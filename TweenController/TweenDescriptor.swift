@@ -6,17 +6,40 @@
 //  Copyright © 2016 Claybrook Software. All rights reserved.
 //
 
-struct TweenDescriptor<T:Tweenable> {
+public protocol TweenIntervalType {
+    var interval: HalfOpenInterval<Double> { get }
+    func containsProgress(progress: Double) -> Bool
+    func handleProgressUpdate(progress: Double)
+}
+
+extension TweenIntervalType {
+    public func containsProgress(progress: Double) -> Bool {
+        return interval.contains(progress)
+    }
+}
+
+public class TweenDescriptor<T:Tweenable>: TweenIntervalType {
     
-    let fromValue: T
-    let toValue: T
-    let interval: ClosedInterval<Double>
-    let thenBlock: (TweenDescriptor<T>) -> ()
+    public let fromValue: T
+    public let toValue: T
+    public let interval: HalfOpenInterval<Double>
+    public var updateBlock: ((T) -> ())?
     
-    func then(value: T, progress: Double) -> TweenDescriptor<T> {
-        let nextInterval = interval.end...progress
-        let descriptor = TweenDescriptor(fromValue: toValue, toValue: value, interval: nextInterval, thenBlock: thenBlock)
-        thenBlock(descriptor)
-        return descriptor
+    init(fromValue: T, toValue: T, interval: HalfOpenInterval<Double>) {
+        self.fromValue = fromValue
+        self.toValue = toValue
+        self.interval = interval
+    }
+    
+    public func handleProgressUpdate(progress: Double) {
+        guard let block = updateBlock where interval.contains(progress) else { return }
+        let percent = percentFromProgress(progress)
+        block(T.valueBetween(fromValue, toValue, percent: percent))
+    }
+    
+    //MARK: Private
+    
+    private func percentFromProgress(progress: Double) -> Double {
+        return (progress - interval.start) / (interval.end - interval.start)
     }
 }

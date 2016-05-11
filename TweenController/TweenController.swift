@@ -8,28 +8,56 @@
 
 public class TweenController {
     
-    private(set) var progress: Double = 0.0
+    public private(set) var progress: Double = 0.0
+    private var descriptors = [TweenIntervalType]()
+    private var boundaries = [Boundary]()
     
     //MARK: Public
     
-    func describeTween<T:Tweenable>(fromValue fromValue: T, toValue: T, interval: ClosedInterval<Double>) -> TweenDescriptor<T> {
-        let descriptor = TweenDescriptor(fromValue: fromValue, toValue: toValue, interval: interval, thenBlock: { [weak self] thenDescriptor in
-            self?.registerDescriptor(thenDescriptor)
-        })
-        registerDescriptor(descriptor)
-        return descriptor
+    public init() {}
+    
+    public func tweenFrom<T:Tweenable>(from: T, at progress: Double) -> TweenPromise<T> {
+        return TweenPromise(from: from, progress: progress, resolvedDescriptors: []) { [weak self] descriptor in
+            self?.registerDescriptor(descriptor)
+        }
     }
     
-    func updateProgress(progress: Double) {
+    public func observeForwardBoundary(progress: Double, block: () -> ()) {
+        boundaries.append(Boundary(progress: progress, block: block, direction: .Forward))
+    }
+    
+    public func observeBackwardBoundary(progress: Double, block: () -> ()) {
+        boundaries.append(Boundary(progress: progress, block: block, direction: .Backward))
+    }
+    
+    public func updateProgress(progress: Double) {
         let lastProgress = self.progress
         self.progress = progress
         
-        
+        let filtered = descriptors.filter() { $0.containsProgress(progress) }
+        filtered.forEach({ $0.handleProgressUpdate(progress) })
+        handleBoundaryCrossingIfNecessaryForProgress(progress, lastProgress: lastProgress)
     }
     
     //MARK: Private
     
-    private func registerDescriptor<T:Tweenable>(descriptor: TweenDescriptor<T>) {
+    private func registerDescriptor(descriptor: TweenIntervalType) {
+        descriptors.append(descriptor)
+    }
+    
+    private func handleBoundaryCrossingIfNecessaryForProgress(progress: Double, lastProgress: Double) {
+        guard progress != lastProgress else { return }
+        let direction: Boundary.Direction = progress > lastProgress ? .Forward : .Backward
         
+        var boundaries = self.boundaries.filter() { $0.direction == direction }
+        boundaries = boundaries.filter() { boundary in
+            if direction == .Forward {
+                return progress >= boundary.progress && lastProgress < boundary.progress
+            } else {
+                return lastProgress > boundary.progress && progress <= boundary.progress
+            }
+        }
+        
+        boundaries.forEach { $0.block() }
     }
 }

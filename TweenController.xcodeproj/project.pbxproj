@@ -17,7 +17,20 @@
 		7536561D1CE12A510031BEA5 /* Tweenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7536561C1CE12A510031BEA5 /* Tweenable.swift */; };
 		7536561F1CE12CB70031BEA5 /* StandardTweenables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7536561E1CE12CB70031BEA5 /* StandardTweenables.swift */; };
 		753656211CE13D170031BEA5 /* TweenDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753656201CE13D170031BEA5 /* TweenDescriptor.swift */; };
+		BE4030611CE3C11D0067DF4F /* Boundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4030601CE3C11D0067DF4F /* Boundary.swift */; };
+		BE40306E1CE3C9420067DF4F /* TweenController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753655F91CE127100031BEA5 /* TweenController.framework */; };
+		BE4030701CE3D9020067DF4F /* TweenPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE40306F1CE3D9020067DF4F /* TweenPromise.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BE40306C1CE3C93C0067DF4F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 753655F01CE127100031BEA5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 753655F81CE127100031BEA5;
+			remoteInfo = TweenController;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		753655F91CE127100031BEA5 /* TweenController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TweenController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,6 +47,8 @@
 		7536561C1CE12A510031BEA5 /* Tweenable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweenable.swift; sourceTree = "<group>"; };
 		7536561E1CE12CB70031BEA5 /* StandardTweenables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardTweenables.swift; sourceTree = "<group>"; };
 		753656201CE13D170031BEA5 /* TweenDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweenDescriptor.swift; sourceTree = "<group>"; };
+		BE4030601CE3C11D0067DF4F /* Boundary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boundary.swift; sourceTree = "<group>"; };
+		BE40306F1CE3D9020067DF4F /* TweenPromise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweenPromise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE40306E1CE3C9420067DF4F /* TweenController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,7 +116,9 @@
 				7536561A1CE127460031BEA5 /* TweenController.swift */,
 				7536561C1CE12A510031BEA5 /* Tweenable.swift */,
 				7536561E1CE12CB70031BEA5 /* StandardTweenables.swift */,
+				BE40306F1CE3D9020067DF4F /* TweenPromise.swift */,
 				753656201CE13D170031BEA5 /* TweenDescriptor.swift */,
+				BE4030601CE3C11D0067DF4F /* Boundary.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -157,6 +175,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BE40306D1CE3C93C0067DF4F /* PBXTargetDependency */,
 			);
 			name = TweenControllerDemo;
 			productName = TweenControllerDemo;
@@ -226,9 +245,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7536561B1CE127460031BEA5 /* TweenController.swift in Sources */,
+				BE4030701CE3D9020067DF4F /* TweenPromise.swift in Sources */,
 				7536561F1CE12CB70031BEA5 /* StandardTweenables.swift in Sources */,
 				753656211CE13D170031BEA5 /* TweenDescriptor.swift in Sources */,
 				7536561D1CE12A510031BEA5 /* Tweenable.swift in Sources */,
+				BE4030611CE3C11D0067DF4F /* Boundary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +263,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BE40306D1CE3C93C0067DF4F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 753655F81CE127100031BEA5 /* TweenController */;
+			targetProxy = BE40306C1CE3C93C0067DF4F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7536560E1CE127350031BEA5 /* Main.storyboard */ = {
@@ -430,6 +459,7 @@
 				753656031CE127100031BEA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		753656171CE127350031BEA5 /* Build configuration list for PBXNativeTarget "TweenControllerDemo" */ = {
 			isa = XCConfigurationList;
@@ -438,6 +468,7 @@
 				753656191CE127350031BEA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
