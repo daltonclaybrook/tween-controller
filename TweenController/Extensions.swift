@@ -58,7 +58,8 @@ extension UIView {
     }
     
     public func twc_slidingFrameActionWithScrollView(scrollView: UIScrollView) -> (frame: CGRect) -> () {
-        return { [weak self, scrollView] frame in
+        return { [weak self, weak scrollView] frame in
+            guard let scrollView = scrollView else { return }
             self?.frame = frame.offsetBy(dx: scrollView.contentOffset.x, dy: scrollView.contentOffset.y)
         }
     }

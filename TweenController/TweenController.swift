@@ -37,16 +37,24 @@ public class TweenController {
     public func updateProgress(progress: Double) {
         let lastProgress = self.progress
         self.progress = progress
-        
-        let filtered = descriptors.filter() { $0.containsProgress(progress) }
-        filtered.forEach({ $0.handleProgressUpdate(progress) })
+        updateDescriptorsWithProgress(progress)
         handleBoundaryCrossingIfNecessaryForProgress(progress, lastProgress: lastProgress)
+    }
+    
+    public func resetProgress() {
+        progress = 0.0
+        updateDescriptorsWithProgress(progress)
     }
     
     //MARK: Private
     
     private func registerDescriptor(descriptor: TweenIntervalType) {
         descriptors.append(descriptor)
+    }
+    
+    private func updateDescriptorsWithProgress(progress: Double) {
+        let filtered = descriptors.filter() { $0.containsProgress(progress) }
+        filtered.forEach({ $0.handleProgressUpdate(progress) })
     }
     
     private func handleBoundaryCrossingIfNecessaryForProgress(progress: Double, lastProgress: Double) {

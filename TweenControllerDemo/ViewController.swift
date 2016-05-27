@@ -9,13 +9,7 @@
 import UIKit
 import TweenController
 
-class ViewController: UIViewController, TutorialViewController {
-
-    // MARK: TutorialViewController
-    
-    @IBOutlet var containerView: UIView!
-    @IBOutlet var buttonsContainerView: UIView!
-    @IBOutlet var pageControl: UIPageControl!
+class ViewController: UIViewController {
     
     let controller = TweenController()
     @IBOutlet private var tweenView: UIView!

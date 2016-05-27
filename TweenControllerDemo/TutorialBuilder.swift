@@ -9,7 +9,7 @@
 import UIKit
 import TweenController
 
-protocol TutorialViewController {
+protocol TutorialViewController: class {
     var containerView: UIView! { get }
     var buttonsContainerView: UIView! { get }
     var pageControl: UIPageControl! { get }
@@ -23,6 +23,7 @@ struct TutorialBuilder {
         let tweenController = TweenController()
         let scrollView = layoutViewsWithVC(viewController)
         describeBottomControlsWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
+        observeEndOfScrollView(viewController, tweenController: tweenController, scrollView: scrollView)
         
         return (tweenController, scrollView)
     }
@@ -76,8 +77,9 @@ struct TutorialBuilder {
         let viewportSize = vc.containerView.frame.size
         let startingButtonFrame = vc.buttonsContainerView.frame
         let startingPageControlFrame = vc.pageControl.frame
-        tweenController.tweenFrom(startingButtonFrame, at: 0.0)
-            .to(CGRect(x: startingButtonFrame.minX, y: viewportSize.height, width: startingButtonFrame.width, height: startingButtonFrame.height), at: viewportSize.width)
+        tweenController.tweenFrom(startingButtonFrame, at: -viewportSize.width)
+            .to(startingButtonFrame, at: 0.0)
+            .thenTo(CGRect(x: startingButtonFrame.minX, y: viewportSize.height, width: startingButtonFrame.width, height: startingButtonFrame.height), at: viewportSize.width)
             .thenHoldUntil(viewportSize.width * 4.0)
             .thenTo(startingButtonFrame, at: viewportSize.width * 5.0)
             .withAction(vc.buttonsContainerView.twc_slidingFrameActionWithScrollView(scrollView))
@@ -91,4 +93,13 @@ struct TutorialBuilder {
     }
     
     //MARK: Observers
+    
+    private static func observeEndOfScrollView(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+        let viewSize = vc.containerView.bounds.size
+        tweenController.observeForwardBoundary(scrollView.contentSize.width - viewSize.width) { [weak scrollView, weak vc, weak tweenController] in
+            scrollView?.contentOffset = CGPointZero
+            tweenController?.resetProgress()
+            vc?.pageControl.currentPage = 0
+        }
+    }
 }
