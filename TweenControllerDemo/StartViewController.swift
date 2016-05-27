@@ -19,6 +19,8 @@ class StartViewController: UIViewController, TutorialViewController {
     private var tweenController: TweenController!
     private var scrollView: UIScrollView!
     
+    //MARK: Superclass
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         dispatch_once(&appearanceToken) {
@@ -28,11 +30,27 @@ class StartViewController: UIViewController, TutorialViewController {
             scrollView.delegate = self
         }
     }
+    
+    //MARK: Private
+    
+    private func updatePageControl() {
+        pageControl.currentPage = Int(round(scrollView.contentOffset.x / containerView.frame.width))
+    }
 }
 
 extension StartViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         tweenController.updateProgress(scrollView.contentOffset.x)
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        updatePageControl()
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            updatePageControl()
+        }
     }
 }

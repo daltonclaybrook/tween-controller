@@ -21,6 +21,10 @@ extension TweenController {
         observeBackwardBoundary(Double(progress), block: block)
     }
     
+    public func observeBothBoundaries(progress: CGFloat, block: () -> ()) {
+        observeBothBoundaries(Double(progress), block: block)
+    }
+    
     public func updateProgress(progress: CGFloat) {
         updateProgress(Double(progress))
     }

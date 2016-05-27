@@ -40,6 +40,7 @@ struct TutorialBuilder {
         
         let viewSize = vc.containerView.bounds.size
         scrollView.contentSize = CGSizeMake(viewSize.width * 6.0, viewSize.height)
+        vc.pageControl.numberOfPages = 5
         
         vc.containerView.translatesAutoresizingMaskIntoConstraints = true
         scrollView.addSubview(vc.containerView)
@@ -66,13 +67,20 @@ struct TutorialBuilder {
     
     private static func describeBottomControlsWithVC(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         
-        let frame = vc.containerView.frame
+        let viewportSize = vc.containerView.frame.size
         let startingButtonFrame = vc.buttonsContainerView.frame
+        let startingPageControlFrame = vc.pageControl.frame
         tweenController.tweenFrom(startingButtonFrame, at: 0.0)
-            .to(CGRect(x: 0.0, y: frame.maxY, width: startingButtonFrame.width, height: startingButtonFrame.height), at: frame.width)
-            .thenHoldUntil(frame.width * 5.0)
-            .thenTo(startingButtonFrame, at: frame.width * 6.0)
+            .to(CGRect(x: startingButtonFrame.minX, y: viewportSize.height, width: startingButtonFrame.width, height: startingButtonFrame.height), at: viewportSize.width)
+            .thenHoldUntil(viewportSize.width * 5.0)
+            .thenTo(startingButtonFrame, at: viewportSize.width * 6.0)
             .withAction(vc.buttonsContainerView.twc_slidingFrameActionWithScrollView(scrollView))
-//            .withAction(vc.buttonsContainerView.twc_applyFrame)
+        
+        let nextPageControlFrame = CGRect(x: startingPageControlFrame.minX, y: startingPageControlFrame.minY + startingButtonFrame.height, width: startingPageControlFrame.width, height: startingPageControlFrame.height)
+        tweenController.tweenFrom(startingPageControlFrame, at: 0.0)
+            .to(nextPageControlFrame, at: viewportSize.width)
+            .thenHoldUntil(viewportSize.width * 5.0)
+            .thenTo(startingPageControlFrame, at: viewportSize.width * 6.0)
+            .withAction(vc.pageControl.twc_slidingFrameActionWithScrollView(scrollView))
     }
 }

@@ -30,6 +30,10 @@ public class TweenController {
         boundaries.append(Boundary(progress: progress, block: block, direction: .Backward))
     }
     
+    public func observeBothBoundaries(progress: Double, block: () -> ()) {
+        boundaries.append(Boundary(progress: progress, block: block, direction: .Both))
+    }
+    
     public func updateProgress(progress: Double) {
         let lastProgress = self.progress
         self.progress = progress
@@ -49,7 +53,7 @@ public class TweenController {
         guard progress != lastProgress else { return }
         let direction: Boundary.Direction = progress > lastProgress ? .Forward : .Backward
         
-        var boundaries = self.boundaries.filter() { $0.direction == direction }
+        var boundaries = self.boundaries.filter() { $0.direction.contains(direction) }
         boundaries = boundaries.filter() { boundary in
             if direction == .Forward {
                 return progress >= boundary.progress && lastProgress < boundary.progress
