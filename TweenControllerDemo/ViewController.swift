@@ -20,19 +20,23 @@ class ViewController: UIViewController, TutorialViewController {
     let controller = TweenController()
     @IBOutlet private var tweenView: UIView!
     private var timer: NSTimer!
+    private var timesFired: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tweenTransform()
         tweenColor()
-        observeBoundaries()
-        
         timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(ViewController.timerFired(_:)), userInfo: nil, repeats: true)
     }
     
     func timerFired(timer: NSTimer) {
-        controller.updateProgress(controller.progress + 0.01)
+        timesFired += 1
+        controller.updateProgress(Double(timesFired) * 0.01)
+        if controller.progress >= 1.0 {
+            self.timer.invalidate()
+            self.timer = nil
+        }
     }
     
     //MARK: Private
@@ -58,21 +62,6 @@ class ViewController: UIViewController, TutorialViewController {
             .to(colorB, at: 0.5)
             .thenTo(colorC, at: 1.0)
             .withAction(tweenView.twc_applyBackgroundColor)
-    }
-    
-    private func observeBoundaries() {
-        controller.observeForwardBoundary(0.5) {
-            print("halfway there!")
-        }
-        
-        controller.observeForwardBoundary(1.0) { [weak self] in
-            print("finished!")
-            self?.timer.invalidate()
-            self?.timer = nil
-            
-            self?.tweenView.backgroundColor = UIColor.redColor()
-            self?.tweenView.layer.setAffineTransform(CGAffineTransformMakeRotation(CGFloat(M_PI_2)))
-        }
     }
 }
 

@@ -38,7 +38,7 @@ public class TweenDescriptor<T:Tweenable>: TweenIntervalType {
     }
     
     public func handleProgressUpdate(progress: Double) {
-        guard let block = updateBlock where interval.contains(progress) else { return }
+        guard let block = updateBlock where containsProgress(progress) else { return }
         let percent = percentFromProgress(progress)
         block(T.valueBetween(fromValue, toValue, percent: percent))
     }
