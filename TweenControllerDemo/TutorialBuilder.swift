@@ -28,10 +28,19 @@ struct TutorialBuilder {
     }
     
     //MARK: Private
+    //MARK: Initial Layout
     
     private static func layoutViewsWithVC(vc: TutorialViewController) -> UIScrollView {
         let scrollView = UIScrollView(frame: vc.containerView.bounds)
         guard let superview = vc.containerView.superview else { return scrollView }
+        
+        layoutButtonsAndPageControlWithVC(vc, scrollView: scrollView)
+        
+        superview.addSubview(scrollView)
+        return scrollView
+    }
+    
+    private static func layoutButtonsAndPageControlWithVC(vc: TutorialViewController, scrollView: UIScrollView) {
         let snapshot = vc.containerView.snapshotViewAfterScreenUpdates(true)
         
         scrollView.pagingEnabled = true
@@ -58,12 +67,9 @@ struct TutorialBuilder {
         scrollView.addSubview(vc.pageControl)
         vc.buttonsContainerView.frame = buttonsFrame
         vc.pageControl.frame = pageControlFrame
-        
-        
-        
-        superview.addSubview(scrollView)
-        return scrollView
     }
+    
+    //MARK: Tutorial Actions
     
     private static func describeBottomControlsWithVC(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         
@@ -72,15 +78,17 @@ struct TutorialBuilder {
         let startingPageControlFrame = vc.pageControl.frame
         tweenController.tweenFrom(startingButtonFrame, at: 0.0)
             .to(CGRect(x: startingButtonFrame.minX, y: viewportSize.height, width: startingButtonFrame.width, height: startingButtonFrame.height), at: viewportSize.width)
-            .thenHoldUntil(viewportSize.width * 5.0)
-            .thenTo(startingButtonFrame, at: viewportSize.width * 6.0)
+            .thenHoldUntil(viewportSize.width * 4.0)
+            .thenTo(startingButtonFrame, at: viewportSize.width * 5.0)
             .withAction(vc.buttonsContainerView.twc_slidingFrameActionWithScrollView(scrollView))
         
         let nextPageControlFrame = CGRect(x: startingPageControlFrame.minX, y: startingPageControlFrame.minY + startingButtonFrame.height, width: startingPageControlFrame.width, height: startingPageControlFrame.height)
         tweenController.tweenFrom(startingPageControlFrame, at: 0.0)
             .to(nextPageControlFrame, at: viewportSize.width)
-            .thenHoldUntil(viewportSize.width * 5.0)
-            .thenTo(startingPageControlFrame, at: viewportSize.width * 6.0)
+            .thenHoldUntil(viewportSize.width * 4.0)
+            .thenTo(startingPageControlFrame, at: viewportSize.width * 5.0)
             .withAction(vc.pageControl.twc_slidingFrameActionWithScrollView(scrollView))
     }
+    
+    //MARK: Observers
 }
