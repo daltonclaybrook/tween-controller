@@ -17,6 +17,9 @@
 		7536561D1CE12A510031BEA5 /* Tweenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7536561C1CE12A510031BEA5 /* Tweenable.swift */; };
 		7536561F1CE12CB70031BEA5 /* StandardTweenables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7536561E1CE12CB70031BEA5 /* StandardTweenables.swift */; };
 		753656211CE13D170031BEA5 /* TweenDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753656201CE13D170031BEA5 /* TweenDescriptor.swift */; };
+		7586C3A91CF7EB70007DC4CB /* TutorialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */; };
+		7586C3AB1CF7EF9A007DC4CB /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */; };
+		7586C3AD1CF806FC007DC4CB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3AC1CF806FC007DC4CB /* Extensions.swift */; };
 		BE4030611CE3C11D0067DF4F /* Boundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4030601CE3C11D0067DF4F /* Boundary.swift */; };
 		BE40306E1CE3C9420067DF4F /* TweenController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753655F91CE127100031BEA5 /* TweenController.framework */; };
 		BE4030701CE3D9020067DF4F /* TweenPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE40306F1CE3D9020067DF4F /* TweenPromise.swift */; };
@@ -47,6 +50,9 @@
 		7536561C1CE12A510031BEA5 /* Tweenable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweenable.swift; sourceTree = "<group>"; };
 		7536561E1CE12CB70031BEA5 /* StandardTweenables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardTweenables.swift; sourceTree = "<group>"; };
 		753656201CE13D170031BEA5 /* TweenDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweenDescriptor.swift; sourceTree = "<group>"; };
+		7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialBuilder.swift; sourceTree = "<group>"; };
+		7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		7586C3AC1CF806FC007DC4CB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BE4030601CE3C11D0067DF4F /* Boundary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boundary.swift; sourceTree = "<group>"; };
 		BE40306F1CE3D9020067DF4F /* TweenPromise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweenPromise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,8 +106,10 @@
 		753656091CE127350031BEA5 /* TweenControllerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				7586C3A71CF7EB56007DC4CB /* Tutorial */,
 				7536560A1CE127350031BEA5 /* AppDelegate.swift */,
 				7536560C1CE127350031BEA5 /* ViewController.swift */,
+				7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */,
 				7536560E1CE127350031BEA5 /* Main.storyboard */,
 				753656111CE127350031BEA5 /* Assets.xcassets */,
 				753656131CE127350031BEA5 /* LaunchScreen.storyboard */,
@@ -119,6 +127,7 @@
 				BE40306F1CE3D9020067DF4F /* TweenPromise.swift */,
 				753656201CE13D170031BEA5 /* TweenDescriptor.swift */,
 				BE4030601CE3C11D0067DF4F /* Boundary.swift */,
+				7586C3AC1CF806FC007DC4CB /* Extensions.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -130,6 +139,14 @@
 				753655FC1CE127100031BEA5 /* TweenController.h */,
 			);
 			name = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		7586C3A71CF7EB56007DC4CB /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */,
+			);
+			name = Tutorial;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +267,7 @@
 				753656211CE13D170031BEA5 /* TweenDescriptor.swift in Sources */,
 				7536561D1CE12A510031BEA5 /* Tweenable.swift in Sources */,
 				BE4030611CE3C11D0067DF4F /* Boundary.swift in Sources */,
+				7586C3AD1CF806FC007DC4CB /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +276,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7536560D1CE127350031BEA5 /* ViewController.swift in Sources */,
+				7586C3AB1CF7EF9A007DC4CB /* StartViewController.swift in Sources */,
+				7586C3A91CF7EB70007DC4CB /* TutorialBuilder.swift in Sources */,
 				7536560B1CE127350031BEA5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

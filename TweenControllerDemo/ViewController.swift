@@ -9,20 +9,14 @@
 import UIKit
 import TweenController
 
-extension CALayer {
-    func applyAffineTransform(transform: CGAffineTransform) {
-        self.setAffineTransform(transform)
-    }
-}
+class ViewController: UIViewController, TutorialViewController {
 
-extension UIView {
-    func applyBackgroundColor(color: UIColor) {
-        self.backgroundColor = color
-    }
-}
-
-class ViewController: UIViewController {
-
+    // MARK: TutorialViewController
+    
+    @IBOutlet var containerView: UIView!
+    @IBOutlet var buttonsContainerView: UIView!
+    @IBOutlet var pageControl: UIPageControl!
+    
     let controller = TweenController()
     @IBOutlet private var tweenView: UIView!
     private var timer: NSTimer!
@@ -51,7 +45,7 @@ class ViewController: UIViewController {
         controller.tweenFrom(transformA, at: 0.0)
             .to(transformB, at: 0.5)
             .thenTo(transformC, at: 1.0)
-            .withAction(tweenView.layer.applyAffineTransform)
+            .withAction(tweenView.layer.twc_applyAffineTransform)
     }
     
     private func tweenColor() {
@@ -63,7 +57,7 @@ class ViewController: UIViewController {
         controller.tweenFrom(colorA, at: 0.0)
             .to(colorB, at: 0.5)
             .thenTo(colorC, at: 1.0)
-            .withAction(tweenView.applyBackgroundColor)
+            .withAction(tweenView.twc_applyBackgroundColor)
     }
     
     private func observeBoundaries() {

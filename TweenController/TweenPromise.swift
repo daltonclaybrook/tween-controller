@@ -22,7 +22,12 @@ public struct TweenPromise<T:Tweenable> {
         return self.to(to, at: progress)
     }
     
+    public func thenHoldUntil(until: Double) -> TweenPromise<T> {
+        return self.to(from, at: until)
+    }
+    
     public func withAction(block: (T) -> ()) {
+        resolvedDescriptors.last?.isIntervalClosed = true
         resolvedDescriptors.forEach() { $0.updateBlock = block }
     }
 }
