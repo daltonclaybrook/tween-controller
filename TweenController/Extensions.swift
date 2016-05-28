@@ -71,6 +71,10 @@ extension UIView {
     public func twc_applyTransform(transform: CGAffineTransform) {
         self.transform = transform
     }
+    
+    public func twc_applyAlpha(alpha: CGFloat) {
+        self.alpha = alpha
+    }
 }
 
 extension CALayer {
