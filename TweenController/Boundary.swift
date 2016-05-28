@@ -17,6 +17,6 @@ struct Boundary {
     }
     
     let progress: Double
-    let block: () -> ()
+    let block: TweenObserverBlock
     let direction: Direction
 }

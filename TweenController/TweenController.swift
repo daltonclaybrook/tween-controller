@@ -6,6 +6,8 @@
 //  Copyright © 2016 Claybrook Software. All rights reserved.
 //
 
+public typealias TweenObserverBlock = (progress: Double) -> ()
+
 public class TweenController {
     
     public private(set) var progress: Double = 0.0
@@ -17,20 +19,18 @@ public class TweenController {
     public init() {}
     
     public func tweenFrom<T:Tweenable>(from: T, at progress: Double) -> TweenPromise<T> {
-        return TweenPromise(from: from, progress: progress, resolvedDescriptors: []) { [weak self] descriptor in
-            self?.registerDescriptor(descriptor)
-        }
+        return TweenPromise(from: from, progress: progress, resolvedDescriptors: [], registration: self)
     }
     
-    public func observeForwardBoundary(progress: Double, block: () -> ()) {
+    public func observeForwardBoundary(progress: Double, block: TweenObserverBlock) {
         boundaries.append(Boundary(progress: progress, block: block, direction: .Forward))
     }
     
-    public func observeBackwardBoundary(progress: Double, block: () -> ()) {
+    public func observeBackwardBoundary(progress: Double, block: TweenObserverBlock) {
         boundaries.append(Boundary(progress: progress, block: block, direction: .Backward))
     }
     
-    public func observeBothBoundaries(progress: Double, block: () -> ()) {
+    public func observeBothBoundaries(progress: Double, block: TweenObserverBlock) {
         boundaries.append(Boundary(progress: progress, block: block, direction: .Both))
     }
     
@@ -47,10 +47,6 @@ public class TweenController {
     }
     
     //MARK: Private
-    
-    private func registerDescriptor(descriptor: TweenIntervalType) {
-        descriptors.append(descriptor)
-    }
     
     private func updateDescriptorsWithProgress(progress: Double) {
         let filtered = descriptors.filter() { $0.containsProgress(progress) }
@@ -70,6 +66,17 @@ public class TweenController {
             }
         }
         
-        boundaries.forEach { $0.block() }
+        boundaries.forEach { $0.block(progress: progress) }
+    }
+}
+
+extension TweenController: DescriptorRegistration {
+    
+    func registerDescriptor<T : Tweenable>(descriptor: TweenDescriptor<T>) {
+        descriptors.append(descriptor)
+    }
+    
+    func observeBoundary(boundary: Boundary) {
+        boundaries.append(boundary)
     }
 }

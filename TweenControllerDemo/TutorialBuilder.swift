@@ -29,6 +29,7 @@ struct TutorialBuilder {
         observeEndOfScrollView(viewController, tweenController: tweenController, scrollView: scrollView)
         describeBackgroundWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         describeTextWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
+        describeCardImageWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         
         return (tweenController, scrollView)
     }
@@ -220,16 +221,25 @@ struct TutorialBuilder {
         }
         
         // reset at the end
-        tweenController.observeForwardBoundary(scrollView.contentSize.width - viewportFrame.width) { [weak topView1] in
+        tweenController.observeForwardBoundary(scrollView.contentSize.width - viewportFrame.width) { [weak topView1] _ in
             topView1?.alpha = 1.0
         }
+    }
+    
+    private static func describeCardImageWithVC(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+        let viewportFrame = CGRect(origin: CGPointZero, size: vc.containerView.frame.size)
+        let sunriseView = UIImageView(image: UIImage(named: "sunrise"))
+        let birthdayView = UIImageView(image: UIImage(named: "birthday_cake"))
+        let eiffelView = UIImageView(image: UIImage(named: "eiffel"))
+        
+        
     }
     
     //MARK: Observers
     
     private static func observeEndOfScrollView(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewSize = vc.containerView.bounds.size
-        tweenController.observeForwardBoundary(scrollView.contentSize.width - viewSize.width) { [weak scrollView, weak vc, weak tweenController] in
+        tweenController.observeForwardBoundary(scrollView.contentSize.width - viewSize.width) { [weak scrollView, weak vc, weak tweenController] _ in
             scrollView?.contentOffset = CGPointZero
             scrollView?.scrollEnabled = false
             scrollView?.scrollEnabled = true

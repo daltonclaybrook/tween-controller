@@ -13,15 +13,15 @@ extension TweenController {
         return tweenFrom(from, at: Double(progress))
     }
     
-    public func observeForwardBoundary(progress: CGFloat, block: () -> ()) {
+    public func observeForwardBoundary(progress: CGFloat, block: TweenObserverBlock) {
         observeForwardBoundary(Double(progress), block: block)
     }
     
-    public func observeBackwardBoundary(progress: CGFloat, block: () -> ()) {
+    public func observeBackwardBoundary(progress: CGFloat, block: TweenObserverBlock) {
         observeBackwardBoundary(Double(progress), block: block)
     }
     
-    public func observeBothBoundaries(progress: CGFloat, block: () -> ()) {
+    public func observeBothBoundaries(progress: CGFloat, block: TweenObserverBlock) {
         observeBothBoundaries(Double(progress), block: block)
     }
     
