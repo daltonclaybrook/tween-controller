@@ -339,6 +339,47 @@ struct TutorialBuilder {
     private static func describeCardFacesWithVC(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewportFrame = CGRect(origin: CGPointZero, size: vc.containerView.frame.size)
         let multiplier = viewportFrame.width / baselineScreenWidth
+        
+        let dudeImage = UIImage(named: "dude_face")
+        let chickImage = UIImage(named: "chick_face")
+        let dudeView1 = UIImageView(image: dudeImage)
+        let dudeView2 = UIImageView(image: dudeImage)
+        let chickView = UIImageView(image: chickImage)
+        
+        scrollView.addSubview(dudeView1)
+        scrollView.addSubview(dudeView2)
+        scrollView.addSubview(chickView)
+        chickView.alpha = 0.0
+        
+        let imageSize = CGSize(width: dudeImage!.size.width * multiplier, height: dudeImage!.size.height * multiplier)
+        let xOffset = 250.0 * multiplier
+        let yOffset = 380.0 * multiplier
+        let frame1 = CGRect(x: xOffset, y: yOffset, width: imageSize.width, height: imageSize.height)
+        let frame2 = frame1.offsetBy(dx: 0.0, dy: cardYTranslation * multiplier)
+        
+        dudeView1.frame = frame1.offsetBy(dx: viewportFrame.width, dy: 0.0)
+        chickView.frame = frame1.offsetBy(dx: viewportFrame.width, dy: 0.0)
+        dudeView2.frame = frame2.offsetBy(dx: viewportFrame.width * 3.0, dy: 0.0)
+        
+        tweenController.tweenFrom(dudeView1.frame, at: 0.0)
+            .thenHoldUntil(1.0)
+            .thenTo(frame2.offsetBy(dx: viewportFrame.width * 2.0, dy: 0.0), at: 2.0)
+            .withAction(dudeView1.twc_applyFrame)
+        
+        tweenController.tweenFrom(chickView.frame, at: 0.0)
+            .thenHoldUntil(1.0)
+            .thenTo(frame2.offsetBy(dx: viewportFrame.width * 2.0, dy: 0.0), at: 2.0)
+            .withAction(chickView.twc_applyFrame)
+        
+        tweenController.tweenFrom(dudeView1.alpha, at: 0.0)
+            .thenHoldUntil(1.0)
+            .thenTo(0.0, at: 2.0)
+            .withAction(dudeView1.twc_applyAlpha)
+        
+        tweenController.tweenFrom(chickView.alpha, at: 0.0)
+            .thenHoldUntil(1.0)
+            .thenTo(1.0, at: 2.0)
+            .withAction(chickView.twc_applyAlpha)
     }
     
     //MARK: Observers
