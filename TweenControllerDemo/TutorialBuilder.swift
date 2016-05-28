@@ -19,6 +19,7 @@ struct TutorialBuilder {
     
     private static let starsSize = CGSize(width: 326, height: 462)
     private static let baselineScreenWidth: CGFloat = 414
+    private static let baselineCardViewHeight: CGFloat = 496
     
     //MARK: Public
     
@@ -232,7 +233,40 @@ struct TutorialBuilder {
         let birthdayView = UIImageView(image: UIImage(named: "birthday_cake"))
         let eiffelView = UIImageView(image: UIImage(named: "eiffel"))
         
+        scrollView.addSubview(sunriseView)
+        scrollView.addSubview(birthdayView)
+        scrollView.addSubview(eiffelView)
         
+        let multiplier = viewportFrame.width / baselineScreenWidth
+        let imageSize = CGSize(width: sunriseView.image!.size.width * multiplier, height: sunriseView.image!.size.height * multiplier)
+        let imageXOffset = (viewportFrame.width - imageSize.width) / 2.0
+        let imageYOffset = 186.0 * multiplier
+        
+        let frame1 = CGRect(x: viewportFrame.width + imageXOffset, y: imageYOffset, width: imageSize.width, height: imageSize.height)
+        let frame2 = frame1.offsetBy(dx: viewportFrame.width, dy: -28.0 * multiplier)
+        
+        sunriseView.frame = frame1
+        birthdayView.frame = frame1
+        eiffelView.frame = frame2.offsetBy(dx: viewportFrame.width, dy: 0.0)
+        
+        tweenController.tweenFrom(frame1, at: 0.0)
+            .thenHoldUntil(viewportFrame.width)
+            .thenTo(frame2, at: viewportFrame.width * 2.0)
+            .withAction(sunriseView.twc_applyFrame)
+        
+        tweenController.tweenFrom(frame1, at: viewportFrame.width)
+            .to(frame2, at: viewportFrame.width * 2.0)
+            .withAction(birthdayView.twc_applyFrame)
+        
+        birthdayView.alpha = 0.0
+        tweenController.tweenFrom(sunriseView.alpha, at: 0.0)
+            .thenHoldUntil(viewportFrame.width)
+            .thenTo(0.0, at: viewportFrame.width * 2.0)
+            .withAction(sunriseView.twc_applyAlpha)
+        
+        tweenController.tweenFrom(birthdayView.alpha, at: viewportFrame.width)
+            .to(1.0, at: viewportFrame.width * 2.0)
+            .withAction(birthdayView.twc_applyAlpha)
     }
     
     //MARK: Observers

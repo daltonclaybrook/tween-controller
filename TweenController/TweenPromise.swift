@@ -49,13 +49,13 @@ public struct TweenPromise<T:Tweenable> {
         // if we're exiting the interval, update the progress to the edges
         registration?.observeBoundary(Boundary(progress: firstProgress, block: { [weak first] progress in
             guard let first = first else { return }
-            if !first.containsProgress(progress) {
+            if !first.containsProgress(progress) || firstProgress == progress {
                 first.handleProgressUpdate(firstProgress)
             }
         }, direction: .Both))
         registration?.observeBoundary(Boundary(progress: lastProgress, block: { [weak last] progress in
             guard let last = last else { return }
-            if !last.containsProgress(progress) {
+            if !last.containsProgress(progress) || progress == lastProgress {
                 last.handleProgressUpdate(lastProgress)
             }
         }, direction: .Both))
