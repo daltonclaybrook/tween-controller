@@ -65,6 +65,10 @@ then simply call:
 // such as a gesture recognizer or scroll view
 // or something else, like a CADisplayLink
 
+// progress range is arbitrary
+// you might choose to use a percentage, like 0.0 - 1.0
+// or the content size of a scroll view
+
 controller.updateProgress(newProgress)
 ```
 

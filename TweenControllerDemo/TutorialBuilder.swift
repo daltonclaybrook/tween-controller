@@ -18,6 +18,7 @@ protocol TutorialViewController: class {
 struct TutorialBuilder {
     
     private static let starsSize = CGSize(width: 326, height: 462)
+    private static let baselineScreenWidth: CGFloat = 414
     
     //MARK: Public
     
@@ -27,6 +28,7 @@ struct TutorialBuilder {
         describeBottomControlsWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         observeEndOfScrollView(viewController, tweenController: tweenController, scrollView: scrollView)
         describeBackgroundWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
+        describeTextWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         
         return (tweenController, scrollView)
     }
@@ -165,12 +167,72 @@ struct TutorialBuilder {
             .withAction(imageView.twc_applyAlpha)
     }
     
+    private static func describeTextWithVC(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+        let viewportFrame = CGRect(origin: CGPointZero, size: vc.containerView.frame.size)
+        let multiplier = viewportFrame.width / baselineScreenWidth
+        let topYOffset = 50 * multiplier
+        let bottomYOffset = 80 * multiplier
+        
+        let topView1 = UIImageView(image: UIImage(named: "top_copy_s2"))
+        let topView2 = UIImageView(image: UIImage(named: "top_copy_s3"))
+        let topView3 = UIImageView(image: UIImage(named: "top_copy_s4"))
+        let topView4 = UIImageView(image: UIImage(named: "top_copy_s5"))
+        
+        let bottomView1 = UIImageView(image: UIImage(named: "bottom_copy_s2"))
+        let bottomView2 = UIImageView(image: UIImage(named: "bottom_copy_s3"))
+        let bottomView3 = UIImageView(image: UIImage(named: "bottom_copy_s4"))
+        let bottomView4 = UIImageView(image: UIImage(named: "bottom_copy_s5"))
+        
+        let bottomViews = [bottomView1, bottomView2, bottomView3, bottomView4]
+        for i in 0..<bottomViews.count {
+            let view = bottomViews[i]
+            let size = CGSize(width: view.image!.size.width * multiplier, height: view.image!.size.height * multiplier)
+            let xOffset = (viewportFrame.width - size.width) / 2.0
+            view.frame = CGRect(x: CGFloat(i + 1) * viewportFrame.width + xOffset, y: bottomYOffset, width: size.width, height: size.height)
+            scrollView.addSubview(view)
+        }
+        
+        let topViews = [topView1, topView2, topView3, topView4]
+        for i in 0..<topViews.count {
+            let view = topViews[i]
+            let size = CGSize(width: view.image!.size.width * multiplier, height: view.image!.size.height * multiplier)
+            let xOffset = (viewportFrame.width - size.width) / 2.0 + viewportFrame.width
+            view.frame = CGRect(x: xOffset, y: topYOffset, width: size.width, height: size.height)
+            scrollView.addSubview(view)
+            
+            if i != 0 {
+                view.alpha = 0.0
+                let progress = CGFloat(i) * viewportFrame.width
+                tweenController.tweenFrom(view.alpha, at: progress)
+                    .to(1.0, at: progress + viewportFrame.width)
+                    .thenTo(0.0, at: progress + viewportFrame.width * 2.0)
+                    .withAction(view.twc_applyAlpha)
+            } else {
+                tweenController.tweenFrom(view.alpha, at: viewportFrame.width)
+                    .to(0.0, at: viewportFrame.width * 2.0)
+                    .withAction(view.twc_applyAlpha)
+            }
+            
+            tweenController.tweenFrom(view.frame, at: 0.0)
+                .to(view.frame.offsetBy(dx: -viewportFrame.width, dy: 0.0), at: viewportFrame.width)
+                .thenHoldUntil(viewportFrame.width * 4.0)
+                .withAction(view.twc_slidingFrameActionWithScrollView(scrollView))
+        }
+        
+        // reset at the end
+        tweenController.observeForwardBoundary(scrollView.contentSize.width - viewportFrame.width) { [weak topView1] in
+            topView1?.alpha = 1.0
+        }
+    }
+    
     //MARK: Observers
     
     private static func observeEndOfScrollView(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewSize = vc.containerView.bounds.size
         tweenController.observeForwardBoundary(scrollView.contentSize.width - viewSize.width) { [weak scrollView, weak vc, weak tweenController] in
             scrollView?.contentOffset = CGPointZero
+            scrollView?.scrollEnabled = false
+            scrollView?.scrollEnabled = true
             tweenController?.resetProgress()
             vc?.pageControl.currentPage = 0
         }
