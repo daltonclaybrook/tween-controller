@@ -6,7 +6,7 @@ On the surface, TweenController makes it easy to build interactive menus and tut
 
 Tween anything that is *Tweenable*, such as **CGAffineTransform**:
 
-```
+``` swift
 func tweenTransform() {
     let transformA = CGAffineTransformIdentity
     let transformB = CGAffineTransformMakeScale(2.0, 2.0)
@@ -20,7 +20,7 @@ func tweenTransform() {
 ```
 or **UIColor**:
 
-```
+``` swift
 func tweenColor() {
     let colorA = UIColor.greenColor()
     let colorB = UIColor.blueColor()
@@ -35,7 +35,7 @@ func tweenColor() {
 ```
 or your own custom type:
 
-```
+``` swift
 enum Step: Int {
     case One = 1, Two = 2, Three = 3, Four = 4
 }
@@ -60,7 +60,7 @@ func tweenStep() {
 
 then simply call:
 
-```
+``` swift
 // can be called in response to user interaction
 // such as a gesture recognizer or scroll view
 // or something else, like a CADisplayLink
@@ -70,7 +70,7 @@ controller.updateProgress(newProgress)
 
 You can also *observe boundaries*:
 
-```
+``` swift
 func observeBoundaries() {
     tweenController.observeForwardBoundary(0.5) { 
         // halfway finished!
