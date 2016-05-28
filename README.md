@@ -2,6 +2,9 @@
 
 On the surface, TweenController makes it easy to build interactive menus and tutorials. Under the hood, it's a simple but powerful toolkit to interpolate between values that are *Tweenable*.
 
+## Example
+![Pinyada](https://raw.githubusercontent.com/daltonclaybrook/tween-controller/master/example.gif)
+
 ## Usage
 
 Tween anything that is *Tweenable*, such as **CGAffineTransform**:
