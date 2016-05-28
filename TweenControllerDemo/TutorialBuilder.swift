@@ -210,8 +210,9 @@ struct TutorialBuilder {
                     .thenTo(0.0, at: progress + viewportFrame.width * 2.0)
                     .withAction(view.twc_applyAlpha)
             } else {
-                tweenController.tweenFrom(view.alpha, at: viewportFrame.width)
-                    .to(0.0, at: viewportFrame.width * 2.0)
+                tweenController.tweenFrom(view.alpha, at: 0.0)
+                    .thenHoldUntil(viewportFrame.width)
+                    .thenTo(0.0, at: viewportFrame.width * 2.0)
                     .withAction(view.twc_applyAlpha)
             }
             
@@ -219,11 +220,6 @@ struct TutorialBuilder {
                 .to(view.frame.offsetBy(dx: -viewportFrame.width, dy: 0.0), at: viewportFrame.width)
                 .thenHoldUntil(viewportFrame.width * 4.0)
                 .withAction(view.twc_slidingFrameActionWithScrollView(scrollView))
-        }
-        
-        // reset at the end
-        tweenController.observeForwardBoundary(scrollView.contentSize.width - viewportFrame.width) { [weak topView1] _ in
-            topView1?.alpha = 1.0
         }
     }
     
