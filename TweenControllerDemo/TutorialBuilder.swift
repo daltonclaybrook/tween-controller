@@ -86,18 +86,18 @@ struct TutorialBuilder {
         let viewportSize = vc.containerView.frame.size
         let startingButtonFrame = vc.buttonsContainerView.frame
         let startingPageControlFrame = vc.pageControl.frame
-        tweenController.tweenFrom(startingButtonFrame, at: -viewportSize.width)
+        tweenController.tweenFrom(startingButtonFrame, at: -1.0)
             .to(startingButtonFrame, at: 0.0)
-            .thenTo(CGRect(x: startingButtonFrame.minX, y: viewportSize.height, width: startingButtonFrame.width, height: startingButtonFrame.height), at: viewportSize.width)
-            .thenHoldUntil(viewportSize.width * 4.0)
-            .thenTo(startingButtonFrame, at: viewportSize.width * 5.0)
+            .thenTo(CGRect(x: startingButtonFrame.minX, y: viewportSize.height, width: startingButtonFrame.width, height: startingButtonFrame.height), at: 1.0)
+            .thenHoldUntil(4.0)
+            .thenTo(startingButtonFrame, at: 5.0)
             .withAction(vc.buttonsContainerView.twc_slidingFrameActionWithScrollView(scrollView))
         
         let nextPageControlFrame = CGRect(x: startingPageControlFrame.minX, y: startingPageControlFrame.minY + startingButtonFrame.height, width: startingPageControlFrame.width, height: startingPageControlFrame.height)
         tweenController.tweenFrom(startingPageControlFrame, at: 0.0)
-            .to(nextPageControlFrame, at: viewportSize.width)
-            .thenHoldUntil(viewportSize.width * 4.0)
-            .thenTo(startingPageControlFrame, at: viewportSize.width * 5.0)
+            .to(nextPageControlFrame, at: 1.0)
+            .thenHoldUntil(4.0)
+            .thenTo(startingPageControlFrame, at: 5.0)
             .withAction(vc.pageControl.twc_slidingFrameActionWithScrollView(scrollView))
     }
     
@@ -123,13 +123,13 @@ struct TutorialBuilder {
         gradientView.alpha = 0.0
         scrollView.insertSubview(gradientView, belowSubview: vc.pageControl)
         
-        tweenController.tweenFrom(viewportFrame, at: viewportFrame.width)
-            .thenHoldUntil(viewportFrame.width * 3.0)
+        tweenController.tweenFrom(viewportFrame, at: 1.0)
+            .thenHoldUntil(3.0)
             .withAction(gradientView.twc_slidingFrameActionWithScrollView(scrollView))
         
-        tweenController.tweenFrom(gradientView.alpha, at: viewportFrame.width)
-            .to(1.0, at: viewportFrame.width * 2.0)
-            .thenTo(0.0, at: viewportFrame.width * 3.0)
+        tweenController.tweenFrom(gradientView.alpha, at: 1.0)
+            .to(1.0, at: 2.0)
+            .thenTo(0.0, at: 3.0)
             .withAction(gradientView.twc_applyAlpha)
     }
     
@@ -144,13 +144,13 @@ struct TutorialBuilder {
         starsImageView.contentMode = .ScaleToFill
         scrollView.insertSubview(starsImageView, belowSubview: vc.pageControl)
         
-        tweenController.tweenFrom(starsFrame, at: viewportSize.width)
-            .thenHoldUntil(viewportSize.width * 3.0)
+        tweenController.tweenFrom(starsFrame, at: 1.0)
+            .thenHoldUntil(3.0)
             .withAction(starsImageView.twc_slidingFrameActionWithScrollView(scrollView))
         
-        tweenController.tweenFrom(starsImageView.alpha, at: viewportSize.width)
-            .to(1.0, at: viewportSize.width * 2.0)
-            .thenTo(0.0, at: viewportSize.width * 3.0)
+        tweenController.tweenFrom(starsImageView.alpha, at: 1.0)
+            .to(1.0, at: 2.0)
+            .thenTo(0.0, at: 3.0)
             .withAction(starsImageView.twc_applyAlpha)
     }
     
@@ -161,14 +161,14 @@ struct TutorialBuilder {
         imageView.alpha = 0.0
         scrollView.addSubview(imageView)
         
-        tweenController.tweenFrom(viewportFrame, at: viewportFrame.width * 2.0)
-            .thenHoldUntil(viewportFrame.width * 4.0)
+        tweenController.tweenFrom(viewportFrame, at: 2.0)
+            .thenHoldUntil(4.0)
             .withAction(imageView.twc_slidingFrameActionWithScrollView(scrollView))
         
-        tweenController.tweenFrom(imageView.alpha, at: viewportFrame.width * 2.0)
-            .to(1.0, at: viewportFrame.width * 3.0)
-            .thenHoldUntil(viewportFrame.width * 4.0)
-            .thenTo(0.0, at: viewportFrame.width * 5.0)
+        tweenController.tweenFrom(imageView.alpha, at: 2.0)
+            .to(1.0, at: 3.0)
+            .thenHoldUntil(4.0)
+            .thenTo(0.0, at: 5.0)
             .withAction(imageView.twc_applyAlpha)
     }
     
@@ -207,21 +207,21 @@ struct TutorialBuilder {
             
             if i != 0 {
                 view.alpha = 0.0
-                let progress = CGFloat(i) * viewportFrame.width
+                let progress = CGFloat(i)
                 tweenController.tweenFrom(view.alpha, at: progress)
-                    .to(1.0, at: progress + viewportFrame.width)
-                    .thenTo(0.0, at: progress + viewportFrame.width * 2.0)
+                    .to(1.0, at: progress + 1.0)
+                    .thenTo(0.0, at: progress + 2.0)
                     .withAction(view.twc_applyAlpha)
             } else {
                 tweenController.tweenFrom(view.alpha, at: 0.0)
-                    .thenHoldUntil(viewportFrame.width)
-                    .thenTo(0.0, at: viewportFrame.width * 2.0)
+                    .thenHoldUntil(1.0)
+                    .thenTo(0.0, at: 2.0)
                     .withAction(view.twc_applyAlpha)
             }
             
             tweenController.tweenFrom(view.frame, at: 0.0)
-                .to(view.frame.offsetBy(dx: -viewportFrame.width, dy: 0.0), at: viewportFrame.width)
-                .thenHoldUntil(viewportFrame.width * 4.0)
+                .to(view.frame.offsetBy(dx: -viewportFrame.width, dy: 0.0), at: 1.0)
+                .thenHoldUntil(4.0)
                 .withAction(view.twc_slidingFrameActionWithScrollView(scrollView))
         }
     }
@@ -250,8 +250,8 @@ struct TutorialBuilder {
         textView2.frame = frame2.offsetBy(dx: viewportFrame.width, dy: 0.0)
         
         tweenController.tweenFrom(frame1, at: 0.0)
-            .thenHoldUntil(viewportFrame.width)
-            .thenTo(frame2, at: viewportFrame.width * 2.0)
+            .thenHoldUntil(1.0)
+            .thenTo(frame2, at: 2.0)
             .withAction(textView1.twc_applyFrame)
     }
     
@@ -278,30 +278,29 @@ struct TutorialBuilder {
         eiffelView.frame = frame2.offsetBy(dx: viewportFrame.width, dy: 0.0)
         
         tweenController.tweenFrom(frame1, at: 0.0)
-            .thenHoldUntil(viewportFrame.width)
-            .thenTo(frame2, at: viewportFrame.width * 2.0)
+            .thenHoldUntil(1.0)
+            .thenTo(frame2, at: 2.0)
             .withAction(sunriseView.twc_applyFrame)
         
-        tweenController.tweenFrom(frame1, at: viewportFrame.width)
-            .to(frame2, at: viewportFrame.width * 2.0)
+        tweenController.tweenFrom(frame1, at: 1.0)
+            .to(frame2, at: 2.0)
             .withAction(birthdayView.twc_applyFrame)
         
         birthdayView.alpha = 0.0
         tweenController.tweenFrom(sunriseView.alpha, at: 0.0)
-            .thenHoldUntil(viewportFrame.width)
-            .thenTo(0.0, at: viewportFrame.width * 2.0)
+            .thenHoldUntil(1.0)
+            .thenTo(0.0, at: 2.0)
             .withAction(sunriseView.twc_applyAlpha)
         
-        tweenController.tweenFrom(birthdayView.alpha, at: viewportFrame.width)
-            .to(1.0, at: viewportFrame.width * 2.0)
+        tweenController.tweenFrom(birthdayView.alpha, at: 1.0)
+            .to(1.0, at: 2.0)
             .withAction(birthdayView.twc_applyAlpha)
     }
     
     //MARK: Observers
     
     private static func observeEndOfScrollView(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
-        let viewSize = vc.containerView.bounds.size
-        tweenController.observeForwardBoundary(scrollView.contentSize.width - viewSize.width) { [weak scrollView, weak vc, weak tweenController] _ in
+        tweenController.observeForwardBoundary(5.0) { [weak scrollView, weak vc, weak tweenController] _ in
             scrollView?.contentOffset = CGPointZero
             scrollView?.scrollEnabled = false
             scrollView?.scrollEnabled = true

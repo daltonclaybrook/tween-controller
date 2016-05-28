@@ -77,6 +77,16 @@ extension UIView {
     }
 }
 
+extension UIScrollView {
+    public var twc_horizontalPageProgress: CGFloat {
+        return contentOffset.x / bounds.width
+    }
+    
+    public var twc_verticalPageProgress: CGFloat {
+        return contentOffset.y / bounds.height
+    }
+}
+
 extension CALayer {
     public func twc_applyTransform(transform: CATransform3D) {
         self.transform = transform
