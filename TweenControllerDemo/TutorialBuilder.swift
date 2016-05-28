@@ -20,6 +20,8 @@ struct TutorialBuilder {
     private static let starsSize = CGSize(width: 326, height: 462)
     private static let baselineScreenWidth: CGFloat = 414
     private static let baselineCardViewHeight: CGFloat = 496
+    private static let cardYOffset: CGFloat = 186.0
+    private static let cardYTranslation: CGFloat = -28.0
     
     //MARK: Public
     
@@ -30,6 +32,7 @@ struct TutorialBuilder {
         observeEndOfScrollView(viewController, tweenController: tweenController, scrollView: scrollView)
         describeBackgroundWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         describeTextWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
+        describeCardTextWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         describeCardImageWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         
         return (tweenController, scrollView)
@@ -223,6 +226,35 @@ struct TutorialBuilder {
         }
     }
     
+    private static func describeCardTextWithVC(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+        let viewportFrame = CGRect(origin: CGPointZero, size: vc.containerView.frame.size)
+        let multiplier = viewportFrame.width / baselineScreenWidth
+        
+        let textImage = UIImage(named: "message_bubble")
+        let textView1 = UIImageView(image: textImage)
+        let textView2 = UIImageView(image: textImage)
+        
+        scrollView.addSubview(textView1)
+        scrollView.addSubview(textView2)
+        
+        let imageSize = CGSize(width: textImage!.size.width * multiplier, height: textImage!.size.height * multiplier)
+        let cardImageSize = (UIImage(named: "sunrise")?.size).flatMap() { CGSize(width: $0.width * multiplier, height: $0.height * multiplier) }!
+        let xOffset1 = 40.0 * multiplier + viewportFrame.width
+        let xOffset2 = (viewportFrame.width - imageSize.width) / 2.0 + viewportFrame.width * 2.0
+        let yOffset1 = -16.0 * multiplier + cardYOffset * multiplier + cardImageSize.height
+        let yOffset2 = -16.0 * multiplier + cardYOffset * multiplier + cardYTranslation * multiplier + cardImageSize.height
+        
+        let frame1 = CGRect(x: xOffset1, y: yOffset1, width: imageSize.width, height: imageSize.height)
+        let frame2 = CGRect(x: xOffset2, y: yOffset2, width: imageSize.width, height: imageSize.height)
+        textView1.frame = frame1
+        textView2.frame = frame2.offsetBy(dx: viewportFrame.width, dy: 0.0)
+        
+        tweenController.tweenFrom(frame1, at: 0.0)
+            .thenHoldUntil(viewportFrame.width)
+            .thenTo(frame2, at: viewportFrame.width * 2.0)
+            .withAction(textView1.twc_applyFrame)
+    }
+    
     private static func describeCardImageWithVC(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewportFrame = CGRect(origin: CGPointZero, size: vc.containerView.frame.size)
         let sunriseView = UIImageView(image: UIImage(named: "sunrise"))
@@ -236,10 +268,10 @@ struct TutorialBuilder {
         let multiplier = viewportFrame.width / baselineScreenWidth
         let imageSize = CGSize(width: sunriseView.image!.size.width * multiplier, height: sunriseView.image!.size.height * multiplier)
         let imageXOffset = (viewportFrame.width - imageSize.width) / 2.0
-        let imageYOffset = 186.0 * multiplier
+        let imageYOffset = cardYOffset * multiplier
         
         let frame1 = CGRect(x: viewportFrame.width + imageXOffset, y: imageYOffset, width: imageSize.width, height: imageSize.height)
-        let frame2 = frame1.offsetBy(dx: viewportFrame.width, dy: -28.0 * multiplier)
+        let frame2 = frame1.offsetBy(dx: viewportFrame.width, dy: cardYTranslation * multiplier)
         
         sunriseView.frame = frame1
         birthdayView.frame = frame1
