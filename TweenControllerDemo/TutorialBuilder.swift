@@ -36,6 +36,10 @@ struct TutorialBuilder {
         describeCardImageWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         describeCardFacesWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         describePinHillWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
+        describeAnimationWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
+        
+        scrollView.bringSubviewToFront(viewController.buttonsContainerView)
+        scrollView.bringSubviewToFront(viewController.pageControl)
         
         return (tweenController, scrollView)
     }
@@ -419,6 +423,73 @@ struct TutorialBuilder {
             .thenHoldUntil(3.0)
             .thenTo(pinView.frame.offsetBy(dx: -viewportFrame.width, dy: -yTranslation), at: 4.0)
             .withAction(pinView.twc_slidingFrameActionWithScrollView(scrollView))
+    }
+    
+    private static func describeAnimationWithVC(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+        let viewportFrame = CGRect(origin: CGPointZero, size: vc.containerView.frame.size)
+        let multiplier = viewportFrame.width / baselineScreenWidth
+        
+        let armDownImage = UIImage(named: "chick_arm_down")
+        let armUpImage = UIImage(named: "chick_arm_up")
+        let chickView = UIImageView(image: armDownImage)
+        let cardView = UIImageView(image: UIImage(named: "card_detail"))
+        
+        scrollView.addSubview(chickView)
+        scrollView.addSubview(cardView)
+        
+        let chickSize = CGSize(width: armDownImage!.size.width * multiplier, height: armDownImage!.size.height * multiplier)
+        let cardSize = CGSize(width: cardView.image!.size.width * multiplier, height: cardView.image!.size.height * multiplier)
+        
+        let chickBottomOffset = 38.0 * multiplier
+        let chickXTranslation = -220.0 * multiplier
+        let cardXOffset = 82.0 * multiplier + viewportFrame.width * 4.0
+        let cardStartingYOffset = 174.0 * multiplier
+        let cardYTranslation = 14.0 * multiplier
+        
+        let cardStartingFrame = CGRect(x: cardXOffset, y: cardStartingYOffset, width: cardSize.width, height: cardSize.height)
+        let cardEndingFrame = cardStartingFrame.offsetBy(dx: 0.0, dy: cardYTranslation)
+        let chickStartingFrame = CGRect(x: viewportFrame.width * 5.0, y: viewportFrame.maxY - chickBottomOffset - chickSize.height, width: chickSize.width, height: chickSize.height)
+        let chickEndingFrame = chickStartingFrame.offsetBy(dx: chickXTranslation, dy: 0.0)
+        
+        chickView.frame = chickStartingFrame
+        cardView.frame = cardStartingFrame
+        cardView.alpha = 0.0
+        
+        tweenController.observeForwardBoundary(4.0) { [weak scrollView] _ in
+            scrollView?.scrollEnabled = false
+            
+            UIView.animateWithDuration(1.2, animations: { [weak chickView] in
+                chickView?.frame = chickEndingFrame
+                }, completion: { [weak chickView] finished in
+                    chickView?.image = armUpImage
+                    UIView.animateWithDuration(0.5, animations: { [weak cardView] in
+                        cardView?.frame = cardEndingFrame
+                        cardView?.alpha = 1.0
+                        }, completion: { finished in
+                            scrollView?.scrollEnabled = true
+                    })
+            })
+        }
+        
+        let resetBlock = { [weak chickView, weak cardView] (_: Double) in
+            chickView?.image = armDownImage
+            chickView?.frame = chickStartingFrame
+            cardView?.frame = cardStartingFrame
+            chickView?.alpha = 1.0
+            cardView?.alpha = 0.0
+        }
+        
+        tweenController.observeBackwardBoundary(3.0, block: resetBlock)
+        tweenController.observeForwardBoundary(5.0, block: resetBlock)
+        
+        tweenController.tweenFrom(CGFloat(1.0), at: 4.25)
+            .to(0.0, at: 5.0)
+            .withAction(cardView.twc_applyAlpha)
+        
+        tweenController.tweenFrom(CGFloat(1.0), at: 3.0)
+            .thenHoldUntil(4.25)
+            .thenTo(0.0, at: 5.0)
+            .withAction(chickView.twc_applyAlpha)
     }
     
     //MARK: Observers
