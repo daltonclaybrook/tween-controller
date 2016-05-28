@@ -34,6 +34,7 @@ struct TutorialBuilder {
         describeTextWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         describeCardTextWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         describeCardImageWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
+        describeCardFacesWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         
         return (tweenController, scrollView)
     }
@@ -197,6 +198,11 @@ struct TutorialBuilder {
             scrollView.addSubview(view)
         }
         
+        tweenController.tweenFrom(bottomView4.alpha, at: 3.0)
+            .thenHoldUntil(4.0)
+            .thenTo(0.0, at: 5.0)
+            .withAction(bottomView4.twc_applyAlpha)
+        
         let topViews = [topView1, topView2, topView3, topView4]
         for i in 0..<topViews.count {
             let view = topViews[i]
@@ -207,15 +213,15 @@ struct TutorialBuilder {
             
             if i != 0 {
                 view.alpha = 0.0
-                let progress = CGFloat(i)
+                let progress = CGFloat(i) + 0.5
                 tweenController.tweenFrom(view.alpha, at: progress)
-                    .to(1.0, at: progress + 1.0)
-                    .thenTo(0.0, at: progress + 2.0)
+                    .to(1.0, at: progress + 0.5)
+                    .thenTo(0.0, at: progress + 1.0)
                     .withAction(view.twc_applyAlpha)
             } else {
                 tweenController.tweenFrom(view.alpha, at: 0.0)
                     .thenHoldUntil(1.0)
-                    .thenTo(0.0, at: 2.0)
+                    .thenTo(0.0, at: 1.5)
                     .withAction(view.twc_applyAlpha)
             }
             
@@ -230,6 +236,8 @@ struct TutorialBuilder {
         let viewportFrame = CGRect(origin: CGPointZero, size: vc.containerView.frame.size)
         let multiplier = viewportFrame.width / baselineScreenWidth
         
+        // Text Box
+        
         let textImage = UIImage(named: "message_bubble")
         let textView1 = UIImageView(image: textImage)
         let textView2 = UIImageView(image: textImage)
@@ -237,15 +245,15 @@ struct TutorialBuilder {
         scrollView.addSubview(textView1)
         scrollView.addSubview(textView2)
         
-        let imageSize = CGSize(width: textImage!.size.width * multiplier, height: textImage!.size.height * multiplier)
+        let boxImageSize = CGSize(width: textImage!.size.width * multiplier, height: textImage!.size.height * multiplier)
         let cardImageSize = (UIImage(named: "sunrise")?.size).flatMap() { CGSize(width: $0.width * multiplier, height: $0.height * multiplier) }!
         let xOffset1 = 40.0 * multiplier + viewportFrame.width
-        let xOffset2 = (viewportFrame.width - imageSize.width) / 2.0 + viewportFrame.width * 2.0
+        let xOffset2 = (viewportFrame.width - boxImageSize.width) / 2.0 + viewportFrame.width * 2.0
         let yOffset1 = -16.0 * multiplier + cardYOffset * multiplier + cardImageSize.height
         let yOffset2 = -16.0 * multiplier + cardYOffset * multiplier + cardYTranslation * multiplier + cardImageSize.height
         
-        let frame1 = CGRect(x: xOffset1, y: yOffset1, width: imageSize.width, height: imageSize.height)
-        let frame2 = CGRect(x: xOffset2, y: yOffset2, width: imageSize.width, height: imageSize.height)
+        let frame1 = CGRect(x: xOffset1, y: yOffset1, width: boxImageSize.width, height: boxImageSize.height)
+        let frame2 = CGRect(x: xOffset2, y: yOffset2, width: boxImageSize.width, height: boxImageSize.height)
         textView1.frame = frame1
         textView2.frame = frame2.offsetBy(dx: viewportFrame.width, dy: 0.0)
         
@@ -253,6 +261,37 @@ struct TutorialBuilder {
             .thenHoldUntil(1.0)
             .thenTo(frame2, at: 2.0)
             .withAction(textView1.twc_applyFrame)
+        
+        // Box Contents
+        
+        let contentsView1 = UIImageView(image: UIImage(named: "card_copy_s2"))
+        let contentsView2 = UIImageView(image: UIImage(named: "card_copy_s3"))
+        let contentsView3 = UIImageView(image: UIImage(named: "card_copy_s4"))
+        
+        let contents1Size = CGSize(width: contentsView1.image!.size.width * multiplier, height: contentsView1.image!.size.height * multiplier)
+        let contents2Size = CGSize(width: contentsView2.image!.size.width * multiplier, height: contentsView2.image!.size.height * multiplier)
+        let contents3Size = CGSize(width: contentsView3.image!.size.width * multiplier, height: contentsView3.image!.size.height * multiplier)
+        
+        let yMod = -12.0 * multiplier
+        contentsView1.frame = CGRect(x: (boxImageSize.width-contents1Size.width)/2.0, y: (boxImageSize.height-contents1Size.height)/2.0 + yMod, width: contents1Size.width, height: contents1Size.height)
+        contentsView2.frame = CGRect(x: (boxImageSize.width-contents2Size.width)/2.0, y: (boxImageSize.height-contents2Size.height)/2.0 + yMod, width: contents2Size.width, height: contents2Size.height)
+        contentsView3.frame = CGRect(x: (boxImageSize.width-contents3Size.width)/2.0, y: (boxImageSize.height-contents3Size.height)/2.0 + yMod, width: contents3Size.width, height: contents3Size.height)
+        
+        textView1.addSubview(contentsView1)
+        textView1.addSubview(contentsView2)
+        textView2.addSubview(contentsView3)
+        
+        contentsView2.alpha = 0.0
+        
+        tweenController.tweenFrom(contentsView1.alpha, at: 0.0)
+            .thenHoldUntil(1.0)
+            .thenTo(0.0, at: 2.0)
+            .withAction(contentsView1.twc_applyAlpha)
+        
+        tweenController.tweenFrom(contentsView2.alpha, at: 0.0)
+            .thenHoldUntil(1.0)
+            .thenTo(1.0, at: 2.0)
+            .withAction(contentsView2.twc_applyAlpha)
     }
     
     private static func describeCardImageWithVC(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
@@ -295,6 +334,11 @@ struct TutorialBuilder {
         tweenController.tweenFrom(birthdayView.alpha, at: 1.0)
             .to(1.0, at: 2.0)
             .withAction(birthdayView.twc_applyAlpha)
+    }
+    
+    private static func describeCardFacesWithVC(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+        let viewportFrame = CGRect(origin: CGPointZero, size: vc.containerView.frame.size)
+        let multiplier = viewportFrame.width / baselineScreenWidth
     }
     
     //MARK: Observers
