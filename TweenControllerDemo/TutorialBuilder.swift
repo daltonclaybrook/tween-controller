@@ -35,6 +35,7 @@ struct TutorialBuilder {
         describeCardTextWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         describeCardImageWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         describeCardFacesWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
+        describePinHillWithVC(viewController, tweenController: tweenController, scrollView: scrollView)
         
         return (tweenController, scrollView)
     }
@@ -380,6 +381,44 @@ struct TutorialBuilder {
             .thenHoldUntil(1.0)
             .thenTo(1.0, at: 2.0)
             .withAction(chickView.twc_applyAlpha)
+    }
+    
+    private static func describePinHillWithVC(vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+        let viewportFrame = CGRect(origin: CGPointZero, size: vc.containerView.frame.size)
+        let multiplier = viewportFrame.width / baselineScreenWidth
+        
+        let hillView = UIImageView(image: UIImage(named: "hill"))
+        let pinView = UIImageView(image: UIImage(named: "hill_mark"))
+        
+        scrollView.addSubview(hillView)
+        scrollView.addSubview(pinView)
+        
+        let hillSize = CGSize(width: hillView.image!.size.width * multiplier, height: hillView.image!.size.height * multiplier)
+        let pinSize = CGSize(width: pinView.image!.size.width * multiplier, height: pinView.image!.size.height * multiplier)
+        
+        let pinBottomOffset = 24.0 * multiplier
+        let pinXOffset = 28.0 * multiplier
+        let yTranslation = pinSize.height + pinBottomOffset
+        let hillTopPadding = yTranslation - hillSize.height
+        
+        let hillXMod = -4.0 * multiplier
+        let hillYMod = 4.0 * multiplier
+        
+        hillView.frame = CGRect(x: hillXMod, y: viewportFrame.maxY + hillTopPadding + hillYMod, width: hillSize.width, height: hillSize.height)
+        pinView.frame = CGRect(x: pinXOffset, y: viewportFrame.maxY, width: pinSize.width, height: pinSize.height)
+        
+        tweenController.tweenFrom(hillView.frame, at: 0.0)
+            .thenHoldUntil(1.0)
+            .thenTo(hillView.frame.offsetBy(dx: 0.0, dy: -yTranslation), at: 2.0)
+            .thenTo(hillView.frame, at: 3.0)
+            .withAction(hillView.twc_slidingFrameActionWithScrollView(scrollView))
+        
+        tweenController.tweenFrom(pinView.frame, at: 0.0)
+            .thenHoldUntil(1.0)
+            .thenTo(pinView.frame.offsetBy(dx: 0.0, dy: -yTranslation), at: 2.0)
+            .thenHoldUntil(3.0)
+            .thenTo(pinView.frame.offsetBy(dx: -viewportFrame.width, dy: -yTranslation), at: 4.0)
+            .withAction(pinView.twc_slidingFrameActionWithScrollView(scrollView))
     }
     
     //MARK: Observers
