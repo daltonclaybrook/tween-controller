@@ -20,6 +20,7 @@
 		7586C3A91CF7EB70007DC4CB /* TutorialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */; };
 		7586C3AB1CF7EF9A007DC4CB /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */; };
 		7586C3AD1CF806FC007DC4CB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3AC1CF806FC007DC4CB /* Extensions.swift */; };
+		75CCBD711CFA5DA40024787B /* TweenController.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 753655F91CE127100031BEA5 /* TweenController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE4030611CE3C11D0067DF4F /* Boundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4030601CE3C11D0067DF4F /* Boundary.swift */; };
 		BE40306E1CE3C9420067DF4F /* TweenController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753655F91CE127100031BEA5 /* TweenController.framework */; };
 		BE4030701CE3D9020067DF4F /* TweenPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE40306F1CE3D9020067DF4F /* TweenPromise.swift */; };
@@ -34,6 +35,20 @@
 			remoteInfo = TweenController;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		75CCBD701CFA5D920024787B /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				75CCBD711CFA5DA40024787B /* TweenController.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		753655F91CE127100031BEA5 /* TweenController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TweenController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,6 +203,7 @@
 				753656041CE127350031BEA5 /* Sources */,
 				753656051CE127350031BEA5 /* Frameworks */,
 				753656061CE127350031BEA5 /* Resources */,
+				75CCBD701CFA5D920024787B /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
