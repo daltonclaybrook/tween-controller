@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "TweenController"
-  s.version      = “0.1.0”
+  s.version      = "0.1.0"
   s.summary      = "A pure Swift toolkit for creating interactive menus and tutorials"
 
   s.description  = <<-DESC
@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
 
   s.license      = { :type => "MIT", :file => "LICENSE" }
 
-  s.authors            = { “Dalton Claybrook” => “daltonclaybrook@gmail.com" }
-  s.social_media_url   = "http://twitter.com/daltonclaybrook”
+  s.authors            = { "Dalton Claybrook" => "daltonclaybrook@gmail.com" }
+  s.social_media_url   = "http://twitter.com/daltonclaybrook"
 
   s.source       = { :git => "https://github.com/daltonclaybrook/tween-controller.git", :tag => s.version }
   
