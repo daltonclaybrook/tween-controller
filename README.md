@@ -1,4 +1,4 @@
-# TweenController [![Swift v2.1.1](https://img.shields.io/badge/Swift-v2.2.1-orange.svg)](swift.org) ![License MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg)
+# TweenController [![Swift v2.1.1](https://img.shields.io/badge/Swift-v2.2.1-orange.svg)](swift.org) ![License MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg) [![Cocoapods](https://img.shields.io/badge/pod-v0.1.0-blue.svg)](cocoapods.org)
 
 On the surface, TweenController makes it easy to build interactive menus and tutorials. Under the hood, it's a simple but powerful toolkit to interpolate between values that are *Tweenable*.
 
@@ -101,3 +101,81 @@ func observeBoundaries() {
 * UIColor
 * CGAffineTransform
 * CATransform3D
+
+## Installation
+
+### CocoaPods
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
+
+``` bash
+$ gem install cocoapods
+```
+
+
+To integrate TweenController into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+``` ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'TweenController', '~> 0.1'
+```
+
+Then, run the following command:
+
+``` bash
+$ pod install
+```
+
+You should open the `{Project}.xcworkspace` instead of the `{Project}.xcodeproj` after you installed anything from CocoaPods.
+
+### Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager for Cocoa application. To install the carthage tool, you can use [Homebrew](http://brew.sh).
+
+``` bash
+$ brew update
+$ brew install carthage
+```
+
+To integrate TweenController into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+``` ogdl
+github "daltonclaybrook/tween-controller" ~> 0.1
+```
+
+Then, run the following command to build the TweenController framework:
+
+``` bash
+$ carthage update
+
+```
+
+At last, you need to set up your Xcode project manually to add the TweenController framework.
+
+On your application targets’ “General” settings tab, in the “Linked Frameworks and Libraries” section, drag and drop each framework you want to use from the Carthage/Build folder on disk.
+
+On your application targets’ “Build Phases” settings tab, click the “+” icon and choose “New Run Script Phase”. Create a Run Script with the following content:
+
+``` 
+/usr/local/bin/carthage copy-frameworks
+```
+
+and add the paths to the frameworks you want to use under “Input Files”:
+
+``` 
+$(SRCROOT)/Carthage/Build/iOS/TweenController.framework
+```
+
+For more information about how to use Carthage, please see its [project page](https://github.com/Carthage/Carthage).
+
+
+## Contact
+
+Follow and contact me on [Twitter](http://twitter.com/daltonclaybrook). If you find an issue, just [open a ticket](https://github.com/daltonclaybrook/tween-controller/issues/new) on it. Pull requests are warmly welcome as well.
+
+## License
+
+TweenController is released under the MIT license. See LICENSE for details.
