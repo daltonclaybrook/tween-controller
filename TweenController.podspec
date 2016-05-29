@@ -3,6 +3,7 @@ Pod::Spec.new do |s|
   s.name         = "TweenController"
   s.version      = "0.1.0"
   s.summary      = "A pure Swift toolkit for creating interactive menus and tutorials"
+  s.platform	  = :ios, '8.0'
 
   s.description  = <<-DESC
                    On the surface, TweenController makes it easy to build interactive menus and tutorials. Under the hood, it's a simple but powerful toolkit to interpolate between values that are Tweenable.
