@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         
         controller.tweenFrom(transformA, at: 0.0)
             .to(transformB, at: 0.5)
-            .thenTo(transformC, at: 1.0, withEasing: Easing.easeInOutQuart)
+            .thenTo(transformC, at: 1.0, withEasing: Easing.easeInOutExpo)
             .withAction(tweenView.layer.twc_applyAffineTransform)
     }
     
