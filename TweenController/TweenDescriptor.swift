@@ -63,7 +63,6 @@ public class TweenDescriptor<T:Tweenable>: TweenIntervalType {
         guard let block = updateBlock where containsProgress(progress) else { return }
         let percent = percentFromProgress(progress)
         let easedPercent = easingFunction(t: percent)
-        assert(easedPercent >= 0.0 && easedPercent <= 1.0, "value returned from the easing function must be between 0.0 - 1.0")
         block(T.valueBetween(fromValue, toValue, percent: easedPercent))
     }
     
