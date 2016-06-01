@@ -58,6 +58,14 @@ extension TweenPromise {
         return thenTo(to, at: Double(progress))
     }
     
+    public func to(to: T, at progress: CGFloat, withEasing easing: Easing.Function) -> TweenPromise<T> {
+        return self.to(to, at: Double(progress), withEasing: easing)
+    }
+    
+    public func thenTo(to: T, at progress: CGFloat, withEasing easing: Easing.Function) -> TweenPromise<T> {
+        return thenTo(to, at: Double(progress), withEasing: easing)
+    }
+    
     public func thenHoldUntil(until: CGFloat) -> TweenPromise<T> {
         return thenHoldUntil(Double(until))
     }

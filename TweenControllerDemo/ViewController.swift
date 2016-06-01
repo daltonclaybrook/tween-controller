@@ -32,23 +32,24 @@ class ViewController: UIViewController {
     
     let controller = TweenController()
     @IBOutlet private var tweenView: UIView!
-    private var timer: NSTimer!
     private var timesFired: Int = 0
+    private var displayLink: CADisplayLink!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tweenTransform()
         tweenColor()
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(ViewController.timerFired(_:)), userInfo: nil, repeats: true)
+        displayLink = CADisplayLink(target: self, selector: #selector(ViewController.timerFired(_:)))
+        displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
     }
     
     func timerFired(timer: NSTimer) {
         timesFired += 1
-        controller.updateProgress(Double(timesFired) * 0.01)
+        controller.updateProgress(Double(timesFired) * 0.0025)
         if controller.progress >= 1.0 {
-            self.timer.invalidate()
-            self.timer = nil
+            self.displayLink.invalidate()
+            self.displayLink = nil
         }
     }
     
@@ -61,7 +62,7 @@ class ViewController: UIViewController {
         
         controller.tweenFrom(transformA, at: 0.0)
             .to(transformB, at: 0.5)
-            .thenTo(transformC, at: 1.0)
+            .thenTo(transformC, at: 1.0, withEasing: Easing.easeInOutQuart)
             .withAction(tweenView.layer.twc_applyAffineTransform)
     }
     
