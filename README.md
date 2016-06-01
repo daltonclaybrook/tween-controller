@@ -75,6 +75,14 @@ then simply call:
 controller.updateProgress(newProgress)
 ```
 
+You can use *easing functions*:
+
+``` swift
+controller.tweenFrom(transformA, at: 0.0)
+	.to(transformB, at: 1.0, withEasing: Easing.easeInOutQuart)
+	.withAction(tweenView.layer.twc_applyAffineTransform)
+```
+
 You can also *observe boundaries*:
 
 ``` swift
