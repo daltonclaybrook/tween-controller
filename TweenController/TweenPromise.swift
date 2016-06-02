@@ -60,7 +60,7 @@ public struct TweenPromise<T:Tweenable> {
     
     //MARK: Private
     
-    private func addEdgeObservers() {
+    func addEdgeObservers() {
         guard let first = resolvedDescriptors.first, last = resolvedDescriptors.last else { return }
         let firstProgress = first.interval.start
         let lastProgress = last.interval.end
