@@ -57,12 +57,8 @@ extension CGFloat: ObjectConvertible {
 
 extension TweenPromise where T : ObjectConvertible {
     public func withObject(object: NSObject, keyPath: String) {
-        addEdgeObservers()
-        resolvedDescriptors.last?.isIntervalClosed = true
-        resolvedDescriptors.forEach() { descriptor in
-            descriptor.updateBlock = { [weak object] tweenable in
-                object?.setValue(tweenable.toObject(), forKeyPath: keyPath)
-            }
+        withAction { [weak object] tweenable in
+            object?.setValue(tweenable.toObject(), forKeyPath: keyPath)
         }
     }
 }
