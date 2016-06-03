@@ -142,15 +142,15 @@
 		753656221CE13EFB0031BEA5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				75FD5A711CFE947400B5C4A6 /* Easing.swift */,
+				75FD5A731CFE9FB200B5C4A6 /* Foundation+Easing.swift */,
 				7536561A1CE127460031BEA5 /* TweenController.swift */,
 				7536561C1CE12A510031BEA5 /* Tweenable.swift */,
-				75FD5A711CFE947400B5C4A6 /* Easing.swift */,
 				7536561E1CE12CB70031BEA5 /* StandardTweenables.swift */,
 				BE40306F1CE3D9020067DF4F /* TweenPromise.swift */,
 				753656201CE13D170031BEA5 /* TweenDescriptor.swift */,
 				BE4030601CE3C11D0067DF4F /* Boundary.swift */,
 				7586C3AC1CF806FC007DC4CB /* Extensions.swift */,
-				75FD5A731CFE9FB200B5C4A6 /* Foundation+Easing.swift */,
 				75A3255E1CFFEE9200D2A16E /* KVC.swift */,
 			);
 			name = Source;

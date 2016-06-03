@@ -8,41 +8,41 @@
 
 import Foundation
 
-public protocol NumberConvertible {
-    func toNumber() -> NSNumber
+public protocol ObjectConvertible {
+    func toObject() -> AnyObject
 }
 
-extension Int: NumberConvertible {
-    public func toNumber() -> NSNumber {
+extension Int: ObjectConvertible {
+    public func toObject() -> AnyObject {
         return self
     }
 }
 
-extension Float: NumberConvertible {
-    public func toNumber() -> NSNumber {
+extension Float: ObjectConvertible {
+    public func toObject() -> AnyObject {
         return self
     }
 }
 
-extension Double: NumberConvertible {
-    public func toNumber() -> NSNumber {
+extension Double: ObjectConvertible {
+    public func toObject() -> AnyObject {
         return self
     }
 }
 
-extension CGFloat: NumberConvertible {
-    public func toNumber() -> NSNumber {
+extension CGFloat: ObjectConvertible {
+    public func toObject() -> AnyObject {
         return self
     }
 }
 
-extension TweenPromise where T : NumberConvertible {
+extension TweenPromise where T : ObjectConvertible {
     public func withObject(object: NSObject, keyPath: String) {
         addEdgeObservers()
         resolvedDescriptors.last?.isIntervalClosed = true
         resolvedDescriptors.forEach() { descriptor in
             descriptor.updateBlock = { [weak object] tweenable in
-                object?.setValue(tweenable.toNumber(), forKeyPath: keyPath)
+                object?.setValue(tweenable.toObject(), forKeyPath: keyPath)
             }
         }
     }
