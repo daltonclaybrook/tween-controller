@@ -62,4 +62,3 @@ extension TweenPromise where T : ObjectConvertible {
         }
     }
 }
-
