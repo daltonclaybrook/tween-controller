@@ -83,6 +83,14 @@ controller.tweenFrom(transformA, at: 0.0)
 	.withAction(tweenView.layer.twc_applyAffineTransform)
 ```
 
+You can use *[Key-Value Coding](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreAnimation_guide/Key-ValueCodingExtensions/Key-ValueCodingExtensions.html)*:
+
+``` swift
+controller.tweenFrom(0.0, at: 0.0)
+	.to(M_PI * 8.0, at: 1.0)
+	.withObject(tweenView.layer, keyPath: "transform.rotation.z")
+```
+
 You can also *observe boundaries*:
 
 ``` swift
