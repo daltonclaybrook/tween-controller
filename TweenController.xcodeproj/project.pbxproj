@@ -20,7 +20,10 @@
 		7586C3A91CF7EB70007DC4CB /* TutorialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */; };
 		7586C3AB1CF7EF9A007DC4CB /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */; };
 		7586C3AD1CF806FC007DC4CB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3AC1CF806FC007DC4CB /* Extensions.swift */; };
+		75A3255F1CFFEE9200D2A16E /* KVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A3255E1CFFEE9200D2A16E /* KVC.swift */; };
 		75CCBD711CFA5DA40024787B /* TweenController.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 753655F91CE127100031BEA5 /* TweenController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		75FD5A721CFE947400B5C4A6 /* Easing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FD5A711CFE947400B5C4A6 /* Easing.swift */; };
+		75FD5A741CFE9FB200B5C4A6 /* Foundation+Easing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FD5A731CFE9FB200B5C4A6 /* Foundation+Easing.swift */; };
 		BE4030611CE3C11D0067DF4F /* Boundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4030601CE3C11D0067DF4F /* Boundary.swift */; };
 		BE40306E1CE3C9420067DF4F /* TweenController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753655F91CE127100031BEA5 /* TweenController.framework */; };
 		BE4030701CE3D9020067DF4F /* TweenPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE40306F1CE3D9020067DF4F /* TweenPromise.swift */; };
@@ -68,6 +71,9 @@
 		7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialBuilder.swift; sourceTree = "<group>"; };
 		7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7586C3AC1CF806FC007DC4CB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		75A3255E1CFFEE9200D2A16E /* KVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVC.swift; sourceTree = "<group>"; };
+		75FD5A711CFE947400B5C4A6 /* Easing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Easing.swift; sourceTree = "<group>"; };
+		75FD5A731CFE9FB200B5C4A6 /* Foundation+Easing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Easing.swift"; sourceTree = "<group>"; };
 		BE4030601CE3C11D0067DF4F /* Boundary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boundary.swift; sourceTree = "<group>"; };
 		BE40306F1CE3D9020067DF4F /* TweenPromise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweenPromise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +142,8 @@
 		753656221CE13EFB0031BEA5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				75FD5A711CFE947400B5C4A6 /* Easing.swift */,
+				75FD5A731CFE9FB200B5C4A6 /* Foundation+Easing.swift */,
 				7536561A1CE127460031BEA5 /* TweenController.swift */,
 				7536561C1CE12A510031BEA5 /* Tweenable.swift */,
 				7536561E1CE12CB70031BEA5 /* StandardTweenables.swift */,
@@ -143,6 +151,7 @@
 				753656201CE13D170031BEA5 /* TweenDescriptor.swift */,
 				BE4030601CE3C11D0067DF4F /* Boundary.swift */,
 				7586C3AC1CF806FC007DC4CB /* Extensions.swift */,
+				75A3255E1CFFEE9200D2A16E /* KVC.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -278,11 +287,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7536561B1CE127460031BEA5 /* TweenController.swift in Sources */,
+				75FD5A741CFE9FB200B5C4A6 /* Foundation+Easing.swift in Sources */,
 				BE4030701CE3D9020067DF4F /* TweenPromise.swift in Sources */,
 				7536561F1CE12CB70031BEA5 /* StandardTweenables.swift in Sources */,
 				753656211CE13D170031BEA5 /* TweenDescriptor.swift in Sources */,
 				7536561D1CE12A510031BEA5 /* Tweenable.swift in Sources */,
+				75A3255F1CFFEE9200D2A16E /* KVC.swift in Sources */,
 				BE4030611CE3C11D0067DF4F /* Boundary.swift in Sources */,
+				75FD5A721CFE947400B5C4A6 /* Easing.swift in Sources */,
 				7586C3AD1CF806FC007DC4CB /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -36,16 +36,16 @@ public struct TweenPromise<T:Tweenable> {
     let resolvedDescriptors: [TweenDescriptor<T>]
     weak var registration: DescriptorRegistration?
     
-    public func to(to: T, at progress: Double) -> TweenPromise<T> {
+    public func to(to: T, at progress: Double, withEasing easing: Easing.Function = Easing.linear) -> TweenPromise<T> {
         assert(progress != self.progress, "'to' progress must be different than 'from' progress")
         
-        let descriptor = TweenDescriptor(fromValue: from, toValue: to, interval: self.progress..<progress)
+        let descriptor = TweenDescriptor(fromValue: from, toValue: to, interval: self.progress..<progress, easingFunction: easing)
         registration?.registerDescriptor(descriptor)
         return TweenPromise(from: to, progress: progress, resolvedDescriptors: resolvedDescriptors + [descriptor], registration: registration)
     }
     
-    public func thenTo(to: T, at progress: Double) -> TweenPromise<T> {
-        return self.to(to, at: progress)
+    public func thenTo(to: T, at progress: Double, withEasing easing: Easing.Function = Easing.linear) -> TweenPromise<T> {
+        return self.to(to, at: progress, withEasing: easing)
     }
     
     public func thenHoldUntil(until: Double) -> TweenPromise<T> {

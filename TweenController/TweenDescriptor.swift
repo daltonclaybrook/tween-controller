@@ -27,6 +27,7 @@
 
 public protocol TweenIntervalType {
     var interval: HalfOpenInterval<Double> { get }
+    var easingFunction: Easing.Function { get }
     var isIntervalClosed: Bool { get set }
     func containsProgress(progress: Double) -> Bool
     func handleProgressUpdate(progress: Double)
@@ -47,19 +48,22 @@ public class TweenDescriptor<T:Tweenable>: TweenIntervalType {
     public let fromValue: T
     public let toValue: T
     public let interval: HalfOpenInterval<Double>
+    public let easingFunction: Easing.Function
     public var isIntervalClosed: Bool = false
     public var updateBlock: ((T) -> ())?
     
-    init(fromValue: T, toValue: T, interval: HalfOpenInterval<Double>) {
+    init(fromValue: T, toValue: T, interval: HalfOpenInterval<Double>, easingFunction: Easing.Function) {
         self.fromValue = fromValue
         self.toValue = toValue
         self.interval = interval
+        self.easingFunction = easingFunction
     }
     
     public func handleProgressUpdate(progress: Double) {
         guard let block = updateBlock where containsProgress(progress) else { return }
         let percent = percentFromProgress(progress)
-        block(T.valueBetween(fromValue, toValue, percent: percent))
+        let easedPercent = easingFunction(t: percent)
+        block(T.valueBetween(fromValue, toValue, percent: easedPercent))
     }
     
     //MARK: Private

@@ -32,37 +32,41 @@ class ViewController: UIViewController {
     
     let controller = TweenController()
     @IBOutlet private var tweenView: UIView!
-    private var timer: NSTimer!
     private var timesFired: Int = 0
+    private var displayLink: CADisplayLink!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tweenTransform()
         tweenColor()
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(ViewController.timerFired(_:)), userInfo: nil, repeats: true)
+        displayLink = CADisplayLink(target: self, selector: #selector(ViewController.timerFired(_:)))
+        displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
     }
     
     func timerFired(timer: NSTimer) {
         timesFired += 1
-        controller.updateProgress(Double(timesFired) * 0.01)
+        controller.updateProgress(Double(timesFired) * 0.0025)
         if controller.progress >= 1.0 {
-            self.timer.invalidate()
-            self.timer = nil
+            self.displayLink.invalidate()
+            self.displayLink = nil
         }
     }
     
     //MARK: Private
     
     private func tweenTransform() {
-        let transformA = CGAffineTransformIdentity
-        let transformB = CGAffineTransformMakeScale(2.0, 2.0)
-        let transformC = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+        controller.tweenFrom(0.0, at: 0.0)
+            .to(M_PI * 8.0, at: 1.0, withEasing: Easing.easeInOutQuint)
+            .withObject(tweenView.layer, keyPath: "transform.rotation.z")
         
-        controller.tweenFrom(transformA, at: 0.0)
-            .to(transformB, at: 0.5)
-            .thenTo(transformC, at: 1.0)
-            .withAction(tweenView.layer.twc_applyAffineTransform)
+        controller.tweenFrom(1.0, at: 0.0)
+            .to(2.0, at: 0.5)
+            .thenTo(1.0, at: 1.0)
+            .withAction { [weak self] scale in
+                self?.tweenView.layer.setValue(scale, forKeyPath: "transform.scale.x")
+                self?.tweenView.layer.setValue(scale, forKeyPath: "transform.scale.y")
+        }
     }
     
     private func tweenColor() {
