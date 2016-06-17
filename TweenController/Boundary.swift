@@ -26,7 +26,7 @@
 //
 
 struct Boundary {    
-    struct Direction: OptionSetType {
+    struct Direction: OptionSet {
         let rawValue: Int
         init(rawValue: Int) { self.rawValue = rawValue }
         

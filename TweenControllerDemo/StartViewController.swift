@@ -34,19 +34,21 @@ class StartViewController: UIViewController, TutorialViewController {
     @IBOutlet var buttonsContainerView: UIView!
     @IBOutlet var pageControl: UIPageControl!
  
-    private var appearanceToken: dispatch_once_t = 0
+    private var hasAppeared = false
     private var tweenController: TweenController!
     private var scrollView: UIScrollView!
     
     //MARK: Superclass
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        dispatch_once(&appearanceToken) {
+        if !hasAppeared {
+            hasAppeared = true
+        
             let (tc, scrollView) = TutorialBuilder.buildWithContainerViewController(self)
             self.tweenController = tc
             self.scrollView = scrollView
-            scrollView.delegate = self
+            self.scrollView.delegate = self
         }
     }
     
@@ -59,15 +61,15 @@ class StartViewController: UIViewController, TutorialViewController {
 
 extension StartViewController: UIScrollViewDelegate {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        tweenController.updateProgress(scrollView.twc_horizontalPageProgress)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        tweenController.update(progress: Double(scrollView.twc_horizontalPageProgress))
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         updatePageControl()
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             updatePageControl()
         }

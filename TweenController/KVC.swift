@@ -56,8 +56,8 @@ extension CGFloat: ObjectConvertible {
 }
 
 extension TweenPromise where T : ObjectConvertible {
-    public func withObject(object: NSObject, keyPath: String) {
-        withAction { [weak object] tweenable in
+    public func withObject(_ object: NSObject, keyPath: String) {
+        with { [weak object] tweenable in
             object?.setValue(tweenable.toObject(), forKeyPath: keyPath)
         }
     }

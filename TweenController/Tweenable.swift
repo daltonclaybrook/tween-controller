@@ -26,5 +26,5 @@
 //
 
 public protocol Tweenable {
-    static func valueBetween(val1: Self, _ val2: Self, percent: Double) -> Self
+    static func valueBetween(_ val1: Self, _ val2: Self, percent: Double) -> Self
 }

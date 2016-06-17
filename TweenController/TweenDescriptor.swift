@@ -26,20 +26,16 @@
 //
 
 public protocol TweenIntervalType {
-    var interval: HalfOpenInterval<Double> { get }
+    var interval: Range<Double> { get }
     var easingFunction: Easing.Function { get }
     var isIntervalClosed: Bool { get set }
-    func containsProgress(progress: Double) -> Bool
-    func handleProgressUpdate(progress: Double)
+    func containsProgress(_ progress: Double) -> Bool
+    func handleProgressUpdate(_ progress: Double)
 }
 
 extension TweenIntervalType {
-    public func containsProgress(progress: Double) -> Bool {
-        if isIntervalClosed {
-            return (interval.start...interval.end).contains(progress)
-        } else {
-            return interval.contains(progress)
-        }
+    public func containsProgress(_ progress: Double) -> Bool {
+        return interval.contains(progress) || (isIntervalClosed && interval.upperBound == progress)
     }
 }
 
@@ -47,19 +43,19 @@ public class TweenDescriptor<T:Tweenable>: TweenIntervalType {
     
     public let fromValue: T
     public let toValue: T
-    public let interval: HalfOpenInterval<Double>
+    public let interval: Range<Double>
     public let easingFunction: Easing.Function
     public var isIntervalClosed: Bool = false
     public var updateBlock: ((T) -> ())?
     
-    init(fromValue: T, toValue: T, interval: HalfOpenInterval<Double>, easingFunction: Easing.Function) {
+    init(fromValue: T, toValue: T, interval: Range<Double>, easingFunction: Easing.Function) {
         self.fromValue = fromValue
         self.toValue = toValue
         self.interval = interval
         self.easingFunction = easingFunction
     }
     
-    public func handleProgressUpdate(progress: Double) {
+    public func handleProgressUpdate(_ progress: Double) {
         guard let block = updateBlock where containsProgress(progress) else { return }
         let percent = percentFromProgress(progress)
         let easedPercent = easingFunction(t: percent)
@@ -68,7 +64,7 @@ public class TweenDescriptor<T:Tweenable>: TweenIntervalType {
     
     //MARK: Private
     
-    private func percentFromProgress(progress: Double) -> Double {
-        return (progress - interval.start) / (interval.end - interval.start)
+    private func percentFromProgress(_ progress: Double) -> Double {
+        return (progress - interval.lowerBound) / (interval.upperBound - interval.lowerBound)
     }
 }

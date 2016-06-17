@@ -37,42 +37,42 @@ public class TweenController {
     
     public init() {}
     
-    public func tweenFrom<T:Tweenable>(from: T, at progress: Double) -> TweenPromise<T> {
+    public func tween<T:Tweenable>(from: T, at progress: Double) -> TweenPromise<T> {
         return TweenPromise(from: from, progress: progress, resolvedDescriptors: [], registration: self)
     }
     
-    public func observeForwardBoundary(progress: Double, block: TweenObserverBlock) {
+    public func observeForward(progress: Double, block: TweenObserverBlock) {
         boundaries.append(Boundary(progress: progress, block: block, direction: .Forward))
     }
     
-    public func observeBackwardBoundary(progress: Double, block: TweenObserverBlock) {
+    public func observeBackward(progress: Double, block: TweenObserverBlock) {
         boundaries.append(Boundary(progress: progress, block: block, direction: .Backward))
     }
     
-    public func observeBothBoundaries(progress: Double, block: TweenObserverBlock) {
+    public func observeBoth(progress: Double, block: TweenObserverBlock) {
         boundaries.append(Boundary(progress: progress, block: block, direction: .Both))
     }
     
-    public func updateProgress(progress: Double) {
+    public func update(progress: Double) {
         let lastProgress = self.progress
         self.progress = progress
-        updateDescriptorsWithProgress(progress)
-        handleBoundaryCrossingIfNecessaryForProgress(progress, lastProgress: lastProgress)
+        updateDescriptors(progress: progress)
+        handleBoundaryCrossingIfNecessary(progress: progress, lastProgress: lastProgress)
     }
     
     public func resetProgress() {
         progress = 0.0
-        updateDescriptorsWithProgress(progress)
+        updateDescriptors(progress: progress)
     }
     
     //MARK: Private
     
-    private func updateDescriptorsWithProgress(progress: Double) {
+    private func updateDescriptors(progress: Double) {
         let filtered = descriptors.filter() { $0.containsProgress(progress) }
         filtered.forEach({ $0.handleProgressUpdate(progress) })
     }
     
-    private func handleBoundaryCrossingIfNecessaryForProgress(progress: Double, lastProgress: Double) {
+    private func handleBoundaryCrossingIfNecessary(progress: Double, lastProgress: Double) {
         guard progress != lastProgress else { return }
         let direction: Boundary.Direction = progress > lastProgress ? .Forward : .Backward
         
@@ -91,11 +91,11 @@ public class TweenController {
 
 extension TweenController: DescriptorRegistration {
     
-    func registerDescriptor<T : Tweenable>(descriptor: TweenDescriptor<T>) {
+    func register<T : Tweenable>(descriptor: TweenDescriptor<T>) {
         descriptors.append(descriptor)
     }
     
-    func observeBoundary(boundary: Boundary) {
+    func observe(boundary: Boundary) {
         boundaries.append(boundary)
     }
 }

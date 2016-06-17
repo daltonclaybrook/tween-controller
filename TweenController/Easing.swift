@@ -33,21 +33,21 @@ public struct Easing {
     
     // Linear
     
-    public static func linear(t: Double) -> Double {
+    public static func linear(_ t: Double) -> Double {
         return t
     }
     
     // Quadratic
     
-    public static func easeInQuad(t: Double) -> Double {
+    public static func easeInQuad(_ t: Double) -> Double {
         return t * t
     }
     
-    public static func easeOutQuad(t: Double) -> Double {
+    public static func easeOutQuad(_ t: Double) -> Double {
         return -t * (t - 2)
     }
     
-    public static func easeInOutQuad(t: Double) -> Double {
+    public static func easeInOutQuad(_ t: Double) -> Double {
         var _t = t / 0.5
         if _t < 1.0 {
             return 0.5 * _t * _t
@@ -58,16 +58,16 @@ public struct Easing {
     
     // Cubic
     
-    public static func easeInCubic(t: Double) -> Double {
+    public static func easeInCubic(_ t: Double) -> Double {
         return t * t * t
     }
     
-    public static func easeOutCubic(t: Double) -> Double {
+    public static func easeOutCubic(_ t: Double) -> Double {
         let _t = t - 1.0
         return _t * _t * _t + 1
     }
     
-    public static func easeInOutCubic(t: Double) -> Double {
+    public static func easeInOutCubic(_ t: Double) -> Double {
         var _t = t / 0.5
         if _t < 1.0 {
             return 0.5 * _t * _t * _t
@@ -78,16 +78,16 @@ public struct Easing {
     
     // Quartic
     
-    public static func easeInQuart(t: Double) -> Double {
+    public static func easeInQuart(_ t: Double) -> Double {
         return t * t * t * t
     }
     
-    public static func easeOutQuart(t: Double) -> Double {
+    public static func easeOutQuart(_ t: Double) -> Double {
         let _t = t - 1.0
         return -(_t * _t * _t * _t + 1)
     }
     
-    public static func easeInOutQuart(t: Double) -> Double {
+    public static func easeInOutQuart(_ t: Double) -> Double {
         var _t = t / 0.5
         if _t < 1.0 {
             return 0.5 * _t * _t * _t * _t
@@ -98,16 +98,16 @@ public struct Easing {
     
     // Quintic
     
-    public static func easeInQuint(t: Double) -> Double {
+    public static func easeInQuint(_ t: Double) -> Double {
         return t * t * t * t * t
     }
     
-    public static func easeOutQuint(t: Double) -> Double {
+    public static func easeOutQuint(_ t: Double) -> Double {
         let _t = t - 1.0
         return _t * _t * _t * _t * _t + 1
     }
     
-    public static func easeInOutQuint(t: Double) -> Double {
+    public static func easeInOutQuint(_ t: Double) -> Double {
         var _t = t / 0.5
         if _t < 1.0 {
             return 0.5 * _t * _t * _t * _t * _t
