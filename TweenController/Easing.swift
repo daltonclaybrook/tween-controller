@@ -115,4 +115,57 @@ public struct Easing {
         _t -= 2.0
         return 0.5 * (_t * _t * _t * _t * _t + 2.0)
     }
+    
+    // Sinusoidal
+    
+    public static func easeInSine(_ t: Double) -> Double {
+        return -cos(t * (Double.pi/2.0)) + 1.0
+    }
+    
+    public static func easeOutSine(_ t: Double) -> Double {
+        return sin(t * (Double.pi/2.0))
+    }
+    
+    public static func easeInOutSine(_ t: Double) -> Double {
+        return -0.5 * (cos(Double.pi * t) - 1.0)
+    }
+    
+    // Exponential
+    
+    public static func easeInExpo(_ t: Double) -> Double {
+        return pow(2.0, 10.0 * (t - 1.0))
+    }
+    
+    public static func easeOutExpo(_ t: Double) -> Double {
+        return (-pow(2.0, -10.0 * t) + 1.0)
+    }
+    
+    public static func easeInOutExpo(_ t: Double) -> Double {
+        var _t = t / 0.5
+        if _t < 1.0 {
+            return 0.5 * pow(2.0, 10.0 * (_t - 1.0))
+        }
+        _t -= 1.0
+        return 0.5 * (-pow(2.0, -10.0 * _t) + 2.0)
+    }
+    
+    // Circular
+    
+    public static func easeInCirc(_ t: Double) -> Double {
+        return -(sqrt(1.0 - t * t) - 1.0)
+    }
+    
+    public static func easeOutCirc(_ t: Double) -> Double {
+        let _t = t - 1.0
+        return sqrt(1.0 - _t * _t)
+    }
+    
+    public static func easeInOutCirc(_ t: Double) -> Double {
+        var _t = t / 0.5
+        if _t < 1.0 {
+            return -0.5 * (sqrt(1.0 - _t * _t) - 1.0)
+        }
+        _t -= 2.0
+        return 0.5 * (sqrt(1.0 - _t * _t) + 1.0)
+    }
 }

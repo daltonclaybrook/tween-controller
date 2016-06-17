@@ -57,7 +57,7 @@ class ViewController: UIViewController {
     
     private func tweenTransform() {
         controller.tween(from: 0.0, at: 0.0)
-            .to(M_PI * 8.0, at: 1.0, withEasing: Easing.easeInOutQuint)
+            .to(Double.pi * 8.0, at: 1.0, withEasing: Easing.easeInOutQuint)
             .withObject(tweenView.layer, keyPath: "transform.rotation.z")
         
         controller.tween(from: 1.0, at: 0.0)
