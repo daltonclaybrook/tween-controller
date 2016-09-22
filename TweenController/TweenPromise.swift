@@ -26,8 +26,8 @@
 //
 
 protocol DescriptorRegistration: class {
-    func register<T: Tweenable>(descriptor: TweenDescriptor<T>)
-    func observe(boundary: Boundary)
+    func register<T: Tweenable>(_ descriptor: TweenDescriptor<T>)
+    func observe(_ boundary: Boundary)
 }
 
 public struct TweenPromise<T:Tweenable> {
@@ -36,23 +36,23 @@ public struct TweenPromise<T:Tweenable> {
     let resolvedDescriptors: [TweenDescriptor<T>]
     weak var registration: DescriptorRegistration?
     
-    public func to(_ to: T, at progress: Double, withEasing easing: Easing.Function = Easing.linear) -> TweenPromise<T> {
+    public func to(_ to: T, at progress: Double, withEasing easing: @escaping Easing.Function = Easing.linear) -> TweenPromise<T> {
         assert(progress != self.progress, "'to' progress must be different than 'from' progress")
         
         let descriptor = TweenDescriptor(fromValue: from, toValue: to, interval: self.progress..<progress, easingFunction: easing)
-        registration?.register(descriptor: descriptor)
+        registration?.register(descriptor)
         return TweenPromise(from: to, progress: progress, resolvedDescriptors: resolvedDescriptors + [descriptor], registration: registration)
     }
     
-    public func then(to: T, at progress: Double, withEasing easing: Easing.Function = Easing.linear) -> TweenPromise<T> {
+    public func then(_ to: T, at progress: Double, withEasing easing: @escaping Easing.Function = Easing.linear) -> TweenPromise<T> {
         return self.to(to, at: progress, withEasing: easing)
     }
     
-    public func thenHold(until: Double) -> TweenPromise<T> {
+    public func thenHold(_ until: Double) -> TweenPromise<T> {
         return self.to(from, at: until)
     }
     
-    public func with(action: (T) -> ()) {
+    public func with(_ action: @escaping (T) -> ()) {
         addEdgeObservers()
         resolvedDescriptors.last?.isIntervalClosed = true
         resolvedDescriptors.forEach() { $0.updateBlock = action }
@@ -60,19 +60,19 @@ public struct TweenPromise<T:Tweenable> {
     
     //MARK: Private
     
-    private func addEdgeObservers() {
-        guard let first = resolvedDescriptors.first, last = resolvedDescriptors.last else { return }
+    fileprivate func addEdgeObservers() {
+        guard let first = resolvedDescriptors.first, let last = resolvedDescriptors.last else { return }
         let firstProgress = first.interval.lowerBound
         let lastProgress = last.interval.upperBound
         
         // if we're exiting the interval, update the progress to the edges
-        registration?.observe(boundary: Boundary(progress: firstProgress, block: { [weak first] progress in
+        registration?.observe(Boundary(progress: firstProgress, block: { [weak first] progress in
             guard let first = first else { return }
             if !first.containsProgress(progress) || firstProgress == progress {
                 first.handleProgressUpdate(firstProgress)
             }
         }, direction: .Both))
-        registration?.observe(boundary: Boundary(progress: lastProgress, block: { [weak last] progress in
+        registration?.observe(Boundary(progress: lastProgress, block: { [weak last] progress in
             guard let last = last else { return }
             if !last.containsProgress(progress) || progress == lastProgress {
                 last.handleProgressUpdate(lastProgress)

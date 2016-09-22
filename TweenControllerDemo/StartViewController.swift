@@ -34,9 +34,9 @@ class StartViewController: UIViewController, TutorialViewController {
     @IBOutlet var buttonsContainerView: UIView!
     @IBOutlet var pageControl: UIPageControl!
  
-    private var hasAppeared = false
-    private var tweenController: TweenController!
-    private var scrollView: UIScrollView!
+    fileprivate var hasAppeared = false
+    fileprivate var tweenController: TweenController!
+    fileprivate var scrollView: UIScrollView!
     
     //MARK: Superclass
     
@@ -54,7 +54,7 @@ class StartViewController: UIViewController, TutorialViewController {
     
     //MARK: Private
     
-    private func updatePageControl() {
+    fileprivate func updatePageControl() {
         pageControl.currentPage = Int(round(scrollView.contentOffset.x / containerView.frame.width))
     }
 }
@@ -62,7 +62,7 @@ class StartViewController: UIViewController, TutorialViewController {
 extension StartViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        tweenController.update(progress: Double(scrollView.twc_horizontalPageProgress))
+        tweenController.update(Double(scrollView.twc_horizontalPageProgress))
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
