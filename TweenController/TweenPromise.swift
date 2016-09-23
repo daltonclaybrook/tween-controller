@@ -26,8 +26,8 @@
 //
 
 protocol DescriptorRegistration: class {
-    func register<T: Tweenable>(_ descriptor: TweenDescriptor<T>)
-    func observe(_ boundary: Boundary)
+    func register<T: Tweenable>(descriptor: TweenDescriptor<T>)
+    func observe(boundary: Boundary)
 }
 
 public struct TweenPromise<T:Tweenable> {
@@ -40,19 +40,19 @@ public struct TweenPromise<T:Tweenable> {
         assert(progress != self.progress, "'to' progress must be different than 'from' progress")
         
         let descriptor = TweenDescriptor(fromValue: from, toValue: to, interval: self.progress..<progress, easingFunction: easing)
-        registration?.register(descriptor)
+        registration?.register(descriptor: descriptor)
         return TweenPromise(from: to, progress: progress, resolvedDescriptors: resolvedDescriptors + [descriptor], registration: registration)
     }
     
-    public func then(_ to: T, at progress: Double, withEasing easing: @escaping Easing.Function = Easing.linear) -> TweenPromise<T> {
+    public func then(to: T, at progress: Double, withEasing easing: @escaping Easing.Function = Easing.linear) -> TweenPromise<T> {
         return self.to(to, at: progress, withEasing: easing)
     }
     
-    public func thenHold(_ until: Double) -> TweenPromise<T> {
+    public func thenHold(until: Double) -> TweenPromise<T> {
         return self.to(from, at: until)
     }
     
-    public func with(_ action: @escaping (T) -> ()) {
+    public func with(action: @escaping (T) -> ()) {
         addEdgeObservers()
         resolvedDescriptors.last?.isIntervalClosed = true
         resolvedDescriptors.forEach() { $0.updateBlock = action }
@@ -66,15 +66,15 @@ public struct TweenPromise<T:Tweenable> {
         let lastProgress = last.interval.upperBound
         
         // if we're exiting the interval, update the progress to the edges
-        registration?.observe(Boundary(progress: firstProgress, block: { [weak first] progress in
+        registration?.observe(boundary: Boundary(progress: firstProgress, block: { [weak first] progress in
             guard let first = first else { return }
-            if !first.containsProgress(progress) || firstProgress == progress {
+            if !first.contains(progress: progress) || firstProgress == progress {
                 first.handleProgressUpdate(firstProgress)
             }
         }, direction: .Both))
-        registration?.observe(Boundary(progress: lastProgress, block: { [weak last] progress in
+        registration?.observe(boundary: Boundary(progress: lastProgress, block: { [weak last] progress in
             guard let last = last else { return }
-            if !last.containsProgress(progress) || progress == lastProgress {
+            if !last.contains(progress: progress) || progress == lastProgress {
                 last.handleProgressUpdate(lastProgress)
             }
         }, direction: .Both))

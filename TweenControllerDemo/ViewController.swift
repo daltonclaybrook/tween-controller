@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     
     func timerFired(_ timer: Timer) {
         timesFired += 1
-        controller.update(Double(timesFired) * 0.0025)
+        controller.update(progress: Double(timesFired) * 0.0025)
         if controller.progress >= 1.0 {
             self.displayLink.invalidate()
             self.displayLink = nil
@@ -56,13 +56,13 @@ class ViewController: UIViewController {
     //MARK: Private
     
     fileprivate func tweenTransform() {
-        controller.tween(0.0, at: 0.0)
+        controller.tween(from: 0.0, at: 0.0)
             .to(Double.pi * 8.0, at: 1.0, withEasing: Easing.easeInOutQuint)
-            .with(tweenView.layer, keyPath: "transform.rotation.z")
+            .with(object: tweenView.layer, keyPath: "transform.rotation.z")
         
-        controller.tween(1.0, at: 0.0)
+        controller.tween(from: 1.0, at: 0.0)
             .to(2.0, at: 0.5)
-            .then(1.0, at: 1.0)
+            .then(to: 1.0, at: 1.0)
             .with { [weak self] scale in
                 self?.tweenView.layer.setValue(scale, forKeyPath: "transform.scale.x")
                 self?.tweenView.layer.setValue(scale, forKeyPath: "transform.scale.y")
@@ -75,9 +75,9 @@ class ViewController: UIViewController {
         let colorC = UIColor.red
         tweenView.backgroundColor = colorA
         
-        controller.tween(colorA, at: 0.0)
+        controller.tween(from: colorA, at: 0.0)
             .to(colorB, at: 0.5)
-            .then(colorC, at: 1.0)
-            .with(tweenView.twc_applyBackgroundColor)
+            .then(to: colorC, at: 1.0)
+            .with(action: tweenView.twc_applyBackgroundColor)
     }
 }

@@ -29,12 +29,12 @@ public protocol TweenIntervalType {
     var interval: Range<Double> { get }
     var easingFunction: Easing.Function { get }
     var isIntervalClosed: Bool { get set }
-    func containsProgress(_ progress: Double) -> Bool
+    func contains(progress: Double) -> Bool
     func handleProgressUpdate(_ progress: Double)
 }
 
 extension TweenIntervalType {
-    public func containsProgress(_ progress: Double) -> Bool {
+    public func contains(progress: Double) -> Bool {
         return interval.contains(progress) || (isIntervalClosed && interval.upperBound == progress)
     }
 }
@@ -56,7 +56,7 @@ open class TweenDescriptor<T:Tweenable>: TweenIntervalType {
     }
     
     open func handleProgressUpdate(_ progress: Double) {
-        guard let block = updateBlock , containsProgress(progress) else { return }
+        guard let block = updateBlock , contains(progress: progress) else { return }
         let percent = percentFromProgress(progress)
         let easedPercent = easingFunction(percent)
         block(T.valueBetween(fromValue, toValue, percent: easedPercent))
