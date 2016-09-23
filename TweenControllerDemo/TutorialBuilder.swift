@@ -36,11 +36,11 @@ protocol TutorialViewController: class {
 
 struct TutorialBuilder {
     
-    private static let starsSize = CGSize(width: 326, height: 462)
-    private static let baselineScreenWidth: CGFloat = 414
-    private static let baselineCardViewHeight: CGFloat = 496
-    private static let cardYOffset: CGFloat = 186.0
-    private static let cardYTranslation: CGFloat = -28.0
+    fileprivate static let starsSize = CGSize(width: 326, height: 462)
+    fileprivate static let baselineScreenWidth: CGFloat = 414
+    fileprivate static let baselineCardViewHeight: CGFloat = 496
+    fileprivate static let cardYOffset: CGFloat = 186.0
+    fileprivate static let cardYTranslation: CGFloat = -28.0
     
     //MARK: Public
     
@@ -66,7 +66,7 @@ struct TutorialBuilder {
     //MARK: Private
     //MARK: Initial Layout
     
-    private static func layoutViewsWithVC(_ vc: TutorialViewController) -> UIScrollView {
+    fileprivate static func layoutViewsWithVC(_ vc: TutorialViewController) -> UIScrollView {
         let scrollView = UIScrollView(frame: vc.containerView.bounds)
         guard let superview = vc.containerView.superview else { return scrollView }
         
@@ -76,7 +76,7 @@ struct TutorialBuilder {
         return scrollView
     }
     
-    private static func layoutButtonsAndPageControlWithVC(_ vc: TutorialViewController, scrollView: UIScrollView) {
+    fileprivate static func layoutButtonsAndPageControlWithVC(_ vc: TutorialViewController, scrollView: UIScrollView) {
         let snapshot = vc.containerView.snapshotView(afterScreenUpdates: true)
         
         scrollView.isPagingEnabled = true
@@ -107,32 +107,32 @@ struct TutorialBuilder {
     
     //MARK: Tutorial Actions
     
-    private static func describeBottomControlsWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+    fileprivate static func describeBottomControlsWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewportSize = vc.containerView.frame.size
         let startingButtonFrame = vc.buttonsContainerView.frame
         let startingPageControlFrame = vc.pageControl.frame
-        tweenController.tween(from: startingButtonFrame, at: -1.0)
+        tweenController.tween(startingButtonFrame, at: -1.0)
             .to(startingButtonFrame, at: 0.0)
-            .then(to: CGRect(x: startingButtonFrame.minX, y: viewportSize.height, width: startingButtonFrame.width, height: startingButtonFrame.height), at: 1.0)
-            .thenHold(until: 4.0)
-            .then(to: startingButtonFrame, at: 5.0)
-            .with(action: vc.buttonsContainerView.twc_slidingFrameActionWithScrollView(scrollView))
+            .then(CGRect(x: startingButtonFrame.minX, y: viewportSize.height, width: startingButtonFrame.width, height: startingButtonFrame.height), at: 1.0)
+            .thenHold(4.0)
+            .then(startingButtonFrame, at: 5.0)
+            .with(vc.buttonsContainerView.twc_slidingFrameActionWithScrollView(scrollView))
         
         let nextPageControlFrame = CGRect(x: startingPageControlFrame.minX, y: startingPageControlFrame.minY + startingButtonFrame.height, width: startingPageControlFrame.width, height: startingPageControlFrame.height)
-        tweenController.tween(from: startingPageControlFrame, at: 0.0)
+        tweenController.tween(startingPageControlFrame, at: 0.0)
             .to(nextPageControlFrame, at: 1.0)
-            .thenHold(until: 4.0)
-            .then(to: startingPageControlFrame, at: 5.0)
-            .with(action: vc.pageControl.twc_slidingFrameActionWithScrollView(scrollView))
+            .thenHold(4.0)
+            .then(startingPageControlFrame, at: 5.0)
+            .with(vc.pageControl.twc_slidingFrameActionWithScrollView(scrollView))
     }
     
-    private static func describeBackgroundWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+    fileprivate static func describeBackgroundWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         describeStarGradientWithVC(vc, tweenController: tweenController, scrollView: scrollView)
         describeStarsWithVC(vc, tweenController: tweenController, scrollView: scrollView)
         describeEiffelTowerWithVC(vc, tweenController: tweenController, scrollView: scrollView)
     }
     
-    private static func describeStarGradientWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+    fileprivate static func describeStarGradientWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewportFrame = CGRect(origin: CGPoint.zero, size: vc.containerView.frame.size)
         let topColor = UIColor(red: 155.0/255.0, green: 39.0/255.0, blue: 153.0/255.0, alpha: 1.0)
         let bottomColor = UIColor(red: 38.0/255.0, green: 198.0/255.0, blue: 218.0/255.0, alpha: 1.0)
@@ -143,22 +143,22 @@ struct TutorialBuilder {
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
         gradientLayer.frame = viewportFrame
-        gradientView.backgroundColor = UIColor.clear()
+        gradientView.backgroundColor = UIColor.clear
         gradientView.layer.addSublayer(gradientLayer)
         gradientView.alpha = 0.0
         scrollView.insertSubview(gradientView, belowSubview: vc.pageControl)
         
-        tweenController.tween(from: viewportFrame, at: 1.0)
-            .thenHold(until: 3.0)
-            .with(action: gradientView.twc_slidingFrameActionWithScrollView(scrollView))
+        tweenController.tween(viewportFrame, at: 1.0)
+            .thenHold(3.0)
+            .with(gradientView.twc_slidingFrameActionWithScrollView(scrollView))
         
-        tweenController.tween(from: gradientView.alpha, at: 1.0)
+        tweenController.tween(gradientView.alpha, at: 1.0)
             .to(1.0, at: 2.0)
-            .then(to: 0.0, at: 3.0)
-            .with(action: gradientView.twc_applyAlpha)
+            .then(0.0, at: 3.0)
+            .with(gradientView.twc_applyAlpha)
     }
     
-    private static func describeStarsWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+    fileprivate static func describeStarsWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewportSize = vc.containerView.frame.size
         let xOffset = (viewportSize.width-starsSize.width)/2.0
         let starsFrame = CGRect(x: xOffset, y: 0.0, width: starsSize.width, height: starsSize.height)
@@ -169,35 +169,35 @@ struct TutorialBuilder {
         starsImageView.contentMode = .scaleToFill
         scrollView.insertSubview(starsImageView, belowSubview: vc.pageControl)
         
-        tweenController.tween(from: starsFrame, at: 1.0)
-            .thenHold(until: 3.0)
-            .with(action: starsImageView.twc_slidingFrameActionWithScrollView(scrollView))
+        tweenController.tween(starsFrame, at: 1.0)
+            .thenHold(3.0)
+            .with(starsImageView.twc_slidingFrameActionWithScrollView(scrollView))
         
-        tweenController.tween(from: starsImageView.alpha, at: 1.0)
+        tweenController.tween(starsImageView.alpha, at: 1.0)
             .to(1.0, at: 2.0)
-            .then(to: 0.0, at: 3.0)
-            .with(action: starsImageView.twc_applyAlpha)
+            .then(0.0, at: 3.0)
+            .with(starsImageView.twc_applyAlpha)
     }
     
-    private static func describeEiffelTowerWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+    fileprivate static func describeEiffelTowerWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewportFrame = CGRect(origin: CGPoint.zero, size: vc.containerView.frame.size)
         let imageView = UIImageView(image: UIImage(named: "eiffel_tower"))
         imageView.frame = viewportFrame.offsetBy(dx: viewportFrame.width * 2.0, dy: 0.0)
         imageView.alpha = 0.0
         scrollView.addSubview(imageView)
         
-        tweenController.tween(from: viewportFrame, at: 2.0)
-            .thenHold(until: 4.0)
-            .with(action: imageView.twc_slidingFrameActionWithScrollView(scrollView))
+        tweenController.tween(viewportFrame, at: 2.0)
+            .thenHold(4.0)
+            .with(imageView.twc_slidingFrameActionWithScrollView(scrollView))
         
-        tweenController.tween(from: imageView.alpha, at: 2.0)
+        tweenController.tween(imageView.alpha, at: 2.0)
             .to(1.0, at: 3.0)
-            .thenHold(until: 4.0)
-            .then(to: 0.0, at: 5.0)
-            .with(action: imageView.twc_applyAlpha)
+            .thenHold(4.0)
+            .then(0.0, at: 5.0)
+            .with(imageView.twc_applyAlpha)
     }
     
-    private static func describeTextWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+    fileprivate static func describeTextWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewportFrame = CGRect(origin: CGPoint.zero, size: vc.containerView.frame.size)
         let multiplier = viewportFrame.width / baselineScreenWidth
         let topYOffset = 50 * multiplier
@@ -222,10 +222,10 @@ struct TutorialBuilder {
             scrollView.addSubview(view)
         }
         
-        tweenController.tween(from: bottomView4.alpha, at: 3.0)
-            .thenHold(until: 4.0)
-            .then(to: 0.0, at: 5.0)
-            .with(action: bottomView4.twc_applyAlpha)
+        tweenController.tween(bottomView4.alpha, at: 3.0)
+            .thenHold(4.0)
+            .then(0.0, at: 5.0)
+            .with(bottomView4.twc_applyAlpha)
         
         let topViews = [topView1, topView2, topView3, topView4]
         for i in 0..<topViews.count {
@@ -238,25 +238,25 @@ struct TutorialBuilder {
             if i != 0 {
                 view.alpha = 0.0
                 let progress = Double(CGFloat(i) + 0.5)
-                tweenController.tween(from: view.alpha, at: progress)
+                tweenController.tween(view.alpha, at: progress)
                     .to(1.0, at: progress + 0.5)
-                    .then(to: 0.0, at: progress + 1.0)
-                    .with(action: view.twc_applyAlpha)
+                    .then(0.0, at: progress + 1.0)
+                    .with(view.twc_applyAlpha)
             } else {
-                tweenController.tween(from: view.alpha, at: 0.0)
-                    .thenHold(until: 1.0)
-                    .then(to: 0.0, at: 1.5)
-                    .with(action: view.twc_applyAlpha)
+                tweenController.tween(view.alpha, at: 0.0)
+                    .thenHold(1.0)
+                    .then(0.0, at: 1.5)
+                    .with(view.twc_applyAlpha)
             }
             
-            tweenController.tween(from: view.frame, at: 0.0)
+            tweenController.tween(view.frame, at: 0.0)
                 .to(view.frame.offsetBy(dx: -viewportFrame.width, dy: 0.0), at: 1.0)
-                .thenHold(until: 4.0)
-                .with(action: view.twc_slidingFrameActionWithScrollView(scrollView))
+                .thenHold(4.0)
+                .with(view.twc_slidingFrameActionWithScrollView(scrollView))
         }
     }
     
-    private static func describeCardTextWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+    fileprivate static func describeCardTextWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewportFrame = CGRect(origin: CGPoint.zero, size: vc.containerView.frame.size)
         let multiplier = viewportFrame.width / baselineScreenWidth
         
@@ -281,10 +281,10 @@ struct TutorialBuilder {
         textView1.frame = frame1
         textView2.frame = frame2.offsetBy(dx: viewportFrame.width, dy: 0.0)
         
-        tweenController.tween(from: frame1, at: 0.0)
-            .thenHold(until: 1.0)
-            .then(to: frame2, at: 2.0)
-            .with(action: textView1.twc_applyFrame)
+        tweenController.tween(frame1, at: 0.0)
+            .thenHold(1.0)
+            .then(frame2, at: 2.0)
+            .with(textView1.twc_applyFrame)
         
         // Box Contents
         
@@ -307,18 +307,18 @@ struct TutorialBuilder {
         
         contentsView2.alpha = 0.0
         
-        tweenController.tween(from: contentsView1.alpha, at: 0.0)
-            .thenHold(until: 1.0)
-            .then(to: 0.0, at: 2.0)
-            .with(action: contentsView1.twc_applyAlpha)
+        tweenController.tween(contentsView1.alpha, at: 0.0)
+            .thenHold(1.0)
+            .then(0.0, at: 2.0)
+            .with(contentsView1.twc_applyAlpha)
         
-        tweenController.tween(from: contentsView2.alpha, at: 0.0)
-            .thenHold(until: 1.0)
-            .then(to: 1.0, at: 2.0)
-            .with(action: contentsView2.twc_applyAlpha)
+        tweenController.tween(contentsView2.alpha, at: 0.0)
+            .thenHold(1.0)
+            .then(1.0, at: 2.0)
+            .with(contentsView2.twc_applyAlpha)
     }
     
-    private static func describeCardImageWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+    fileprivate static func describeCardImageWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewportFrame = CGRect(origin: CGPoint.zero, size: vc.containerView.frame.size)
         let sunriseView = UIImageView(image: UIImage(named: "sunrise"))
         let birthdayView = UIImageView(image: UIImage(named: "birthday_cake"))
@@ -340,27 +340,27 @@ struct TutorialBuilder {
         birthdayView.frame = frame1
         eiffelView.frame = frame2.offsetBy(dx: viewportFrame.width, dy: 0.0)
         
-        tweenController.tween(from: frame1, at: 0.0)
-            .thenHold(until: 1.0)
-            .then(to: frame2, at: 2.0)
-            .with(action: sunriseView.twc_applyFrame)
+        tweenController.tween(frame1, at: 0.0)
+            .thenHold(1.0)
+            .then(frame2, at: 2.0)
+            .with(sunriseView.twc_applyFrame)
         
-        tweenController.tween(from: frame1, at: 1.0)
+        tweenController.tween(frame1, at: 1.0)
             .to(frame2, at: 2.0)
-            .with(action: birthdayView.twc_applyFrame)
+            .with(birthdayView.twc_applyFrame)
         
         birthdayView.alpha = 0.0
-        tweenController.tween(from: sunriseView.alpha, at: 0.0)
-            .thenHold(until: 1.0)
-            .then(to: 0.0, at: 2.0)
-            .with(action: sunriseView.twc_applyAlpha)
+        tweenController.tween(sunriseView.alpha, at: 0.0)
+            .thenHold(1.0)
+            .then(0.0, at: 2.0)
+            .with(sunriseView.twc_applyAlpha)
         
-        tweenController.tween(from: birthdayView.alpha, at: 1.0)
+        tweenController.tween(birthdayView.alpha, at: 1.0)
             .to(1.0, at: 2.0)
-            .with(action: birthdayView.twc_applyAlpha)
+            .with(birthdayView.twc_applyAlpha)
     }
     
-    private static func describeCardFacesWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+    fileprivate static func describeCardFacesWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewportFrame = CGRect(origin: CGPoint.zero, size: vc.containerView.frame.size)
         let multiplier = viewportFrame.width / baselineScreenWidth
         
@@ -385,28 +385,28 @@ struct TutorialBuilder {
         chickView.frame = frame1.offsetBy(dx: viewportFrame.width, dy: 0.0)
         dudeView2.frame = frame2.offsetBy(dx: viewportFrame.width * 3.0, dy: 0.0)
         
-        tweenController.tween(from: dudeView1.frame, at: 0.0)
-            .thenHold(until: 1.0)
-            .then(to: frame2.offsetBy(dx: viewportFrame.width * 2.0, dy: 0.0), at: 2.0)
-            .with(action: dudeView1.twc_applyFrame)
+        tweenController.tween(dudeView1.frame, at: 0.0)
+            .thenHold(1.0)
+            .then(frame2.offsetBy(dx: viewportFrame.width * 2.0, dy: 0.0), at: 2.0)
+            .with(dudeView1.twc_applyFrame)
         
-        tweenController.tween(from: chickView.frame, at: 0.0)
-            .thenHold(until: 1.0)
-            .then(to: frame2.offsetBy(dx: viewportFrame.width * 2.0, dy: 0.0), at: 2.0)
-            .with(action: chickView.twc_applyFrame)
+        tweenController.tween(chickView.frame, at: 0.0)
+            .thenHold(1.0)
+            .then(frame2.offsetBy(dx: viewportFrame.width * 2.0, dy: 0.0), at: 2.0)
+            .with(chickView.twc_applyFrame)
         
-        tweenController.tween(from: dudeView1.alpha, at: 0.0)
-            .thenHold(until: 1.0)
-            .then(to: 0.0, at: 2.0)
-            .with(action: dudeView1.twc_applyAlpha)
+        tweenController.tween(dudeView1.alpha, at: 0.0)
+            .thenHold(1.0)
+            .then(0.0, at: 2.0)
+            .with(dudeView1.twc_applyAlpha)
         
-        tweenController.tween(from: chickView.alpha, at: 0.0)
-            .thenHold(until: 1.0)
-            .then(to: 1.0, at: 2.0)
-            .with(action: chickView.twc_applyAlpha)
+        tweenController.tween(chickView.alpha, at: 0.0)
+            .thenHold(1.0)
+            .then(1.0, at: 2.0)
+            .with(chickView.twc_applyAlpha)
     }
     
-    private static func describePinHillWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+    fileprivate static func describePinHillWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewportFrame = CGRect(origin: CGPoint.zero, size: vc.containerView.frame.size)
         let multiplier = viewportFrame.width / baselineScreenWidth
         
@@ -430,21 +430,21 @@ struct TutorialBuilder {
         hillView.frame = CGRect(x: hillXMod, y: viewportFrame.maxY + hillTopPadding + hillYMod, width: hillSize.width, height: hillSize.height)
         pinView.frame = CGRect(x: pinXOffset, y: viewportFrame.maxY, width: pinSize.width, height: pinSize.height)
         
-        tweenController.tween(from: hillView.frame, at: 0.0)
-            .thenHold(until: 1.0)
-            .then(to: hillView.frame.offsetBy(dx: 0.0, dy: -yTranslation), at: 2.0)
-            .then(to: hillView.frame, at: 3.0)
-            .with(action: hillView.twc_slidingFrameActionWithScrollView(scrollView))
+        tweenController.tween(hillView.frame, at: 0.0)
+            .thenHold(1.0)
+            .then(hillView.frame.offsetBy(dx: 0.0, dy: -yTranslation), at: 2.0)
+            .then(hillView.frame, at: 3.0)
+            .with(hillView.twc_slidingFrameActionWithScrollView(scrollView))
         
-        tweenController.tween(from: pinView.frame, at: 0.0)
-            .thenHold(until: 1.0)
-            .then(to: pinView.frame.offsetBy(dx: 0.0, dy: -yTranslation), at: 2.0)
-            .thenHold(until: 3.0)
-            .then(to: pinView.frame.offsetBy(dx: -viewportFrame.width, dy: -yTranslation), at: 4.0)
-            .with(action: pinView.twc_slidingFrameActionWithScrollView(scrollView))
+        tweenController.tween(pinView.frame, at: 0.0)
+            .thenHold(1.0)
+            .then(pinView.frame.offsetBy(dx: 0.0, dy: -yTranslation), at: 2.0)
+            .thenHold(3.0)
+            .then(pinView.frame.offsetBy(dx: -viewportFrame.width, dy: -yTranslation), at: 4.0)
+            .with(pinView.twc_slidingFrameActionWithScrollView(scrollView))
     }
     
-    private static func describeAnimationWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+    fileprivate static func describeAnimationWithVC(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
         let viewportFrame = CGRect(origin: CGPoint.zero, size: vc.containerView.frame.size)
         let multiplier = viewportFrame.width / baselineScreenWidth
         
@@ -474,7 +474,7 @@ struct TutorialBuilder {
         cardView.frame = cardStartingFrame
         cardView.alpha = 0.0
         
-        tweenController.observeForward(progress: 4.0) { [weak scrollView] _ in
+        tweenController.observeForward(4.0) { [weak scrollView] _ in
             scrollView?.isScrollEnabled = false
             
             UIView.animate(withDuration: 1.2, animations: { [weak chickView] in
@@ -498,23 +498,23 @@ struct TutorialBuilder {
             cardView?.alpha = 0.0
         }
         
-        tweenController.observeBackward(progress: 3.0, block: resetBlock)
-        tweenController.observeForward(progress: 5.0, block: resetBlock)
+        tweenController.observeBackward(3.0, block: resetBlock)
+        tweenController.observeForward(5.0, block: resetBlock)
         
-        tweenController.tween(from: CGFloat(1.0), at: 4.25)
+        tweenController.tween(CGFloat(1.0), at: 4.25)
             .to(0.0, at: 5.0)
-            .with(action: cardView.twc_applyAlpha)
+            .with(cardView.twc_applyAlpha)
         
-        tweenController.tween(from: CGFloat(1.0), at: 3.0)
-            .thenHold(until: 4.25)
-            .then(to: 0.0, at: 5.0)
-            .with(action: chickView.twc_applyAlpha)
+        tweenController.tween(CGFloat(1.0), at: 3.0)
+            .thenHold(4.25)
+            .then(0.0, at: 5.0)
+            .with(chickView.twc_applyAlpha)
     }
     
     //MARK: Observers
     
-    private static func observeEndOfScrollView(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
-        tweenController.observeForward(progress: 5.0) { [weak scrollView, weak vc, weak tweenController] _ in
+    fileprivate static func observeEndOfScrollView(_ vc: TutorialViewController, tweenController: TweenController, scrollView: UIScrollView) {
+        tweenController.observeForward(5.0) { [weak scrollView, weak vc, weak tweenController] _ in
             scrollView?.contentOffset = CGPoint.zero
             scrollView?.isScrollEnabled = false
             scrollView?.isScrollEnabled = true

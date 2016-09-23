@@ -33,30 +33,30 @@ public protocol ObjectConvertible {
 
 extension Int: ObjectConvertible {
     public func toObject() -> AnyObject {
-        return self
+        return self as AnyObject
     }
 }
 
 extension Float: ObjectConvertible {
     public func toObject() -> AnyObject {
-        return self
+        return self as AnyObject
     }
 }
 
 extension Double: ObjectConvertible {
     public func toObject() -> AnyObject {
-        return self
+        return self as AnyObject
     }
 }
 
 extension CGFloat: ObjectConvertible {
     public func toObject() -> AnyObject {
-        return self
+        return self as AnyObject
     }
 }
 
 extension TweenPromise where T : ObjectConvertible {
-    public func with(object: NSObject, keyPath: String) {
+    public func with(_ object: NSObject, keyPath: String) {
         with { [weak object] tweenable in
             object?.setValue(tweenable.toObject(), forKeyPath: keyPath)
         }
