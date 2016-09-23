@@ -40,6 +40,12 @@ extension UIView {
         self.frame = frame
     }
     
+    /// This function can be used as the action block of a tween operation where the `Tweenable` type is `CGRect`.
+    /// The rect passed to the block is offset by the scroll view's `contentOffset`, and thus, appears to be
+    /// unaffected by the scrolling of the view, and acting as a 'sliding window.'
+    ///
+    /// - parameter scrollView: The scroll view used to offset the rect
+    /// - returns: A block which can be used as the action block for a tween operation.
     public func twc_slidingFrameAction(scrollView: UIScrollView) -> (_ frame: CGRect) -> () {
         return { [weak self, weak scrollView] frame in
             guard let scrollView = scrollView else { return }
@@ -61,10 +67,19 @@ extension UIView {
 }
 
 extension UIScrollView {
+    
+    /// Used to obtain the current horizontal 'page' value for the scroll view.
+    ///
+    /// For example, if the scroll view has been swiped three pages to the right and is being dragged halfway to the next page,
+    /// this value will be 3.5.
     public var twc_horizontalPageProgress: CGFloat {
         return contentOffset.x / bounds.width
     }
     
+    /// Used to obtain the current vertical 'page' value for the scroll view.
+    ///
+    /// For example, if the scroll view has been swiped three pages down and is being dragged halfway to the next page,
+    /// this value will be 3.5.
     public var twc_verticalPageProgress: CGFloat {
         return contentOffset.y / bounds.height
     }
