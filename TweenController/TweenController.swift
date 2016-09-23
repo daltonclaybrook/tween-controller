@@ -29,6 +29,9 @@ public typealias TweenObserverBlock = (_ progress: Double) -> ()
 
 open class TweenController {
     
+    /// The current progress of the controller.
+    /// The range of progress is completely arbitrary. 
+    /// For example, you could use a percentage, i.e. 0.0 - 1.0, or the width of a scroll view in points.
     open fileprivate(set) var progress: Double = 0.0
     fileprivate var descriptors = [TweenIntervalType]()
     fileprivate var boundaries = [Boundary]()
@@ -37,22 +40,46 @@ open class TweenController {
     
     public init() {}
     
+    /// Used to begin describing a tween operation.
+    ///
+    /// - parameter from:     The Tweenable value to begin tweening from, such as a UIColor.
+    /// - parameter progress: The progress point at which the tween will begin.
+    ///
+    /// - returns: A TweenPromise, which is used to continue (and ultimately finish) describing a tween operation.
     open func tween<T:Tweenable>(from: T, at progress: Double) -> TweenPromise<T> {
         return TweenPromise(from: from, progress: progress, resolvedDescriptors: [], registration: self)
     }
     
+    /// Used to observe when progress crosses a boundary moving forward.
+    ///
+    /// - parameter progress: The boundary marker progress.
+    /// - parameter block:    The block to execute with the boundary is crossed.
     open func observeForward(progress: Double, block: @escaping TweenObserverBlock) {
         boundaries.append(Boundary(progress: progress, block: block, direction: .Forward))
     }
     
+    /// Used to observe when progress crosses a boundary moving backward.
+    ///
+    /// - parameter progress: The boundary marker progress.
+    /// - parameter block:    The block to execute with the boundary is crossed.
     open func observeBackward(progress: Double, block: @escaping TweenObserverBlock) {
         boundaries.append(Boundary(progress: progress, block: block, direction: .Backward))
     }
     
+    /// Used to observe when progress crosses a boundary moving in either direction.
+    ///
+    /// - parameter progress: The boundary marker progress.
+    /// - parameter block:    The block to execute with the boundary is crossed.
     open func observeBoth(progress: Double, block: @escaping TweenObserverBlock) {
         boundaries.append(Boundary(progress: progress, block: block, direction: .Both))
     }
     
+    /// Used to update the progress of the tween controller and perform any actions necessary.
+    ///
+    /// **Note:** You should not use this method to reset progress back to 0.0 as it will call boundary observer blocks.
+    /// Instead, call `resetProgress()`.
+    ///
+    /// - parameter progress: The new progress value.
     open func update(progress: Double) {
         let lastProgress = self.progress
         self.progress = progress
@@ -60,6 +87,7 @@ open class TweenController {
         handleBoundaryCrossingIfNecessary(progress: progress, lastProgress: lastProgress)
     }
     
+    /// Resets the progress of the tween controller back to 0.0
     open func resetProgress() {
         progress = 0.0
         updateDescriptors(progress: progress)
