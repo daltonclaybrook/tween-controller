@@ -26,55 +26,82 @@
 //
 
 protocol DescriptorRegistration: class {
-    func registerDescriptor<T: Tweenable>(descriptor: TweenDescriptor<T>)
-    func observeBoundary(boundary: Boundary)
+    func register<T: Tweenable>(descriptor: TweenDescriptor<T>)
+    func observe(boundary: Boundary)
 }
 
+/// `TweenPromise` is used to finish describing a tween operation after `tween(from: at:)` has been called on `TweenController`.
 public struct TweenPromise<T:Tweenable> {
     let from: T
     let progress: Double
     let resolvedDescriptors: [TweenDescriptor<T>]
     weak var registration: DescriptorRegistration?
     
-    public func to(to: T, at progress: Double, withEasing easing: Easing.Function = Easing.linear) -> TweenPromise<T> {
+    /// Used to mark a 'key frame' of a tween operation.
+    /// This will register a descriptor with the `TweenController` with the `to` value as the upper bound.
+    ///
+    /// - parameter to:       The `Tweenable` value to end a tweening operation on, such as a UIColor.
+    /// - parameter progress: The progress point at which the tween will end.
+    /// - parameter easing:   A function that can be used to apply an easing effect to the tween operation. Many easing functions are defined in `Easing.swift`.
+    ///
+    /// - returns: Another instance of `TweenPromise` used to register an additional tween operation.
+    public func to(_ to: T, at progress: Double, withEasing easing: @escaping Easing.Function = Easing.linear) -> TweenPromise<T> {
         assert(progress != self.progress, "'to' progress must be different than 'from' progress")
         
         let descriptor = TweenDescriptor(fromValue: from, toValue: to, interval: self.progress..<progress, easingFunction: easing)
-        registration?.registerDescriptor(descriptor)
+        registration?.register(descriptor: descriptor)
         return TweenPromise(from: to, progress: progress, resolvedDescriptors: resolvedDescriptors + [descriptor], registration: registration)
     }
     
-    public func thenTo(to: T, at progress: Double, withEasing easing: Easing.Function = Easing.linear) -> TweenPromise<T> {
+    /// Used to mark a 'key frame' of a tween operation.
+    /// This will register a descriptor with the `TweenController` with the `to` value as the upper bound.
+    /// Functionally equivalent to calling `to(...)`.
+    ///
+    /// - parameter to:       The `Tweenable` value to end a tweening operation on, such as a UIColor.
+    /// - parameter progress: The progress point at which the tween will end.
+    /// - parameter easing:   A function that can be used to apply an easing effect to the tween operation. Many easing functions are defined in `Easing.swift`.
+    ///
+    /// - returns: Another instance of `TweenPromise` used to register an additional tween operation.
+    public func then(to: T, at progress: Double, withEasing easing: @escaping Easing.Function = Easing.linear) -> TweenPromise<T> {
         return self.to(to, at: progress, withEasing: easing)
     }
     
-    public func thenHoldUntil(until: Double) -> TweenPromise<T> {
+    /// Used to keep a value constant across two progress points.
+    /// Functionally equivalent to calling `to(...)` and passing the previous 'key frame' value as the `to` value.
+    ///
+    /// - parameter until: The progress point at which the hold will end.
+    ///
+    /// - returns: Another instance of `TweenPromise` used to register an additional tween operation.
+    public func thenHold(until: Double) -> TweenPromise<T> {
         return self.to(from, at: until)
     }
     
-    public func withAction(block: (T) -> ()) {
+    /// Used to assign an action block to be executed in response to changes in any of the tween operations created by prior calls.
+    ///
+    /// - parameter action: The block which is executed when changes occur.
+    public func with(action: @escaping (T) -> ()) {
         addEdgeObservers()
         resolvedDescriptors.last?.isIntervalClosed = true
-        resolvedDescriptors.forEach() { $0.updateBlock = block }
+        resolvedDescriptors.forEach() { $0.updateBlock = action }
     }
     
     //MARK: Private
     
-    private func addEdgeObservers() {
-        guard let first = resolvedDescriptors.first, last = resolvedDescriptors.last else { return }
-        let firstProgress = first.interval.start
-        let lastProgress = last.interval.end
+    fileprivate func addEdgeObservers() {
+        guard let first = resolvedDescriptors.first, let last = resolvedDescriptors.last else { return }
+        let firstProgress = first.interval.lowerBound
+        let lastProgress = last.interval.upperBound
         
         // if we're exiting the interval, update the progress to the edges
-        registration?.observeBoundary(Boundary(progress: firstProgress, block: { [weak first] progress in
+        registration?.observe(boundary: Boundary(progress: firstProgress, block: { [weak first] progress in
             guard let first = first else { return }
-            if !first.containsProgress(progress) || firstProgress == progress {
+            if !first.contains(progress: progress) || firstProgress == progress {
                 first.handleProgressUpdate(firstProgress)
             }
         }, direction: .Both))
-        registration?.observeBoundary(Boundary(progress: lastProgress, block: { [weak last] progress in
+        registration?.observe(boundary: Boundary(progress: lastProgress, block: { [weak last] progress in
             guard let last = last else { return }
-            if !last.containsProgress(progress) || progress == lastProgress {
+            if !last.contains(progress: progress) || progress == lastProgress {
                 last.handleProgressUpdate(lastProgress)
             }
         }, direction: .Both))

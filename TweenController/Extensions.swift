@@ -27,99 +27,70 @@
 
 import UIKit
 
-extension TweenController {
-    public func tweenFrom<T:Tweenable>(from: T, at progress: CGFloat) -> TweenPromise<T> {
-        return tweenFrom(from, at: Double(progress))
-    }
-    
-    public func observeForwardBoundary(progress: CGFloat, block: TweenObserverBlock) {
-        observeForwardBoundary(Double(progress), block: block)
-    }
-    
-    public func observeBackwardBoundary(progress: CGFloat, block: TweenObserverBlock) {
-        observeBackwardBoundary(Double(progress), block: block)
-    }
-    
-    public func observeBothBoundaries(progress: CGFloat, block: TweenObserverBlock) {
-        observeBothBoundaries(Double(progress), block: block)
-    }
-    
-    public func updateProgress(progress: CGFloat) {
-        updateProgress(Double(progress))
-    }
-}
-
-extension TweenPromise {
-    public func to(to: T, at progress: CGFloat) -> TweenPromise<T> {
-        return self.to(to, at: Double(progress))
-    }
-    
-    public func thenTo(to: T, at progress: CGFloat) -> TweenPromise<T> {
-        return thenTo(to, at: Double(progress))
-    }
-    
-    public func to(to: T, at progress: CGFloat, withEasing easing: Easing.Function) -> TweenPromise<T> {
-        return self.to(to, at: Double(progress), withEasing: easing)
-    }
-    
-    public func thenTo(to: T, at progress: CGFloat, withEasing easing: Easing.Function) -> TweenPromise<T> {
-        return thenTo(to, at: Double(progress), withEasing: easing)
-    }
-    
-    public func thenHoldUntil(until: CGFloat) -> TweenPromise<T> {
-        return thenHoldUntil(Double(until))
-    }
-}
-
 extension UIView {
-    public func twc_applyBackgroundColor(color: UIColor) {
+    public func twc_applyBackgroundColor(_ color: UIColor) {
         self.backgroundColor = color
     }
     
-    public func twc_applyBounds(bounds: CGRect) {
+    public func twc_applyBounds(_ bounds: CGRect) {
         self.bounds = bounds
     }
     
-    public func twc_applyFrame(frame: CGRect) {
+    public func twc_applyFrame(_ frame: CGRect) {
         self.frame = frame
     }
     
-    public func twc_slidingFrameActionWithScrollView(scrollView: UIScrollView) -> (frame: CGRect) -> () {
+    /// This function can be used as the action block of a tween operation where the `Tweenable` type is `CGRect`.
+    /// The rect passed to the block is offset by the scroll view's `contentOffset`, and thus, appears to be
+    /// unaffected by the scrolling of the view, and acting as a 'sliding window.'
+    ///
+    /// - parameter scrollView: The scroll view used to offset the rect
+    /// - returns: A block which can be used as the action block for a tween operation.
+    public func twc_slidingFrameAction(scrollView: UIScrollView) -> (_ frame: CGRect) -> () {
         return { [weak self, weak scrollView] frame in
             guard let scrollView = scrollView else { return }
             self?.frame = frame.offsetBy(dx: scrollView.contentOffset.x, dy: scrollView.contentOffset.y)
         }
     }
     
-    public func twc_applyCenter(center: CGPoint) {
+    public func twc_applyCenter(_ center: CGPoint) {
         self.center = center
     }
     
-    public func twc_applyTransform(transform: CGAffineTransform) {
+    public func twc_applyTransform(_ transform: CGAffineTransform) {
         self.transform = transform
     }
     
-    public func twc_applyAlpha(alpha: CGFloat) {
+    public func twc_applyAlpha(_ alpha: CGFloat) {
         self.alpha = alpha
     }
 }
 
 extension UIScrollView {
+    
+    /// Used to obtain the current horizontal 'page' value for the scroll view.
+    ///
+    /// For example, if the scroll view has been swiped three pages to the right and is being dragged halfway to the next page,
+    /// this value will be 3.5.
     public var twc_horizontalPageProgress: CGFloat {
         return contentOffset.x / bounds.width
     }
     
+    /// Used to obtain the current vertical 'page' value for the scroll view.
+    ///
+    /// For example, if the scroll view has been swiped three pages down and is being dragged halfway to the next page,
+    /// this value will be 3.5.
     public var twc_verticalPageProgress: CGFloat {
         return contentOffset.y / bounds.height
     }
 }
 
 extension CALayer {
-    public func twc_applyTransform(transform: CATransform3D) {
+    public func twc_applyTransform(_ transform: CATransform3D) {
         self.transform = transform
     }
     
-    public func twc_applyAffineTransform(transform: CGAffineTransform) {
+    public func twc_applyAffineTransform(_ transform: CGAffineTransform) {
         self.setAffineTransform(transform)
     }
 }

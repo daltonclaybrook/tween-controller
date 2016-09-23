@@ -1,4 +1,4 @@
-# TweenController [![Swift v2.1.1](https://img.shields.io/badge/Swift-v2.2.1-orange.svg)](https://swift.org) ![License MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg) [![CocoaPods](https://img.shields.io/badge/pod-v0.2.0-blue.svg)](https://cocoapods.org) [![Carthage](https://img.shields.io/badge/Carthage-compatible-green.svg)](https://github.com/Carthage/Carthage)
+# TweenController [![Swift v3.0](https://img.shields.io/badge/Swift-v3.0-orange.svg)](https://swift.org) ![License MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg) [![CocoaPods](https://img.shields.io/badge/pod-v0.3.0-blue.svg)](https://cocoapods.org) [![Carthage](https://img.shields.io/badge/Carthage-compatible-green.svg)](https://github.com/Carthage/Carthage)
 
 On the surface, TweenController makes it easy to build interactive menus and tutorials. Under the hood, it's a simple but powerful toolkit to interpolate between values that are *Tweenable*.
 
@@ -11,29 +11,29 @@ Tween anything that is *Tweenable*, such as **CGAffineTransform**:
 
 ``` swift
 func tweenTransform() {
-    let transformA = CGAffineTransformIdentity
-    let transformB = CGAffineTransformMakeScale(2.0, 2.0)
-    let transformC = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
-    
-    controller.tweenFrom(transformA, at: 0.0)
+    let transformA = CGAffineTransform.identity
+    let transformB = CGAffineTransform(scaleX: 2.0, y: 2.0)
+    let transformC = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+        
+    controller.tween(from: transformA, at: 0.0)
         .to(transformB, at: 0.5)
-        .thenTo(transformC, at: 1.0)
-        .withAction(tweenView.layer.twc_applyAffineTransform)
+        .then(to: transformC, at: 1.0)
+        .with(action: tweenView.layer.twc_applyAffineTransform)
 }
 ```
 or **UIColor**:
 
 ``` swift
 func tweenColor() {
-    let colorA = UIColor.greenColor()
-    let colorB = UIColor.blueColor()
-    let colorC = UIColor.redColor()
+    let colorA = UIColor.green
+    let colorB = UIColor.blue
+    let colorC = UIColor.red
     tweenView.backgroundColor = colorA
     
-    controller.tweenFrom(colorA, at: 0.0)
+    controller.tween(from: colorA, at: 0.0)
         .to(colorB, at: 0.5)
-        .thenTo(colorC, at: 1.0)
-        .withAction(tweenView.twc_applyBackgroundColor)
+        .then(to: colorC, at: 1.0)
+        .with(action: tweenView.twc_applyBackgroundColor)
 }
 ```
 or your own custom type:
@@ -44,20 +44,20 @@ enum Step: Int {
 }
 
 extension Step: Tweenable {
-	static func valueBetween(val1: Step, _ val2: Step, percent: Double) -> Step {
+    static func valueBetween(_ val1: Step, _ val2: Step, percent: Double) -> Step {
         let val = Int(round(Double(val2.rawValue - val1.rawValue) * percent + Double(val1.rawValue)))
         return Step(rawValue: max(min(val, 4), 1)) ?? .One
     }
 }
 
 func tweenStep() {
-    tweenController.tweenFrom(Step.One, at: 0.0)
+    tweenController.tween(from: Step.One, at: 0.0)
         .to(.Four, at: 0.25)
-        .thenHoldUntil(0.75)
-        .thenTo(.Two, at: 1.0)
-        .withAction { step in
+        .thenHold(until: 0.75)
+        .then(to: .Two, at: 1.0)
+        .with { step in
             // use step
-        }
+    }
 }
 ```
 
@@ -72,33 +72,33 @@ then simply call:
 // you might choose to use a percentage, like 0.0 - 1.0
 // or the content size of a scroll view
 
-controller.updateProgress(newProgress)
+controller.update(progress: newProgress)
 ```
 
 You can use *easing functions*:
 
 ``` swift
-controller.tweenFrom(transformA, at: 0.0)
+controller.tween(from: transformA, at: 0.0)
 	.to(transformB, at: 1.0, withEasing: Easing.easeInOutQuart)
-	.withAction(tweenView.layer.twc_applyAffineTransform)
+	.with(action: tweenView.layer.twc_applyAffineTransform)
 ```
 
 You can use *[Key-Value Coding](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreAnimation_guide/Key-ValueCodingExtensions/Key-ValueCodingExtensions.html)*:
 
 ``` swift
-controller.tweenFrom(0.0, at: 0.0)
-	.to(M_PI * 8.0, at: 1.0)
-	.withObject(tweenView.layer, keyPath: "transform.rotation.z")
+controller.tween(from: 0.0, at: 0.0)
+    .to(M_PI * 8.0, at: 1.0)
+    .with(object: tweenView.layer, keyPath: "transform.rotation.z")
 ```
 
 You can also *observe boundaries*:
 
 ``` swift
 func observeBoundaries() {
-    tweenController.observeForwardBoundary(0.5) { 
+    controller.observeForward(progress: 0.5) { progress in
         // halfway finished!
     }
-    tweenController.observeBothBoundaries(0.75) { 
+    controller.observeBoth(progress: 0.75) { progress in
         // this is called when moving backwards or forwards
     }
 }
@@ -133,10 +133,10 @@ To integrate TweenController into your Xcode project using CocoaPods, specify it
 
 ``` ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '10.0'
 use_frameworks!
 
-pod 'TweenController', '~> 0.2'
+pod 'TweenController', '~> 0.3'
 ```
 
 Then, run the following command:
@@ -159,7 +159,7 @@ $ brew install carthage
 To integrate TweenController into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ``` ogdl
-github "daltonclaybrook/tween-controller" ~> 0.2
+github "daltonclaybrook/tween-controller" ~> 0.3
 ```
 
 Then, run the following command to build the TweenController framework:

@@ -28,31 +28,31 @@
 import UIKit
 
 extension Double: Tweenable {
-    public static func valueBetween(val1: Double, _ val2: Double, percent: Double) -> Double {
+    public static func valueBetween(_ val1: Double, _ val2: Double, percent: Double) -> Double {
         return (val2 - val1) * percent + val1
     }
 }
 
 extension Float: Tweenable {
-    public static func valueBetween(val1: Float, _ val2: Float, percent: Double) -> Float {
+    public static func valueBetween(_ val1: Float, _ val2: Float, percent: Double) -> Float {
         return (val2 - val1) * Float(percent) + val1
     }
 }
 
 extension Int: Tweenable {
-    public static func valueBetween(val1: Int, _ val2: Int, percent: Double) -> Int {
+    public static func valueBetween(_ val1: Int, _ val2: Int, percent: Double) -> Int {
         return Int(round((Double(val2) - Double(val1)) * Double(percent) + Double(val1)))
     }
 }
 
 extension CGFloat: Tweenable {
-    public static func valueBetween(val1: CGFloat, _ val2: CGFloat, percent: Double) -> CGFloat {
+    public static func valueBetween(_ val1: CGFloat, _ val2: CGFloat, percent: Double) -> CGFloat {
         return (val2 - val1) * CGFloat(percent) + val1
     }
 }
 
 extension CGPoint: Tweenable {
-    public static func valueBetween(val1: CGPoint, _ val2: CGPoint, percent: Double) -> CGPoint {
+    public static func valueBetween(_ val1: CGPoint, _ val2: CGPoint, percent: Double) -> CGPoint {
         let x = CGFloat.valueBetween(val1.x, val2.x, percent: percent)
         let y = CGFloat.valueBetween(val1.y, val2.y, percent: percent)
         return CGPoint(x: x, y: y)
@@ -60,7 +60,7 @@ extension CGPoint: Tweenable {
 }
 
 extension CGSize: Tweenable {
-    public static func valueBetween(val1: CGSize, _ val2: CGSize, percent: Double) -> CGSize {
+    public static func valueBetween(_ val1: CGSize, _ val2: CGSize, percent: Double) -> CGSize {
         let w = CGFloat.valueBetween(val1.width, val2.width, percent: percent)
         let h = CGFloat.valueBetween(val1.height, val2.height, percent: percent)
         return CGSize(width: w, height: h)
@@ -68,7 +68,7 @@ extension CGSize: Tweenable {
 }
 
 extension CGRect: Tweenable {
-    public static func valueBetween(val1: CGRect, _ val2: CGRect, percent: Double) -> CGRect {
+    public static func valueBetween(_ val1: CGRect, _ val2: CGRect, percent: Double) -> CGRect {
         let origin = CGPoint.valueBetween(val1.origin, val2.origin, percent: percent)
         let size = CGSize.valueBetween(val1.size, val2.size, percent: percent)
         return CGRect(origin: origin, size: size)
@@ -76,7 +76,7 @@ extension CGRect: Tweenable {
 }
 
 extension UIColor: Tweenable {
-    public static func valueBetween(val1: UIColor, _ val2: UIColor, percent: Double) -> Self {
+    public static func valueBetween(_ val1: UIColor, _ val2: UIColor, percent: Double) -> Self {
         var r1: CGFloat = 0.0
         var g1: CGFloat = 0.0
         var b1: CGFloat = 0.0
@@ -100,7 +100,7 @@ extension UIColor: Tweenable {
 }
 
 extension CGAffineTransform: Tweenable {
-    public static func valueBetween(val1: CGAffineTransform, _ val2: CGAffineTransform, percent: Double) -> CGAffineTransform {
+    public static func valueBetween(_ val1: CGAffineTransform, _ val2: CGAffineTransform, percent: Double) -> CGAffineTransform {
         let a = CGFloat.valueBetween(val1.a, val2.a, percent: percent)
         let b = CGFloat.valueBetween(val1.b, val2.b, percent: percent)
         let c = CGFloat.valueBetween(val1.c, val2.c, percent: percent)
@@ -112,7 +112,7 @@ extension CGAffineTransform: Tweenable {
 }
 
 extension CATransform3D: Tweenable {
-    public static func valueBetween(val1: CATransform3D, _ val2: CATransform3D, percent: Double) -> CATransform3D {
+    public static func valueBetween(_ val1: CATransform3D, _ val2: CATransform3D, percent: Double) -> CATransform3D {
         let m11 = CGFloat.valueBetween(val1.m11, val2.m11, percent: percent)
         let m12 = CGFloat.valueBetween(val1.m12, val2.m12, percent: percent)
         let m13 = CGFloat.valueBetween(val1.m13, val2.m13, percent: percent)

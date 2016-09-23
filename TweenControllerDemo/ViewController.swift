@@ -31,9 +31,9 @@ import TweenController
 class ViewController: UIViewController {
     
     let controller = TweenController()
-    @IBOutlet private var tweenView: UIView!
-    private var timesFired: Int = 0
-    private var displayLink: CADisplayLink!
+    @IBOutlet fileprivate var tweenView: UIView!
+    fileprivate var timesFired: Int = 0
+    fileprivate var displayLink: CADisplayLink!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +41,12 @@ class ViewController: UIViewController {
         tweenTransform()
         tweenColor()
         displayLink = CADisplayLink(target: self, selector: #selector(ViewController.timerFired(_:)))
-        displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
+        displayLink.add(to: RunLoop.main, forMode: RunLoopMode(rawValue: RunLoopMode.commonModes.rawValue))
     }
     
-    func timerFired(timer: NSTimer) {
+    func timerFired(_ timer: Timer) {
         timesFired += 1
-        controller.updateProgress(Double(timesFired) * 0.0025)
+        controller.update(progress: Double(timesFired) * 0.0025)
         if controller.progress >= 1.0 {
             self.displayLink.invalidate()
             self.displayLink = nil
@@ -55,29 +55,29 @@ class ViewController: UIViewController {
     
     //MARK: Private
     
-    private func tweenTransform() {
-        controller.tweenFrom(0.0, at: 0.0)
-            .to(M_PI * 8.0, at: 1.0, withEasing: Easing.easeInOutQuint)
-            .withObject(tweenView.layer, keyPath: "transform.rotation.z")
+    fileprivate func tweenTransform() {
+        controller.tween(from: 0.0, at: 0.0)
+            .to(Double.pi * 8.0, at: 1.0, withEasing: Easing.easeInOutQuint)
+            .with(object: tweenView.layer, keyPath: "transform.rotation.z")
         
-        controller.tweenFrom(1.0, at: 0.0)
+        controller.tween(from: 1.0, at: 0.0)
             .to(2.0, at: 0.5)
-            .thenTo(1.0, at: 1.0)
-            .withAction { [weak self] scale in
+            .then(to: 1.0, at: 1.0)
+            .with { [weak self] scale in
                 self?.tweenView.layer.setValue(scale, forKeyPath: "transform.scale.x")
                 self?.tweenView.layer.setValue(scale, forKeyPath: "transform.scale.y")
         }
     }
     
-    private func tweenColor() {
-        let colorA = UIColor.greenColor()
-        let colorB = UIColor.blueColor()
-        let colorC = UIColor.redColor()
+    fileprivate func tweenColor() {
+        let colorA = UIColor.green
+        let colorB = UIColor.blue
+        let colorC = UIColor.red
         tweenView.backgroundColor = colorA
         
-        controller.tweenFrom(colorA, at: 0.0)
+        controller.tween(from: colorA, at: 0.0)
             .to(colorB, at: 0.5)
-            .thenTo(colorC, at: 1.0)
-            .withAction(tweenView.twc_applyBackgroundColor)
+            .then(to: colorC, at: 1.0)
+            .with(action: tweenView.twc_applyBackgroundColor)
     }
 }
