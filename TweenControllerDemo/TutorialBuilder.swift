@@ -77,7 +77,7 @@ struct TutorialBuilder {
     }
     
     private static func layoutButtonsAndPageControlWithVC(vc: TutorialViewController, scrollView: UIScrollView) {
-        let snapshot = vc.containerView.snapshotViewAfterScreenUpdates(true)
+        guard let snapshot = vc.containerView.snapshotViewAfterScreenUpdates(true) else { return }
         
         scrollView.pagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
