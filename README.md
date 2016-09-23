@@ -78,9 +78,9 @@ controller.update(progress: newProgress)
 You can use *easing functions*:
 
 ``` swift
-controller.tweenFrom(transformA, at: 0.0)
+controller.tween(from: transformA, at: 0.0)
 	.to(transformB, at: 1.0, withEasing: Easing.easeInOutQuart)
-	.withAction(tweenView.layer.twc_applyAffineTransform)
+	.with(action: tweenView.layer.twc_applyAffineTransform)
 ```
 
 You can use *[Key-Value Coding](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreAnimation_guide/Key-ValueCodingExtensions/Key-ValueCodingExtensions.html)*:

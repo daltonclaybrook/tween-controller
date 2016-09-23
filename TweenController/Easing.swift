@@ -25,19 +25,20 @@
 //  SOFTWARE.
 //
 
+/// A collection of easing functions beautifully demonstrated at http://gizma.com/easing/
 public struct Easing {
     
     // t is a time value between 0.0 - 1.0
     // Return value is a value between 0.0 - 1.0 with the easing function applied
     public typealias Function = (_ t: Double) -> Double
     
-    // Linear
+    //MARK: Linear
     
     public static func linear(_ t: Double) -> Double {
         return t
     }
     
-    // Quadratic
+    //MARK: Quadratic
     
     public static func easeInQuad(_ t: Double) -> Double {
         return t * t
@@ -56,7 +57,7 @@ public struct Easing {
         return -0.5 * (_t * (_t - 2.0) - 1.0)
     }
     
-    // Cubic
+    //MARK: Cubic
     
     public static func easeInCubic(_ t: Double) -> Double {
         return t * t * t
@@ -76,7 +77,7 @@ public struct Easing {
         return 0.5 * (_t * _t * _t + 2.0)
     }
     
-    // Quartic
+    //MARK: Quartic
     
     public static func easeInQuart(_ t: Double) -> Double {
         return t * t * t * t
@@ -96,7 +97,7 @@ public struct Easing {
         return -0.5 * (_t * _t * _t * _t - 2.0)
     }
     
-    // Quintic
+    //MARK: Quintic
     
     public static func easeInQuint(_ t: Double) -> Double {
         return t * t * t * t * t
@@ -116,7 +117,7 @@ public struct Easing {
         return 0.5 * (_t * _t * _t * _t * _t + 2.0)
     }
     
-    // Sinusoidal
+    //MARK: Sinusoidal
     
     public static func easeInSine(_ t: Double) -> Double {
         return -cos(t * (Double.pi/2.0)) + 1.0
@@ -130,7 +131,7 @@ public struct Easing {
         return -0.5 * (cos(Double.pi * t) - 1.0)
     }
     
-    // Exponential
+    //MARK: Exponential
     
     public static func easeInExpo(_ t: Double) -> Double {
         return pow(2.0, 10.0 * (t - 1.0))
@@ -149,7 +150,7 @@ public struct Easing {
         return 0.5 * (-pow(2.0, -10.0 * _t) + 2.0)
     }
     
-    // Circular
+    //MARK: Circular
     
     public static func easeInCirc(_ t: Double) -> Double {
         return -(sqrt(1.0 - t * t) - 1.0)
