@@ -1,4 +1,4 @@
-# TweenController [![Swift v2.1.1](https://img.shields.io/badge/Swift-v2.2.1-orange.svg)](https://swift.org) ![License MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg) [![CocoaPods](https://img.shields.io/badge/pod-v0.2.0-blue.svg)](https://cocoapods.org) [![Carthage](https://img.shields.io/badge/Carthage-compatible-green.svg)](https://github.com/Carthage/Carthage)
+# TweenController [![Swift v2.3](https://img.shields.io/badge/Swift-v2.3-orange.svg)](https://swift.org) ![License MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg) [![CocoaPods](https://img.shields.io/badge/pod-tag:_swift2.3-blue.svg)](https://cocoapods.org) [![Carthage](https://img.shields.io/badge/Carthage-compatible-green.svg)](https://github.com/Carthage/Carthage)
 
 On the surface, TweenController makes it easy to build interactive menus and tutorials. Under the hood, it's a simple but powerful toolkit to interpolate between values that are *Tweenable*.
 
