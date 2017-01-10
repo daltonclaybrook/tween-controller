@@ -20,6 +20,7 @@
 		755644921E249DB4007C6143 /* TweenControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755644911E249DB4007C6143 /* TweenControllerTests.swift */; };
 		755644941E249DB4007C6143 /* TweenController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753655F91CE127100031BEA5 /* TweenController.framework */; };
 		7556449D1E249E24007C6143 /* StandardTweenablesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7556449C1E249E24007C6143 /* StandardTweenablesTests.swift */; };
+		755644A01E24A7FE007C6143 /* KeypathListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7556449F1E24A7FE007C6143 /* KeypathListener.swift */; };
 		7586C3A91CF7EB70007DC4CB /* TutorialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */; };
 		7586C3AB1CF7EF9A007DC4CB /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */; };
 		7586C3AD1CF806FC007DC4CB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3AC1CF806FC007DC4CB /* Extensions.swift */; };
@@ -81,6 +82,7 @@
 		755644911E249DB4007C6143 /* TweenControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweenControllerTests.swift; sourceTree = "<group>"; };
 		755644931E249DB4007C6143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7556449C1E249E24007C6143 /* StandardTweenablesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardTweenablesTests.swift; sourceTree = "<group>"; };
+		7556449F1E24A7FE007C6143 /* KeypathListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypathListener.swift; sourceTree = "<group>"; };
 		7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialBuilder.swift; sourceTree = "<group>"; };
 		7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7586C3AC1CF806FC007DC4CB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		755644901E249DB4007C6143 /* TweenControllerTests */ = {
 			isa = PBXGroup;
 			children = (
+				7556449E1E24A7E7007C6143 /* Helpers */,
 				7556449A1E249DEA007C6143 /* Tests */,
 				7556449B1E249DF5007C6143 /* SupportingFiles */,
 			);
@@ -210,6 +213,14 @@
 				755644931E249DB4007C6143 /* Info.plist */,
 			);
 			name = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		7556449E1E24A7E7007C6143 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7556449F1E24A7FE007C6143 /* KeypathListener.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		7586C3A71CF7EB56007DC4CB /* Tutorial */ = {
@@ -395,6 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7556449D1E249E24007C6143 /* StandardTweenablesTests.swift in Sources */,
+				755644A01E24A7FE007C6143 /* KeypathListener.swift in Sources */,
 				755644921E249DB4007C6143 /* TweenControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
