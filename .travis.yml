@@ -1,3 +1,4 @@
 language: objective-c
 xcode_project: TweenController.xcodeproj
 xcode_scheme: TweenController
+xcode_sdk: iphonesimulator
