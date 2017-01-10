@@ -17,6 +17,9 @@
 		7536561D1CE12A510031BEA5 /* Tweenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7536561C1CE12A510031BEA5 /* Tweenable.swift */; };
 		7536561F1CE12CB70031BEA5 /* StandardTweenables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7536561E1CE12CB70031BEA5 /* StandardTweenables.swift */; };
 		753656211CE13D170031BEA5 /* TweenDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753656201CE13D170031BEA5 /* TweenDescriptor.swift */; };
+		755644921E249DB4007C6143 /* TweenControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755644911E249DB4007C6143 /* TweenControllerTests.swift */; };
+		755644941E249DB4007C6143 /* TweenController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753655F91CE127100031BEA5 /* TweenController.framework */; };
+		7556449D1E249E24007C6143 /* StandardTweenablesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7556449C1E249E24007C6143 /* StandardTweenablesTests.swift */; };
 		7586C3A91CF7EB70007DC4CB /* TutorialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */; };
 		7586C3AB1CF7EF9A007DC4CB /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */; };
 		7586C3AD1CF806FC007DC4CB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3AC1CF806FC007DC4CB /* Extensions.swift */; };
@@ -29,6 +32,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		755644951E249DB4007C6143 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 753655F01CE127100031BEA5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 753655F81CE127100031BEA5;
+			remoteInfo = TweenController;
+		};
 		BE40306C1CE3C93C0067DF4F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 753655F01CE127100031BEA5 /* Project object */;
@@ -67,6 +77,10 @@
 		7536561C1CE12A510031BEA5 /* Tweenable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweenable.swift; sourceTree = "<group>"; };
 		7536561E1CE12CB70031BEA5 /* StandardTweenables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardTweenables.swift; sourceTree = "<group>"; };
 		753656201CE13D170031BEA5 /* TweenDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweenDescriptor.swift; sourceTree = "<group>"; };
+		7556448F1E249DB4007C6143 /* TweenControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TweenControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		755644911E249DB4007C6143 /* TweenControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweenControllerTests.swift; sourceTree = "<group>"; };
+		755644931E249DB4007C6143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7556449C1E249E24007C6143 /* StandardTweenablesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardTweenablesTests.swift; sourceTree = "<group>"; };
 		7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialBuilder.swift; sourceTree = "<group>"; };
 		7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7586C3AC1CF806FC007DC4CB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -92,6 +106,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7556448C1E249DB4007C6143 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				755644941E249DB4007C6143 /* TweenController.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -100,6 +122,7 @@
 			children = (
 				753655FB1CE127100031BEA5 /* TweenController */,
 				753656091CE127350031BEA5 /* TweenControllerDemo */,
+				755644901E249DB4007C6143 /* TweenControllerTests */,
 				753655FA1CE127100031BEA5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -109,6 +132,7 @@
 			children = (
 				753655F91CE127100031BEA5 /* TweenController.framework */,
 				753656081CE127350031BEA5 /* TweenControllerDemo.app */,
+				7556448F1E249DB4007C6143 /* TweenControllerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,6 +182,32 @@
 			children = (
 				753655FE1CE127100031BEA5 /* Info.plist */,
 				753655FC1CE127100031BEA5 /* TweenController.h */,
+			);
+			name = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		755644901E249DB4007C6143 /* TweenControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				7556449A1E249DEA007C6143 /* Tests */,
+				7556449B1E249DF5007C6143 /* SupportingFiles */,
+			);
+			path = TweenControllerTests;
+			sourceTree = "<group>";
+		};
+		7556449A1E249DEA007C6143 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				755644911E249DB4007C6143 /* TweenControllerTests.swift */,
+				7556449C1E249E24007C6143 /* StandardTweenablesTests.swift */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		7556449B1E249DF5007C6143 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				755644931E249DB4007C6143 /* Info.plist */,
 			);
 			name = SupportingFiles;
 			sourceTree = "<group>";
@@ -221,14 +271,32 @@
 			productReference = 753656081CE127350031BEA5 /* TweenControllerDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		7556448E1E249DB4007C6143 /* TweenControllerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 755644971E249DB4007C6143 /* Build configuration list for PBXNativeTarget "TweenControllerTests" */;
+			buildPhases = (
+				7556448B1E249DB4007C6143 /* Sources */,
+				7556448C1E249DB4007C6143 /* Frameworks */,
+				7556448D1E249DB4007C6143 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				755644961E249DB4007C6143 /* PBXTargetDependency */,
+			);
+			name = TweenControllerTests;
+			productName = TweenControllerTests;
+			productReference = 7556448F1E249DB4007C6143 /* TweenControllerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		753655F01CE127100031BEA5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Claybrook Software";
 				TargetAttributes = {
 					753655F81CE127100031BEA5 = {
@@ -238,6 +306,11 @@
 					753656071CE127350031BEA5 = {
 						CreatedOnToolsVersion = 7.3;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
+					};
+					7556448E1E249DB4007C6143 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 4SGAZDJL4U;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -257,6 +330,7 @@
 			targets = (
 				753655F81CE127100031BEA5 /* TweenController */,
 				753656071CE127350031BEA5 /* TweenControllerDemo */,
+				7556448E1E249DB4007C6143 /* TweenControllerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -276,6 +350,13 @@
 				753656151CE127350031BEA5 /* LaunchScreen.storyboard in Resources */,
 				753656121CE127350031BEA5 /* Assets.xcassets in Resources */,
 				753656101CE127350031BEA5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7556448D1E249DB4007C6143 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,9 +390,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7556448B1E249DB4007C6143 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7556449D1E249E24007C6143 /* StandardTweenablesTests.swift in Sources */,
+				755644921E249DB4007C6143 /* TweenControllerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		755644961E249DB4007C6143 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 753655F81CE127100031BEA5 /* TweenController */;
+			targetProxy = 755644951E249DB4007C6143 /* PBXContainerItemProxy */;
+		};
 		BE40306D1CE3C93C0067DF4F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 753655F81CE127100031BEA5 /* TweenController */;
@@ -353,8 +448,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -402,8 +499,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -434,7 +533,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -455,6 +554,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -500,6 +600,36 @@
 			};
 			name = Release;
 		};
+		755644981E249DB4007C6143 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 4SGAZDJL4U;
+				INFOPLIST_FILE = TweenControllerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.claybrooksoftware.TweenControllerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		755644991E249DB4007C6143 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 4SGAZDJL4U;
+				INFOPLIST_FILE = TweenControllerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.claybrooksoftware.TweenControllerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -529,6 +659,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		755644971E249DB4007C6143 /* Build configuration list for PBXNativeTarget "TweenControllerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				755644981E249DB4007C6143 /* Debug */,
+				755644991E249DB4007C6143 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
