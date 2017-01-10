@@ -13,16 +13,6 @@ class TweenControllerTests: XCTestCase {
     
     var tweenController = TweenController()
     
-    override func setUp() {
-        super.setUp()
-        
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
     //MARK: Tests
     
     func testTweenProgress_To() {
@@ -78,9 +68,62 @@ class TweenControllerTests: XCTestCase {
         XCTAssertEqual(listener.values.count, 1)
         XCTAssertEqual(listener.values[0], 0.375)
     }
-}
-
-//MARK: Helpers
-extension TweenControllerTests {
     
+    func testForwardBoundary() {
+        var finalProgress = Double.nan
+        var count = 0
+        tweenController.observeForward(progress: 0.5) { (progress) in
+            finalProgress = progress
+            count += 1
+        }
+        tweenController.update(progress: 0.25)
+        tweenController.update(progress: 0.75)
+        tweenController.update(progress: 0.25)
+        
+        XCTAssertEqual(finalProgress, 0.75)
+        XCTAssertEqual(count, 1)
+    }
+    
+    func testBackwardBoundary() {
+        var finalProgress = Double.nan
+        var count = 0
+        tweenController.observeBackward(progress: 0.5) { (progress) in
+            finalProgress = progress
+            count += 1
+        }
+        tweenController.update(progress: 0.25)
+        tweenController.update(progress: 0.75)
+        tweenController.update(progress: 0.25)
+        
+        XCTAssertEqual(finalProgress, 0.25)
+        XCTAssertEqual(count, 1)
+    }
+    
+    func testBothBoundaries() {
+        var finalProgress = Double.nan
+        var count = 0
+        tweenController.observeBoth(progress: 0.5) { (progress) in
+            finalProgress = progress
+            count += 1
+        }
+        tweenController.update(progress: 0.25)
+        tweenController.update(progress: 0.75)
+        tweenController.update(progress: 0.25)
+        
+        XCTAssertEqual(finalProgress, 0.25)
+        XCTAssertEqual(count, 2)
+    }
+    
+    func testResetDoesNotFireBoundary() {
+        var fired = false
+        tweenController.observeBackward(progress: 0.5) { (progress) in
+            fired = true
+        }
+        tweenController.update(progress: 0.25)
+        tweenController.update(progress: 0.75)
+        tweenController.resetProgress()
+        
+        XCTAssertEqual(tweenController.progress, 0.0)
+        XCTAssertFalse(fired)
+    }
 }
