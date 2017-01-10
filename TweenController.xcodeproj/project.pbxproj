@@ -83,6 +83,7 @@
 		755644931E249DB4007C6143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7556449C1E249E24007C6143 /* StandardTweenablesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardTweenablesTests.swift; sourceTree = "<group>"; };
 		7556449F1E24A7FE007C6143 /* KeypathListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypathListener.swift; sourceTree = "<group>"; };
+		755644A11E24B923007C6143 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialBuilder.swift; sourceTree = "<group>"; };
 		7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7586C3AC1CF806FC007DC4CB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -210,6 +211,7 @@
 		7556449B1E249DF5007C6143 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				755644A11E24B923007C6143 /* .travis.yml */,
 				755644931E249DB4007C6143 /* Info.plist */,
 			);
 			name = SupportingFiles;
