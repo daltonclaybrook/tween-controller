@@ -21,6 +21,8 @@
 		755644941E249DB4007C6143 /* TweenController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753655F91CE127100031BEA5 /* TweenController.framework */; };
 		7556449D1E249E24007C6143 /* StandardTweenablesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7556449C1E249E24007C6143 /* StandardTweenablesTests.swift */; };
 		755644A01E24A7FE007C6143 /* KeypathListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7556449F1E24A7FE007C6143 /* KeypathListener.swift */; };
+		755644A31E25F4EA007C6143 /* KeyPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755644A21E25F4EA007C6143 /* KeyPathTests.swift */; };
+		755644A51E25F618007C6143 /* ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755644A41E25F618007C6143 /* ExtensionsTests.swift */; };
 		7586C3A91CF7EB70007DC4CB /* TutorialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */; };
 		7586C3AB1CF7EF9A007DC4CB /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */; };
 		7586C3AD1CF806FC007DC4CB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7586C3AC1CF806FC007DC4CB /* Extensions.swift */; };
@@ -84,6 +86,8 @@
 		7556449C1E249E24007C6143 /* StandardTweenablesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardTweenablesTests.swift; sourceTree = "<group>"; };
 		7556449F1E24A7FE007C6143 /* KeypathListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypathListener.swift; sourceTree = "<group>"; };
 		755644A11E24B923007C6143 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
+		755644A21E25F4EA007C6143 /* KeyPathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPathTests.swift; sourceTree = "<group>"; };
+		755644A41E25F618007C6143 /* ExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 		7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialBuilder.swift; sourceTree = "<group>"; };
 		7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7586C3AC1CF806FC007DC4CB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -204,6 +208,8 @@
 			children = (
 				755644911E249DB4007C6143 /* TweenControllerTests.swift */,
 				7556449C1E249E24007C6143 /* StandardTweenablesTests.swift */,
+				755644A21E25F4EA007C6143 /* KeyPathTests.swift */,
+				755644A41E25F618007C6143 /* ExtensionsTests.swift */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -407,8 +413,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				755644A51E25F618007C6143 /* ExtensionsTests.swift in Sources */,
 				7556449D1E249E24007C6143 /* StandardTweenablesTests.swift in Sources */,
 				755644A01E24A7FE007C6143 /* KeypathListener.swift in Sources */,
+				755644A31E25F4EA007C6143 /* KeyPathTests.swift in Sources */,
 				755644921E249DB4007C6143 /* TweenControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -681,6 +689,7 @@
 				755644991E249DB4007C6143 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
