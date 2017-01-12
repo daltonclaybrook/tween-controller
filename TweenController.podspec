@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "TweenController"
-  s.version      = "0.3.0"
+  s.version      = "1.0.0"
   s.summary      = "A pure Swift toolkit for creating interactive menus and tutorials"
   s.platform	  = :ios, '8.0'
 
