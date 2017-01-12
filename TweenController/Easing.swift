@@ -4,7 +4,7 @@
 //
 //  Created by Dalton Claybrook on 5/31/16.
 //
-//  Copyright (c) 2016 Dalton Claybrook
+//  Copyright (c) 2017 Dalton Claybrook
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
