@@ -136,7 +136,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
-pod 'TweenController', '~> 0.3'
+pod 'TweenController', '~> 1.0'
 ```
 
 Then, run the following command:
@@ -159,7 +159,7 @@ $ brew install carthage
 To integrate TweenController into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ``` ogdl
-github "daltonclaybrook/tween-controller" ~> 0.3
+github "daltonclaybrook/tween-controller" ~> 1.0
 ```
 
 Then, run the following command to build the TweenController framework:
