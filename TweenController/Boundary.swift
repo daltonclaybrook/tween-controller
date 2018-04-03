@@ -30,9 +30,9 @@ struct Boundary {
         let rawValue: Int
         init(rawValue: Int) { self.rawValue = rawValue }
         
-        static let Forward = Direction(rawValue: 1 << 0)
-        static let Backward = Direction(rawValue: 1 << 1)
-        static let Both: Direction = [Forward, Backward]
+        static let forward = Direction(rawValue: 1 << 0)
+        static let backward = Direction(rawValue: 1 << 1)
+        static let both: Direction = [forward, backward]
     }
     
     let progress: Double

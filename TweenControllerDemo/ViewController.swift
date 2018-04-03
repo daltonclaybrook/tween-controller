@@ -31,9 +31,9 @@ import TweenController
 class ViewController: UIViewController {
     
     let controller = TweenController()
-    @IBOutlet fileprivate var tweenView: UIView!
-    fileprivate var timesFired: Int = 0
-    fileprivate var displayLink: CADisplayLink!
+    @IBOutlet private var tweenView: UIView!
+    private var timesFired: Int = 0
+    private var displayLink: CADisplayLink!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,10 @@ class ViewController: UIViewController {
         displayLink.add(to: RunLoop.main, forMode: RunLoopMode(rawValue: RunLoopMode.commonModes.rawValue))
     }
     
-    func timerFired(_ timer: Timer) {
+    //MARK: Private
+    
+    @objc
+    private func timerFired(_ timer: Timer) {
         timesFired += 1
         controller.update(progress: Double(timesFired) * 0.0025)
         if controller.progress >= 1.0 {
@@ -53,9 +56,7 @@ class ViewController: UIViewController {
         }
     }
     
-    //MARK: Private
-    
-    fileprivate func tweenTransform() {
+    private func tweenTransform() {
         controller.tween(from: 0.0, at: 0.0)
             .to(Double.pi * 8.0, at: 1.0, withEasing: Easing.easeInOutQuint)
             .with(object: tweenView.layer, keyPath: "transform.rotation.z")
@@ -69,7 +70,7 @@ class ViewController: UIViewController {
         }
     }
     
-    fileprivate func tweenColor() {
+    private func tweenColor() {
         let colorA = UIColor.green
         let colorB = UIColor.blue
         let colorC = UIColor.red
