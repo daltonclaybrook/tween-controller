@@ -39,7 +39,7 @@ extension TweenIntervalType {
     }
 }
 
-open class TweenDescriptor<T:Tweenable>: TweenIntervalType {
+open class TweenDescriptor<T: Tweenable>: TweenIntervalType {
     
     open let fromValue: T
     open let toValue: T

@@ -40,8 +40,8 @@ open class TweenController {
     /// The range of progress is completely arbitrary. 
     /// For example, you could use a percentage, i.e. 0.0 - 1.0, or the width of a scroll view in points.
     open private(set) var progress: Double = 0.0
-    private var descriptors = [TweenIntervalType]()
-    private var boundaries = [Boundary]()
+    private var descriptors: [TweenIntervalType] = []
+    private var boundaries: [Boundary] = []
     
     //MARK: Public
     
@@ -53,7 +53,7 @@ open class TweenController {
     /// - parameter progress: The progress point at which the tween will begin.
     ///
     /// - returns: A TweenPromise, which is used to continue (and ultimately finish) describing a tween operation.
-    open func tween<T:Tweenable>(from: T, at progress: Double) -> TweenPromise<T> {
+    open func tween<T>(from: T, at progress: Double) -> TweenPromise<T> where T: Tweenable {
         return TweenPromise(from: from, progress: progress, resolvedDescriptors: [], registration: self)
     }
     
@@ -62,7 +62,7 @@ open class TweenController {
     /// - parameter progress: The boundary marker progress.
     /// - parameter block:    The block to execute with the boundary is crossed.
     open func observeForward(progress: Double, block: @escaping TweenObserverBlock) {
-        boundaries.append(Boundary(progress: progress, block: block, direction: .Forward))
+        boundaries.append(Boundary(progress: progress, block: block, direction: .forward))
     }
     
     /// Used to observe when `progress` crosses a boundary moving backward.
@@ -70,7 +70,7 @@ open class TweenController {
     /// - parameter progress: The boundary marker progress.
     /// - parameter block:    The block to execute with the boundary is crossed.
     open func observeBackward(progress: Double, block: @escaping TweenObserverBlock) {
-        boundaries.append(Boundary(progress: progress, block: block, direction: .Backward))
+        boundaries.append(Boundary(progress: progress, block: block, direction: .backward))
     }
     
     /// Used to observe when `progress` crosses a boundary moving in either direction.
@@ -78,7 +78,7 @@ open class TweenController {
     /// - parameter progress: The boundary marker progress.
     /// - parameter block:    The block to execute with the boundary is crossed.
     open func observeBoth(progress: Double, block: @escaping TweenObserverBlock) {
-        boundaries.append(Boundary(progress: progress, block: block, direction: .Both))
+        boundaries.append(Boundary(progress: progress, block: block, direction: .both))
     }
     
     /// Used to update the `progress` of the `TweenController` and perform any actions necessary.
@@ -104,16 +104,16 @@ open class TweenController {
     
     private func updateDescriptors(progress: Double) {
         let filtered = descriptors.filter() { $0.contains(progress: progress) }
-        filtered.forEach({ $0.handleProgressUpdate(progress) })
+        filtered.forEach { $0.handleProgressUpdate(progress) }
     }
     
     private func handleBoundaryCrossingIfNecessary(progress: Double, lastProgress: Double) {
         guard progress != lastProgress else { return }
-        let direction: Boundary.Direction = progress > lastProgress ? .Forward : .Backward
+        let direction: Boundary.Direction = progress > lastProgress ? .forward : .backward
         
         var boundaries = self.boundaries.filter() { $0.direction.contains(direction) }
         boundaries = boundaries.filter() { boundary in
-            if direction == .Forward {
+            if direction == .forward {
                 return progress >= boundary.progress && lastProgress < boundary.progress
             } else {
                 return lastProgress > boundary.progress && progress <= boundary.progress
@@ -126,7 +126,7 @@ open class TweenController {
 
 extension TweenController: DescriptorRegistration {
     
-    func register<T : Tweenable>(descriptor: TweenDescriptor<T>) {
+    func register<T>(descriptor: TweenDescriptor<T>) where T: Tweenable {
         descriptors.append(descriptor)
     }
     

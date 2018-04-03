@@ -26,12 +26,12 @@
 //
 
 protocol DescriptorRegistration: class {
-    func register<T: Tweenable>(descriptor: TweenDescriptor<T>)
+    func register<T>(descriptor: TweenDescriptor<T>) where T: Tweenable
     func observe(boundary: Boundary)
 }
 
 /// `TweenPromise` is used to finish describing a tween operation after `tween(from: at:)` has been called on `TweenController`.
-public struct TweenPromise<T:Tweenable> {
+public struct TweenPromise<T: Tweenable> {
     let from: T
     let progress: Double
     let resolvedDescriptors: [TweenDescriptor<T>]
@@ -46,7 +46,7 @@ public struct TweenPromise<T:Tweenable> {
     ///
     /// - returns: Another instance of `TweenPromise` used to register an additional tween operation.
     public func to(_ to: T, at progress: Double, withEasing easing: @escaping Easing.Function = Easing.linear) -> TweenPromise<T> {
-        assert(progress != self.progress, "'to' progress must be different than 'from' progress")
+        precondition(progress != self.progress, "'to' progress must be different than 'from' progress")
         
         let descriptor = TweenDescriptor(fromValue: from, toValue: to, interval: self.progress..<progress, easingFunction: easing)
         registration?.register(descriptor: descriptor)
@@ -100,12 +100,12 @@ public struct TweenPromise<T:Tweenable> {
             if !first.contains(progress: progress) || firstProgress == progress {
                 first.handleProgressUpdate(firstProgress)
             }
-        }, direction: .Both))
+        }, direction: .both))
         registration?.observe(boundary: Boundary(progress: lastProgress, block: { [weak last] progress in
             guard let last = last else { return }
             if !last.contains(progress: progress) || progress == lastProgress {
                 last.handleProgressUpdate(lastProgress)
             }
-        }, direction: .Both))
+        }, direction: .both))
     }
 }
