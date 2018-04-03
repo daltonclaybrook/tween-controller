@@ -89,7 +89,7 @@ public struct TweenPromise<T:Tweenable> {
     
     /// When progress crosses from inside to outside of a tween action interval,
     /// a final terminating action callback occurs using the edge progress value that was crossed over.
-    fileprivate func addEdgeObservers() {
+    private func addEdgeObservers() {
         guard let first = resolvedDescriptors.first, let last = resolvedDescriptors.last else { return }
         let firstProgress = first.interval.lowerBound
         let lastProgress = last.interval.upperBound

@@ -39,9 +39,9 @@ open class TweenController {
     /// The current progress of the controller.
     /// The range of progress is completely arbitrary. 
     /// For example, you could use a percentage, i.e. 0.0 - 1.0, or the width of a scroll view in points.
-    open fileprivate(set) var progress: Double = 0.0
-    fileprivate var descriptors = [TweenIntervalType]()
-    fileprivate var boundaries = [Boundary]()
+    open private(set) var progress: Double = 0.0
+    private var descriptors = [TweenIntervalType]()
+    private var boundaries = [Boundary]()
     
     //MARK: Public
     
@@ -102,12 +102,12 @@ open class TweenController {
     
     //MARK: Private
     
-    fileprivate func updateDescriptors(progress: Double) {
+    private func updateDescriptors(progress: Double) {
         let filtered = descriptors.filter() { $0.contains(progress: progress) }
         filtered.forEach({ $0.handleProgressUpdate(progress) })
     }
     
-    fileprivate func handleBoundaryCrossingIfNecessary(progress: Double, lastProgress: Double) {
+    private func handleBoundaryCrossingIfNecessary(progress: Double, lastProgress: Double) {
         guard progress != lastProgress else { return }
         let direction: Boundary.Direction = progress > lastProgress ? .Forward : .Backward
         

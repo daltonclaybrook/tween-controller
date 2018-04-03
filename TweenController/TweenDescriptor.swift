@@ -64,7 +64,7 @@ open class TweenDescriptor<T:Tweenable>: TweenIntervalType {
     
     //MARK: Private
     
-    fileprivate func percentFromProgress(_ progress: Double) -> Double {
+    private func percentFromProgress(_ progress: Double) -> Double {
         return (progress - interval.lowerBound) / (interval.upperBound - interval.lowerBound)
     }
 }
