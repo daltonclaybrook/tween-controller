@@ -1,4 +1,4 @@
-# TweenController [![travisci](https://travis-ci.org/daltonclaybrook/tween-controller.svg?branch=master)](https://travis-ci.org/daltonclaybrook/tween-controller) [![codecov](https://codecov.io/gh/daltonclaybrook/tween-controller/branch/master/graph/badge.svg)](https://codecov.io/gh/daltonclaybrook/tween-controller) [![Swift v4.1](https://img.shields.io/badge/Swift-v4.1-orange.svg)](https://swift.org) ![License MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg) [![CocoaPods](https://img.shields.io/badge/pod-v1.0.0-blue.svg)](https://cocoapods.org) [![Carthage](https://img.shields.io/badge/Carthage-compatible-green.svg)](https://github.com/Carthage/Carthage)
+# TweenController [![travisci](https://travis-ci.org/daltonclaybrook/tween-controller.svg?branch=master)](https://travis-ci.org/daltonclaybrook/tween-controller) [![codecov](https://codecov.io/gh/daltonclaybrook/tween-controller/branch/master/graph/badge.svg)](https://codecov.io/gh/daltonclaybrook/tween-controller) [![Swift v4.1](https://img.shields.io/badge/Swift-v4.1-orange.svg)](https://swift.org) ![License MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg) [![CocoaPods](https://img.shields.io/badge/pod-v1.0.1-blue.svg)](https://cocoapods.org) [![Carthage](https://img.shields.io/badge/Carthage-compatible-green.svg)](https://github.com/Carthage/Carthage)
 
 On the surface, TweenController makes it easy to build interactive menus and tutorials. Under the hood, it's a simple but powerful toolkit to interpolate between values that are *Tweenable*.
 
@@ -132,7 +132,6 @@ $ gem install cocoapods
 To integrate TweenController into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ``` ruby
-source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
@@ -159,7 +158,7 @@ $ brew install carthage
 To integrate TweenController into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ``` ogdl
-github "daltonclaybrook/tween-controller" ~> 1.0
+github "daltonclaybrook/tween-controller" ~> 1.0.1
 ```
 
 Then, run the following command to build the TweenController framework:
