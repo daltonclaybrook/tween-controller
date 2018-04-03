@@ -44,7 +44,10 @@ class ViewController: UIViewController {
         displayLink.add(to: RunLoop.main, forMode: RunLoopMode(rawValue: RunLoopMode.commonModes.rawValue))
     }
     
-    func timerFired(_ timer: Timer) {
+    //MARK: Private
+    
+    @objc
+    private func timerFired(_ timer: Timer) {
         timesFired += 1
         controller.update(progress: Double(timesFired) * 0.0025)
         if controller.progress >= 1.0 {
@@ -52,8 +55,6 @@ class ViewController: UIViewController {
             self.displayLink = nil
         }
     }
-    
-    //MARK: Private
     
     fileprivate func tweenTransform() {
         controller.tween(from: 0.0, at: 0.0)
