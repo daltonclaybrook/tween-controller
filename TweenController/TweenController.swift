@@ -40,8 +40,8 @@ open class TweenController {
     /// The range of progress is completely arbitrary. 
     /// For example, you could use a percentage, i.e. 0.0 - 1.0, or the width of a scroll view in points.
     open private(set) var progress: Double = 0.0
-    private var descriptors: [TweenIntervalType] = []
-    private var boundaries: [Boundary] = []
+    fileprivate var descriptors: [TweenIntervalType] = []
+    fileprivate var boundaries: [Boundary] = []
     
     //MARK: Public
     
