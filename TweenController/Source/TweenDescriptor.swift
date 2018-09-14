@@ -39,14 +39,13 @@ extension TweenIntervalType {
     }
 }
 
-open class TweenDescriptor<T: Tweenable>: TweenIntervalType {
-    
-    open let fromValue: T
-    open let toValue: T
-    open let interval: Range<Double>
-    open let easingFunction: Easing.Function
-    open var isIntervalClosed: Bool = false
-    open var updateBlock: ((T) -> ())?
+public final class TweenDescriptor<T: Tweenable>: TweenIntervalType {
+    public let fromValue: T
+    public let toValue: T
+    public let interval: Range<Double>
+    public let easingFunction: Easing.Function
+    public var isIntervalClosed: Bool = false
+    public var updateBlock: ((T) -> ())?
     
     init(fromValue: T, toValue: T, interval: Range<Double>, easingFunction: @escaping Easing.Function) {
         self.fromValue = fromValue
@@ -55,7 +54,7 @@ open class TweenDescriptor<T: Tweenable>: TweenIntervalType {
         self.easingFunction = easingFunction
     }
     
-    open func handleProgressUpdate(_ progress: Double) {
+    public func handleProgressUpdate(_ progress: Double) {
         guard let block = updateBlock, contains(progress: progress) else { return }
         let percent = percentFromProgress(progress)
         let easedPercent = easingFunction(percent)

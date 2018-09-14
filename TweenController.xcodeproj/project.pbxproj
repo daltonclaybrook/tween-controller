@@ -86,7 +86,7 @@
 		755644931E249DB4007C6143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7556449C1E249E24007C6143 /* StandardTweenablesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardTweenablesTests.swift; sourceTree = "<group>"; };
 		7556449F1E24A7FE007C6143 /* KeypathListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypathListener.swift; sourceTree = "<group>"; };
-		755644A11E24B923007C6143 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
+		755644A11E24B923007C6143 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		755644A21E25F4EA007C6143 /* KeyPathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPathTests.swift; sourceTree = "<group>"; };
 		755644A41E25F618007C6143 /* ExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 		755644A61E2731DD007C6143 /* EasingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasingTests.swift; sourceTree = "<group>"; };
@@ -149,8 +149,8 @@
 		753655FB1CE127100031BEA5 /* TweenController */ = {
 			isa = PBXGroup;
 			children = (
-				753656231CE13F030031BEA5 /* SupportingFiles */,
 				753656221CE13EFB0031BEA5 /* Source */,
+				753656231CE13F030031BEA5 /* SupportingFiles */,
 			);
 			path = TweenController;
 			sourceTree = "<group>";
@@ -160,12 +160,12 @@
 			children = (
 				7586C3A71CF7EB56007DC4CB /* Tutorial */,
 				7536560A1CE127350031BEA5 /* AppDelegate.swift */,
-				7536560C1CE127350031BEA5 /* ViewController.swift */,
-				7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */,
-				7536560E1CE127350031BEA5 /* Main.storyboard */,
 				753656111CE127350031BEA5 /* Assets.xcassets */,
-				753656131CE127350031BEA5 /* LaunchScreen.storyboard */,
 				753656161CE127350031BEA5 /* Info.plist */,
+				753656131CE127350031BEA5 /* LaunchScreen.storyboard */,
+				7536560E1CE127350031BEA5 /* Main.storyboard */,
+				7586C3AA1CF7EF9A007DC4CB /* StartViewController.swift */,
+				7536560C1CE127350031BEA5 /* ViewController.swift */,
 			);
 			path = TweenControllerDemo;
 			sourceTree = "<group>";
@@ -173,17 +173,17 @@
 		753656221CE13EFB0031BEA5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				75FD5A711CFE947400B5C4A6 /* Easing.swift */,
-				7536561A1CE127460031BEA5 /* TweenController.swift */,
-				7536561C1CE12A510031BEA5 /* Tweenable.swift */,
-				7536561E1CE12CB70031BEA5 /* StandardTweenables.swift */,
-				BE40306F1CE3D9020067DF4F /* TweenPromise.swift */,
-				753656201CE13D170031BEA5 /* TweenDescriptor.swift */,
 				BE4030601CE3C11D0067DF4F /* Boundary.swift */,
+				75FD5A711CFE947400B5C4A6 /* Easing.swift */,
 				7586C3AC1CF806FC007DC4CB /* Extensions.swift */,
 				75A3255E1CFFEE9200D2A16E /* KVC.swift */,
+				7536561E1CE12CB70031BEA5 /* StandardTweenables.swift */,
+				7536561A1CE127460031BEA5 /* TweenController.swift */,
+				753656201CE13D170031BEA5 /* TweenDescriptor.swift */,
+				BE40306F1CE3D9020067DF4F /* TweenPromise.swift */,
+				7536561C1CE12A510031BEA5 /* Tweenable.swift */,
 			);
-			name = Source;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		753656231CE13F030031BEA5 /* SupportingFiles */ = {
@@ -192,15 +192,15 @@
 				753655FE1CE127100031BEA5 /* Info.plist */,
 				753655FC1CE127100031BEA5 /* TweenController.h */,
 			);
-			name = SupportingFiles;
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		755644901E249DB4007C6143 /* TweenControllerTests */ = {
 			isa = PBXGroup;
 			children = (
 				7556449E1E24A7E7007C6143 /* Helpers */,
-				7556449A1E249DEA007C6143 /* Tests */,
 				7556449B1E249DF5007C6143 /* SupportingFiles */,
+				7556449A1E249DEA007C6143 /* Tests */,
 			);
 			path = TweenControllerTests;
 			sourceTree = "<group>";
@@ -208,13 +208,13 @@
 		7556449A1E249DEA007C6143 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				755644911E249DB4007C6143 /* TweenControllerTests.swift */,
-				7556449C1E249E24007C6143 /* StandardTweenablesTests.swift */,
-				755644A21E25F4EA007C6143 /* KeyPathTests.swift */,
-				755644A41E25F618007C6143 /* ExtensionsTests.swift */,
 				755644A61E2731DD007C6143 /* EasingTests.swift */,
+				755644A41E25F618007C6143 /* ExtensionsTests.swift */,
+				755644A21E25F4EA007C6143 /* KeyPathTests.swift */,
+				7556449C1E249E24007C6143 /* StandardTweenablesTests.swift */,
+				755644911E249DB4007C6143 /* TweenControllerTests.swift */,
 			);
-			name = Tests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		7556449B1E249DF5007C6143 /* SupportingFiles */ = {
@@ -223,7 +223,7 @@
 				755644A11E24B923007C6143 /* .travis.yml */,
 				755644931E249DB4007C6143 /* Info.plist */,
 			);
-			name = SupportingFiles;
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		7556449E1E24A7E7007C6143 /* Helpers */ = {
@@ -231,7 +231,7 @@
 			children = (
 				7556449F1E24A7FE007C6143 /* KeypathListener.swift */,
 			);
-			name = Helpers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		7586C3A71CF7EB56007DC4CB /* Tutorial */ = {
@@ -239,7 +239,7 @@
 			children = (
 				7586C3A81CF7EB70007DC4CB /* TutorialBuilder.swift */,
 			);
-			name = Tutorial;
+			path = Tutorial;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,6 +448,7 @@
 				7536560F1CE127350031BEA5 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		753656131CE127350031BEA5 /* LaunchScreen.storyboard */ = {
@@ -456,6 +457,7 @@
 				753656141CE127350031BEA5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -582,14 +584,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TweenController/Info.plist;
+				INFOPLIST_FILE = TweenController/SupportingFiles/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.claybrooksoftware.TweenController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -603,14 +605,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TweenController/Info.plist;
+				INFOPLIST_FILE = TweenController/SupportingFiles/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.claybrooksoftware.TweenController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -648,7 +650,7 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				DEVELOPMENT_TEAM = 4SGAZDJL4U;
-				INFOPLIST_FILE = TweenControllerTests/Info.plist;
+				INFOPLIST_FILE = TweenControllerTests/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.claybrooksoftware.TweenControllerTests;
@@ -663,7 +665,7 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				DEVELOPMENT_TEAM = 4SGAZDJL4U;
-				INFOPLIST_FILE = TweenControllerTests/Info.plist;
+				INFOPLIST_FILE = TweenControllerTests/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.claybrooksoftware.TweenControllerTests;
