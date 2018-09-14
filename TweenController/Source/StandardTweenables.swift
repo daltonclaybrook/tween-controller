@@ -54,20 +54,20 @@ extension UIColor: Tweenable {
         var g1: CGFloat = 0.0
         var b1: CGFloat = 0.0
         var a1: CGFloat = 0.0
-        
+
         var r2: CGFloat = 0.0
         var g2: CGFloat = 0.0
         var b2: CGFloat = 0.0
         var a2: CGFloat = 0.0
-        
+
         val1.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
         val2.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
-        
+
         let r3 = CGFloat.valueBetween(r1, r2, percent: percent)
         let g3 = CGFloat.valueBetween(g1, g2, percent: percent)
         let b3 = CGFloat.valueBetween(b1, b2, percent: percent)
         let a3 = CGFloat.valueBetween(a1, a2, percent: percent)
-        
+
         return self.init(red: r3, green: g3, blue: b3, alpha: a3)
     }
 }

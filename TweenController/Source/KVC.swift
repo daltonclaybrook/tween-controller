@@ -29,7 +29,7 @@ extension CGFloat: ObjectConvertible {
 }
 
 extension TweenPromise where T: ObjectConvertible {
-    
+
     /// Instead of using an action block with a tween operation, you can
     /// call this method to apply the value directly to an object using
     /// Key-Value-Coding. For example:

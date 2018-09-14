@@ -18,24 +18,24 @@ public final class TweenDescriptor<T: Tweenable>: TweenIntervalType {
     public let interval: Range<Double>
     public let easingFunction: Easing.Function
     public var isIntervalClosed: Bool = false
-    public var updateBlock: ((T) -> ())?
-    
+    public var updateBlock: ((T) -> Void)?
+
     init(fromValue: T, toValue: T, interval: Range<Double>, easingFunction: @escaping Easing.Function) {
         self.fromValue = fromValue
         self.toValue = toValue
         self.interval = interval
         self.easingFunction = easingFunction
     }
-    
+
     public func handleProgressUpdate(_ progress: Double) {
         guard let block = updateBlock, contains(progress: progress) else { return }
         let percent = percentFromProgress(progress)
         let easedPercent = easingFunction(percent)
         block(T.valueBetween(fromValue, toValue, percent: easedPercent))
     }
-    
-    //MARK: Private
-    
+
+    // MARK: - Private
+
     private func percentFromProgress(_ progress: Double) -> Double {
         return (progress - interval.lowerBound) / (interval.upperBound - interval.lowerBound)
     }
