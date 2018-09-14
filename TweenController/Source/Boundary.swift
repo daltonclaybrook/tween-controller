@@ -1,4 +1,10 @@
 struct Boundary {
+    let progress: Double
+    let block: TweenObserverBlock
+    let direction: Direction
+}
+
+extension Boundary {
     struct Direction: OptionSet {
         let rawValue: Int
 
@@ -10,8 +16,4 @@ struct Boundary {
         static let backward = Direction(rawValue: 1 << 1)
         static let both: Direction = [forward, backward]
     }
-
-    let progress: Double
-    let block: TweenObserverBlock
-    let direction: Direction
 }

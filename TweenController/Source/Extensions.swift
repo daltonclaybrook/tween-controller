@@ -41,7 +41,6 @@ public extension UIView {
 }
 
 public extension UIScrollView {
-
     /// Used to obtain the current horizontal 'page' value for the scroll view.
     ///
     /// For example, if the scroll view has been swiped three pages to the

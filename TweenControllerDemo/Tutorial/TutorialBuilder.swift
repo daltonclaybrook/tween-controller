@@ -194,7 +194,7 @@ struct TutorialBuilder {
         scrollView: UIScrollView
     ) {
         let viewportFrame = CGRect(origin: CGPoint.zero, size: controller.containerView.frame.size)
-        let imageView = UIImageView(image: #imageLiteral\(resourceName: "eiffel_tower"\)  UIImage\(named: "([^"]+)"\))
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "eiffel_tower"))
         imageView.frame = viewportFrame.offsetBy(dx: viewportFrame.width * 2.0, dy: 0.0)
         imageView.alpha = 0.0
         scrollView.addSubview(imageView)
@@ -298,10 +298,11 @@ struct TutorialBuilder {
         scrollView.addSubview(textView2)
 
         let boxImageSize = CGSize(
-            width: textImage!.size.width * multiplier,
-            height: textImage!.size.height * multiplier
+            width: textImage.size.width * multiplier,
+            height: textImage.size.height * multiplier
         )
-        let cardImageSize = (#imageLiteral(resourceName: "sunrise")?.size).flatMap { CGSize(width: $0.width * multiplier, height: $0.height * multiplier) }!
+        let cardSize = #imageLiteral(resourceName: "sunrise").size
+        let cardImageSize = CGSize(width: cardSize.width * multiplier, height: cardSize.height * multiplier)
         let xOffset1 = 40.0 * multiplier + viewportFrame.width
         let xOffset2 = (viewportFrame.width - boxImageSize.width) / 2.0 + viewportFrame.width * 2.0
         let yOffset1 = -16.0 * multiplier + cardYOffset * multiplier + cardImageSize.height
@@ -449,7 +450,7 @@ struct TutorialBuilder {
         scrollView.addSubview(chickView)
         chickView.alpha = 0.0
 
-        let imageSize = CGSize(width: dudeImage!.size.width * multiplier, height: dudeImage!.size.height * multiplier)
+        let imageSize = CGSize(width: dudeImage.size.width * multiplier, height: dudeImage.size.height * multiplier)
         let xOffset = 250.0 * multiplier
         let yOffset = 380.0 * multiplier
         let frame1 = CGRect(x: xOffset, y: yOffset, width: imageSize.width, height: imageSize.height)
@@ -551,8 +552,8 @@ struct TutorialBuilder {
         scrollView.addSubview(cardView)
 
         let chickSize = CGSize(
-            width: armDownImage!.size.width * multiplier,
-            height: armDownImage!.size.height * multiplier
+            width: armDownImage.size.width * multiplier,
+            height: armDownImage.size.height * multiplier
         )
         let cardSize = CGSize(
             width: cardView.image!.size.width * multiplier,
@@ -633,7 +634,7 @@ struct TutorialBuilder {
             scrollView?.isScrollEnabled = false
             scrollView?.isScrollEnabled = true
             tweenController?.resetProgress()
-            vc?.pageControl.currentPage = 0
+            controller?.pageControl.currentPage = 0
         }
     }
 }

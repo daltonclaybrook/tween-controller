@@ -2,7 +2,6 @@
 
 /// A collection of easing functions beautifully demonstrated at http://gizma.com/easing/
 public struct Easing {
-
     // t is a time value between 0.0 - 1.0
     // Return value is a value between 0.0 - 1.0 with the easing function applied
     public typealias Function = (_ t: Double) -> Double

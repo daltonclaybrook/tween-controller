@@ -2,9 +2,11 @@ import TweenController
 import UIKit
 
 class StartViewController: UIViewController, TutorialViewController {
-    @IBOutlet private var containerView: UIView!
-    @IBOutlet private var buttonsContainerView: UIView!
-    @IBOutlet private var pageControl: UIPageControl!
+    //swiftlint:disable private_outlet
+    @IBOutlet var containerView: UIView!
+    @IBOutlet var buttonsContainerView: UIView!
+    @IBOutlet var pageControl: UIPageControl!
+    //swiftlint:enable private_outlet
 
     private var hasAppeared = false
     private var tweenController: TweenController!
