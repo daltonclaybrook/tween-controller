@@ -8,7 +8,6 @@ public typealias TweenObserverBlock = (_ progress: Double) -> Void
 ///         .then(to: transformC, at: 1.0)
 ///         .with(action: myView.layer.twc_applyAffineTransform)
 open class TweenController {
-
     /// The current progress of the controller.
     /// The range of progress is completely arbitrary. 
     /// For example, you could use a percentage, i.e. 0.0 - 1.0, or the width of a scroll view in points.
@@ -98,7 +97,6 @@ open class TweenController {
 }
 
 extension TweenController: DescriptorRegistration {
-
     func register<T>(descriptor: TweenDescriptor<T>) where T: Tweenable {
         descriptors.append(descriptor)
     }

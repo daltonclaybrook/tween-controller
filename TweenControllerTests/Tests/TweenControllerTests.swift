@@ -2,7 +2,6 @@ import TweenController
 import XCTest
 
 class TweenControllerTests: XCTestCase {
-
     var tweenController = TweenController()
 
     // MARK: - Tests

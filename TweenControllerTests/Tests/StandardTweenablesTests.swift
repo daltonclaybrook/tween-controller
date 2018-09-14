@@ -1,9 +1,9 @@
+//swiftlint:disable object_literal
 import TweenController
 import UIKit
 import XCTest
 
 class StandardTweenablesTests: XCTestCase {
-
     func testDouble() {
         let val = Double.valueBetween(0.0, 0.5, percent: 0.5)
         XCTAssertEqual(val, 0.25)
@@ -44,7 +44,7 @@ class StandardTweenablesTests: XCTestCase {
 
     func testUIColor() {
         let val = UIColor.valueBetween(.green, .blue, percent: 0.5)
-        let final = #colorLiteral(red: 0, green: 0.4980392157, blue: 0.4980392157, alpha: 1)
+        let final = UIColor(red: 0.0, green: 0.5, blue: 0.5, alpha: 1.0)
         XCTAssertEqual(val, final)
     }
 

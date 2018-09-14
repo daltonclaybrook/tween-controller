@@ -2,9 +2,10 @@ import TweenController
 import UIKit
 
 class ViewController: UIViewController {
-
     let controller = TweenController()
+
     @IBOutlet private var tweenView: UIView!
+
     private var timesFired: Int = 0
     private var displayLink: CADisplayLink!
 

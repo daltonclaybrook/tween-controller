@@ -2,7 +2,6 @@ import Foundation
 import TweenController
 
 class KeypathListener<T: Tweenable>: NSObject {
-
     let keyPath = "com.claybrooksoftware.tweencontroller.keyPath"
     private(set) var values = [T]()
 

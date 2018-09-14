@@ -2,7 +2,6 @@ import TweenController
 import XCTest
 
 class KeyPathTests: XCTestCase {
-
     let tweenController = TweenController()
 
     // MARK: - Tests

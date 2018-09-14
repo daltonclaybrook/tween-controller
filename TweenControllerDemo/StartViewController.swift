@@ -32,7 +32,6 @@ class StartViewController: UIViewController, TutorialViewController {
 }
 
 extension StartViewController: UIScrollViewDelegate {
-
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         tweenController.update(progress: Double(scrollView.twc_horizontalPageProgress))
     }

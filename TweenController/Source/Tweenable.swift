@@ -13,7 +13,6 @@
 ///
 /// You can also make your own types conform to `Tweenable`.
 public protocol Tweenable {
-
     /// Returns a value that is between `val1` and `val2`, interpolated by a `percent`.
     ///
     /// - parameter val1:    The lower bound of the interpolation.

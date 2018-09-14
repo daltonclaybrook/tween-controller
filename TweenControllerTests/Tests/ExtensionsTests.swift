@@ -1,8 +1,8 @@
+//swiftlint:disable object_literal
 import TweenController
 import XCTest
 
 class ExtensionsTests: XCTestCase {
-
     let tweenController = TweenController()
 
     // MARK: - Tests
@@ -14,7 +14,7 @@ class ExtensionsTests: XCTestCase {
             .with(action: view.twc_applyBackgroundColor)
         tweenController.update(progress: 0.5)
 
-        let final = #colorLiteral(red: 0, green: 0.4980392157, blue: 0.4980392157, alpha: 1)
+        let final = UIColor(red: 0.0, green: 0.5, blue: 0.5, alpha: 1.0)
         XCTAssertEqual(view.backgroundColor!, final)
     }
 
