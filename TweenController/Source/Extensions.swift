@@ -3,7 +3,7 @@ import UIKit
 
 public extension UIView {
     func twc_applyBackgroundColor(_ color: UIColor) {
-        self.backgroundColor = color
+        backgroundColor = color
     }
 
     func twc_applyBounds(_ bounds: CGRect) {
@@ -65,6 +65,6 @@ public extension CALayer {
     }
 
     func twc_applyAffineTransform(_ transform: CGAffineTransform) {
-        self.setAffineTransform(transform)
+        setAffineTransform(transform)
     }
 }

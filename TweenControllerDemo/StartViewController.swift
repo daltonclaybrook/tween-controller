@@ -18,7 +18,7 @@ class StartViewController: UIViewController, TutorialViewController {
             hasAppeared = true
 
             let (controller, scrollView) = TutorialBuilder.buildWithContainerViewController(self)
-            self.tweenController = controller
+            tweenController = controller
             self.scrollView = scrollView
             self.scrollView.delegate = self
         }

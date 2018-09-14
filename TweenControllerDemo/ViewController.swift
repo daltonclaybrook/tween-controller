@@ -25,8 +25,8 @@ class ViewController: UIViewController {
         timesFired += 1
         controller.update(progress: Double(timesFired) * 0.002_5)
         if controller.progress >= 1.0 {
-            self.displayLink.invalidate()
-            self.displayLink = nil
+            displayLink.invalidate()
+            displayLink = nil
         }
     }
 
