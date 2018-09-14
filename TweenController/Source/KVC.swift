@@ -28,7 +28,7 @@ extension CGFloat: ObjectConvertible {
     }
 }
 
-extension TweenPromise where T: ObjectConvertible {
+public extension TweenPromise where T: ObjectConvertible {
 
     /// Instead of using an action block with a tween operation, you can
     /// call this method to apply the value directly to an object using
@@ -40,7 +40,7 @@ extension TweenPromise where T: ObjectConvertible {
     ///
     /// - parameter object:  The object to apply tweened values to.
     /// - parameter keyPath: The key-path on `object` used when applying tweened values.
-    public func with(object: NSObject, keyPath: String) {
+    func with(object: NSObject, keyPath: String) {
         with { [weak object] tweenable in
             object?.setValue(tweenable.toObject(), forKeyPath: keyPath)
         }

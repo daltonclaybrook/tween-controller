@@ -1,3 +1,5 @@
+//swiftlint:disable identifier_name
+
 /// A collection of easing functions beautifully demonstrated at http://gizma.com/easing/
 public struct Easing {
 

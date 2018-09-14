@@ -2,12 +2,13 @@ public protocol TweenIntervalType {
     var interval: Range<Double> { get }
     var easingFunction: Easing.Function { get }
     var isIntervalClosed: Bool { get set }
+
     func contains(progress: Double) -> Bool
     func handleProgressUpdate(_ progress: Double)
 }
 
-extension TweenIntervalType {
-    public func contains(progress: Double) -> Bool {
+public extension TweenIntervalType {
+    func contains(progress: Double) -> Bool {
         return interval.contains(progress) || (isIntervalClosed && interval.upperBound == progress)
     }
 }
