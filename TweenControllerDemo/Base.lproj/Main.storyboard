@@ -56,16 +56,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM5-io-3Nh" userLabel="Container View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLj-rd-RiO" userLabel="Mark Container">
-                                        <rect key="frame" x="108.33333333333333" y="168.33333333333337" width="158.33333333333337" height="193.66666666666663"/>
+                                        <rect key="frame" x="104.66666666666667" y="175.66666666666663" width="165.66666666666663" height="202"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mark_shadow" translatesAutoresizingMaskIntoConstraints="NO" id="IHs-hD-8q2">
-                                                <rect key="frame" x="76.666666666666686" y="165.66666666666666" width="105" height="28"/>
+                                                <rect key="frame" x="80.333333333333314" y="174.00000000000003" width="105" height="28"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mark" translatesAutoresizingMaskIntoConstraints="NO" id="GRA-zS-RS6">
-                                                <rect key="frame" x="0.0" y="0.0" width="158.33333333333334" height="193.66666666666666"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="165.66666666666666" height="202"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -80,10 +80,10 @@
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_tagline" translatesAutoresizingMaskIntoConstraints="NO" id="X3h-F9-Q2M">
-                                        <rect key="frame" x="37.666666666666657" y="387.33333333333331" width="300" height="90"/>
+                                        <rect key="frame" x="37.666666666666657" y="406" width="300" height="90"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="left_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="akD-IC-pJT">
-                                        <rect key="frame" x="30" y="535.66666666666663" width="315" height="73"/>
+                                        <rect key="frame" x="30" y="560.66666666666663" width="315" height="73"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -147,7 +147,7 @@
                             <constraint firstAttribute="bottom" secondItem="j0L-5V-yKu" secondAttribute="bottom" id="mnB-aU-4mo"/>
                             <constraint firstItem="j0L-5V-yKu" firstAttribute="leading" secondItem="sxL-TY-4o9" secondAttribute="leading" id="tbe-Y3-lUi"/>
                             <constraint firstItem="j0L-5V-yKu" firstAttribute="height" secondItem="MAN-dC-07N" secondAttribute="height" multiplier="100/667" id="uXl-7o-N8d"/>
-                            <constraint firstItem="sxL-TY-4o9" firstAttribute="bottom" secondItem="fM5-io-3Nh" secondAttribute="bottom" id="x0Z-wN-MN0"/>
+                            <constraint firstAttribute="bottom" secondItem="fM5-io-3Nh" secondAttribute="bottom" id="x0Z-wN-MN0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sxL-TY-4o9"/>
                     </view>
